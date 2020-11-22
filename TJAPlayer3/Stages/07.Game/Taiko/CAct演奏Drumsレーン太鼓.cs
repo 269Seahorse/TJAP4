@@ -833,20 +833,41 @@ namespace TJAPlayer4
                         {
                             case E判定.Perfect:
                             case E判定.Great:
+                                if (this.st状態[i].nIsBig == 1 && TJAPlayer4.Tx.Effects_Hit_Great_Big != null)
+                                {
+                                    TJAPlayer4.Tx.Effects_Hit_Great_Big.Opacity = 255 - this.st状態[i].ct進行.n現在の値 * 5;
+                                    TJAPlayer4.Tx.Effects_Hit_Great_Big.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Great_Big.szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nScrollFieldY[i] + (130 / 2) - TJAPlayer4.Tx.Effects_Hit_Great_Big.szテクスチャサイズ.Width / 2);
+                                }
+                                else if (TJAPlayer4.Tx.Effects_Hit_Great != null)
+                                {
+                                    TJAPlayer4.Tx.Effects_Hit_Great.Opacity = 255 - this.st状態[i].ct進行.n現在の値 * 5;
+                                    TJAPlayer4.Tx.Effects_Hit_Great.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Great.szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nScrollFieldY[i] + (130 / 2) - TJAPlayer4.Tx.Effects_Hit_Great.szテクスチャサイズ.Width / 2);
+                                }
+                                break;
                             case E判定.Auto:
-                                //this.txアタックエフェクトLower.t2D描画( CDTXMania.app.Device, 285, 127, new Rectangle( this.st状態[ i ].ct進行.n現在の値 * 260, n, 260, 260 ) );
-                                if (this.st状態[i].nIsBig == 1 && TJAPlayer4.Tx.Effects_Hit_Great_Big[this.st状態[i].ct進行.n現在の値] != null)
-                                    TJAPlayer4.Tx.Effects_Hit_Great_Big[this.st状態[i].ct進行.n現在の値].t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Great_Big[0].szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nJudgePointY[i] - TJAPlayer4.Tx.Effects_Hit_Great_Big[0].szテクスチャサイズ.Width / 2);
-                                else if (TJAPlayer4.Tx.Effects_Hit_Great[this.st状態[i].ct進行.n現在の値] != null)
-                                    TJAPlayer4.Tx.Effects_Hit_Great[this.st状態[i].ct進行.n現在の値].t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Great[0].szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nJudgePointY[i] - TJAPlayer4.Tx.Effects_Hit_Great[0].szテクスチャサイズ.Width / 2);
+                                if (this.st状態[i].nIsBig == 1 && TJAPlayer4.Tx.Effects_Hit_Great_Big != null)
+                                {
+                                    TJAPlayer4.Tx.Effects_Hit_Great_Big.Opacity = 255 - this.st状態[i].ct進行.n現在の値 * 5;
+                                    TJAPlayer4.Tx.Effects_Hit_Great_Big.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Great_Big.szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nScrollFieldY[i] + (130 / 2) - TJAPlayer4.Tx.Effects_Hit_Great_Big.szテクスチャサイズ.Width / 2);
+                                }
+                                else if (TJAPlayer4.Tx.Effects_Hit_Great != null)
+                                {
+                                    TJAPlayer4.Tx.Effects_Hit_Great.Opacity = 255 - this.st状態[i].ct進行.n現在の値 * 5;
+                                    TJAPlayer4.Tx.Effects_Hit_Great.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Great.szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nScrollFieldY[i] + (130 / 2) - TJAPlayer4.Tx.Effects_Hit_Great.szテクスチャサイズ.Width / 2);
+                                }
                                 break;
 
                             case E判定.Good:
-                                //this.txアタックエフェクトLower.t2D描画( CDTXMania.app.Device, 285, 127, new Rectangle( this.st状態[ i ].ct進行.n現在の値 * 260, n + 260, 260, 260 ) );
-                                if (this.st状態[i].nIsBig == 1 && TJAPlayer4.Tx.Effects_Hit_Good_Big[this.st状態[i].ct進行.n現在の値] != null)
-                                    TJAPlayer4.Tx.Effects_Hit_Good_Big[this.st状態[i].ct進行.n現在の値].t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Good_Big[0].szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nJudgePointY[i] - TJAPlayer4.Tx.Effects_Hit_Good_Big[0].szテクスチャサイズ.Width / 2);
-                                else if (TJAPlayer4.Tx.Effects_Hit_Good[this.st状態[i].ct進行.n現在の値] != null)
-                                    TJAPlayer4.Tx.Effects_Hit_Good[this.st状態[i].ct進行.n現在の値].t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Good[0].szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nJudgePointY[i] - TJAPlayer4.Tx.Effects_Hit_Good[0].szテクスチャサイズ.Width / 2);
+                                if (this.st状態[i].nIsBig == 1 && TJAPlayer4.Tx.Effects_Hit_Good_Big != null)
+                                {
+                                    TJAPlayer4.Tx.Effects_Hit_Good_Big.Opacity = 255 - this.st状態[i].ct進行.n現在の値 * 5;
+                                    TJAPlayer4.Tx.Effects_Hit_Good_Big.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Good_Big.szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nScrollFieldY[i] + (130 / 2) - TJAPlayer4.Tx.Effects_Hit_Good_Big.szテクスチャサイズ.Width / 2);
+                                }
+                                else if (TJAPlayer4.Tx.Effects_Hit_Good != null)
+                                {
+                                    TJAPlayer4.Tx.Effects_Hit_Good.Opacity = 255 - this.st状態[i].ct進行.n現在の値 * 5;
+                                    TJAPlayer4.Tx.Effects_Hit_Good.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.nScrollFieldX[0] - TJAPlayer4.Tx.Effects_Hit_Good.szテクスチャサイズ.Width / 2, TJAPlayer4.Skin.nScrollFieldY[i] + (130 / 2) - TJAPlayer4.Tx.Effects_Hit_Good.szテクスチャサイズ.Width / 2);
+                                }
                                 break;
 
                             case E判定.Miss:
@@ -866,7 +887,7 @@ namespace TJAPlayer4
 
             //for( int n = 0; n < 1; n++ )
             {
-                this.st状態[nPlayer].ct進行 = new CCounter(0, 14, 20, TJAPlayer4.Timer);
+                this.st状態[nPlayer].ct進行 = new CCounter(0, 51, 6, TJAPlayer4.Timer);
                 this.st状態[nPlayer].judge = judge;
                 this.st状態[nPlayer].nPlayer = nPlayer;
 

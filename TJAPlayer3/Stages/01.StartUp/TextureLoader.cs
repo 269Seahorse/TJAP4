@@ -344,12 +344,7 @@ namespace TJAPlayer4
             Taiko_Ka_Right = TxC(GAME + TAIKO + @"Ka.png");
             Taiko_LevelUp = TxC(GAME + TAIKO + @"LevelUp.png");
             Taiko_LevelDown = TxC(GAME + TAIKO + @"LevelDown.png");
-            Couse_Symbol = new CTexture[(int)Difficulty.Total + 1]; // +1は真打ちモードの分
-            string[] Couse_Symbols = new string[(int)Difficulty.Total + 1] { "Easy", "Normal", "Hard", "Oni", "Edit", "Tower", "Dan", "Shin" };
-            for (int i = 0; i < (int)Difficulty.Total + 1; i++)
-            {
-                Couse_Symbol[i] = TxC(GAME + COURSESYMBOL + Couse_Symbols[i] + ".png");
-            }
+            Couse_Symbol = TxC(GAME + COURSESYMBOL + "Difficulties.png");
             Taiko_Score = new CTexture[3];
             Taiko_Score[0] = TxC(GAME + TAIKO + @"Score.png");
             Taiko_Score[1] = TxC(GAME + TAIKO + @"Score_1P.png");
@@ -392,7 +387,9 @@ namespace TJAPlayer4
             Balloon_Roll = TxC(GAME + BALLOON + @"Roll.png");
             Balloon_Balloon = TxC(GAME + BALLOON + @"Balloon.png");
             Balloon_Number_Roll = TxC(GAME + BALLOON + @"Number_Roll.png");
-            Balloon_Number_Combo = TxC(GAME + BALLOON + @"Number_Combo.png");
+            Balloon_Number_Combo = new CTexture[2];
+            Balloon_Number_Combo[0] = TxC(GAME + BALLOON + @"1P_Number_Combo.png");
+            Balloon_Number_Combo[1] = TxC(GAME + BALLOON + @"2P_Number_Combo.png");
 
             Balloon_Breaking = new CTexture[6];
             for (int i = 0; i < 6; i++)
@@ -416,17 +413,10 @@ namespace TJAPlayer4
 
             Effects_GoGoSplash = TxC(GAME + EFFECTS + @"GoGoSplash.png");
             if (Effects_GoGoSplash != null) Effects_GoGoSplash.b加算合成 = TJAPlayer4.Skin.Game_Effect_GoGoSplash_AddBlend;
-            Effects_Hit_Great = new CTexture[15];
-            Effects_Hit_Great_Big = new CTexture[15];
-            Effects_Hit_Good = new CTexture[15];
-            Effects_Hit_Good_Big = new CTexture[15];
-            for (int i = 0; i < 15; i++)
-            {
-                Effects_Hit_Great[i] = TxC(GAME + EFFECTS + @"Hit\" + @"Great\" + i.ToString() + ".png");
-                Effects_Hit_Great_Big[i] = TxC(GAME + EFFECTS + @"Hit\" + @"Great_Big\" + i.ToString() + ".png");
-                Effects_Hit_Good[i] = TxC(GAME + EFFECTS + @"Hit\" + @"Good\" + i.ToString() + ".png");
-                Effects_Hit_Good_Big[i] = TxC(GAME + EFFECTS + @"Hit\" + @"Good_Big\" + i.ToString() + ".png");
-            }
+            Effects_Hit_Great = TxC(GAME + EFFECTS + @"Hit\" + "Great.png");
+            Effects_Hit_Great_Big = TxC(GAME + EFFECTS + @"Hit\" + "Great_Big.png");
+            Effects_Hit_Good = TxC(GAME + EFFECTS + @"Hit\" + "Good.png");
+            Effects_Hit_Good_Big = TxC(GAME + EFFECTS + @"Hit\" + "Good_Big.png");
             TJAPlayer4.Skin.Game_Effect_Roll_Ptn = TJAPlayer4.t連番画像の枚数を数える(CSkin.Path(BASE + GAME + EFFECTS + @"Roll\"));
             Effects_Roll = new CTexture[TJAPlayer4.Skin.Game_Effect_Roll_Ptn];
             for (int i = 0; i < TJAPlayer4.Skin.Game_Effect_Roll_Ptn; i++)
@@ -712,10 +702,7 @@ namespace TJAPlayer4
             TJAPlayer4.tテクスチャの解放(ref Taiko_Ka_Right);
             TJAPlayer4.tテクスチャの解放(ref Taiko_LevelUp);
             TJAPlayer4.tテクスチャの解放(ref Taiko_LevelDown);
-            for (int i = 0; i < 6; i++)
-            {
-                TJAPlayer4.tテクスチャの解放(ref Couse_Symbol[i]);
-            }
+            TJAPlayer4.tテクスチャの解放(ref Couse_Symbol);
             TJAPlayer4.tテクスチャの解放(ref Taiko_Score[0]);
             TJAPlayer4.tテクスチャの解放(ref Taiko_Score[1]);
             TJAPlayer4.tテクスチャの解放(ref Taiko_Score[2]);
@@ -746,7 +733,8 @@ namespace TJAPlayer4
             TJAPlayer4.tテクスチャの解放(ref Balloon_Roll);
             TJAPlayer4.tテクスチャの解放(ref Balloon_Balloon);
             TJAPlayer4.tテクスチャの解放(ref Balloon_Number_Roll);
-            TJAPlayer4.tテクスチャの解放(ref Balloon_Number_Combo);
+            TJAPlayer4.tテクスチャの解放(ref Balloon_Number_Combo[0]);
+            TJAPlayer4.tテクスチャの解放(ref Balloon_Number_Combo[1]);
 
             for (int i = 0; i < 6; i++)
             {
@@ -763,13 +751,10 @@ namespace TJAPlayer4
 
             TJAPlayer4.tテクスチャの解放(ref Effects_GoGoSplash);
 
-            for (int i = 0; i < 15; i++)
-            {
-                TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Great[i]);
-                TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Great_Big[i]);
-                TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Good[i]);
-                TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Good_Big[i]);
-            }
+            TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Great);
+            TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Great_Big);
+            TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Good);
+            TJAPlayer4.tテクスチャの解放(ref Effects_Hit_Good_Big);
             for (int i = 0; i < TJAPlayer4.Skin.Game_Effect_Roll_Ptn; i++)
             {
                 TJAPlayer4.tテクスチャの解放(ref Effects_Roll[i]);
@@ -962,9 +947,9 @@ namespace TJAPlayer4
             Taiko_LevelUp,
             Taiko_LevelDown,
             Taiko_Combo_Effect,
+            Couse_Symbol,
             Taiko_Combo_Text;
-        public CTexture[] Couse_Symbol, // コースシンボル
-            Taiko_PlayerNumber,
+        public CTexture[] Taiko_PlayerNumber,// コースシンボル
             Taiko_NamePlate; // ネームプレート
         public CTexture[] Taiko_Score,
             Taiko_Combo;
@@ -982,10 +967,9 @@ namespace TJAPlayer4
         public CTexture[] Balloon_Combo;
         public CTexture Balloon_Roll,
             Balloon_Balloon,
-            Balloon_Number_Roll,
-            Balloon_Number_Combo/*,*/
-                                /*Balloon_Broken*/;
-        public CTexture[] Balloon_Breaking;
+            Balloon_Number_Roll;
+        public CTexture[] Balloon_Breaking,
+            Balloon_Number_Combo;
         #endregion
         #region エフェクト
         public CTexture Effects_Hit_Explosion,
@@ -994,7 +978,7 @@ namespace TJAPlayer4
             Effects_Rainbow,
             Effects_GoGoSplash,
             Effects_Hit_FireWorks;
-        public CTexture[] Effects_Hit_Great,
+        public CTexture Effects_Hit_Great,
             Effects_Hit_Good,
             Effects_Hit_Great_Big,
             Effects_Hit_Good_Big;

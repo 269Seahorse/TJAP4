@@ -261,20 +261,21 @@ namespace TJAPlayer4
 
             for (int nPlayer = 0; nPlayer < TJAPlayer4.ConfigIni.nPlayerCount; nPlayer++)
             {
-                TJAPlayer4.Tx.Couse_Symbol[TJAPlayer4.stage選曲.n確定された曲の難易度[nPlayer]]?.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.Game_CourseSymbol_X[nPlayer], TJAPlayer4.Skin.Game_CourseSymbol_Y[nPlayer]);
+                TJAPlayer4.Tx.Couse_Symbol?.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.Game_CourseSymbol_X[nPlayer], TJAPlayer4.Skin.Game_CourseSymbol_Y[nPlayer], new Rectangle(TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Width / 7 * TJAPlayer4.stage選曲.n確定された曲の難易度[nPlayer], 0, TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Width / 7, TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Height));
                 if (TJAPlayer4.ConfigIni.ShinuchiMode[nPlayer])
                 {
-                    TJAPlayer4.Tx.Couse_Symbol[(int)Difficulty.Total]?.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.Game_CourseSymbol_X[nPlayer], TJAPlayer4.Skin.Game_CourseSymbol_Y[nPlayer]);
+                    TJAPlayer4.Tx.Couse_Symbol.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.Game_CourseSymbol_X[nPlayer], TJAPlayer4.Skin.Game_CourseSymbol_Y[nPlayer], new Rectangle(TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Width / 7 * 7, 0, TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Width / 7, TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Height));
                 }
 
                 if (TJAPlayer4.ConfigIni.ShinuchiMode[nPlayer])
                 {
-                    if (TJAPlayer4.Tx.Couse_Symbol[(int)Difficulty.Total] != null)
+                    if (TJAPlayer4.Tx.Couse_Symbol != null)
                     {
-                        TJAPlayer4.Tx.Couse_Symbol[(int)Difficulty.Total].t2D描画(TJAPlayer4.app.Device,
+                        TJAPlayer4.Tx.Couse_Symbol.t2D描画(TJAPlayer4.app.Device,
                             TJAPlayer4.Skin.Game_CourseSymbol_X[nPlayer],
-                            TJAPlayer4.Skin.Game_CourseSymbol_Y[nPlayer]
-                            );
+                            TJAPlayer4.Skin.Game_CourseSymbol_Y[nPlayer],
+                            new Rectangle(TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Width / 7 * 7, 0, TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Width / 7, TJAPlayer4.Tx.Couse_Symbol.szテクスチャサイズ.Height));
+                            ;
                     }
 
                 }

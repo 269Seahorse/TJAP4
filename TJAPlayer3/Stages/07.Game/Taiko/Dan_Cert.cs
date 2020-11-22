@@ -435,8 +435,6 @@ namespace TJAPlayer4
                     Counter_Out = null;
                 }
             }
-            TJAPlayer4.act文字コンソール.tPrint(0, 400, C文字コンソール.Eフォント種別.白, TJAPlayer4.stage演奏ドラム画面.actDan.GetExamStatus(Challenge, Challenge_Gauge).ToString());
-            TJAPlayer4.act文字コンソール.tPrint(0, 430, C文字コンソール.Eフォント種別.白, GetFailedAllChallenges() ? "true" : "false");
             return base.On進行描画();
         }
 

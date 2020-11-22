@@ -109,48 +109,48 @@ namespace TJAPlayer4
 			st文字位置Array2[ 10 ] = st文字位置22;
 			this.st大文字位置 = st文字位置Array2;
 
-            ST文字位置[] stScore文字位置Array = new ST文字位置[10];
-            ST文字位置 stScore文字位置 = new ST文字位置();
-            stScore文字位置.ch = '0';
-            stScore文字位置.pt = new Point(0, 0);
-            stScore文字位置Array[0] = stScore文字位置;
-            ST文字位置 stScore文字位置2 = new ST文字位置();
-            stScore文字位置2.ch = '1';
-            stScore文字位置2.pt = new Point(24, 0);
-            stScore文字位置Array[1] = stScore文字位置2;
-            ST文字位置 stScore文字位置3 = new ST文字位置();
-            stScore文字位置3.ch = '2';
-            stScore文字位置3.pt = new Point(48, 0);
-            stScore文字位置Array[2] = stScore文字位置3;
-            ST文字位置 stScore文字位置4 = new ST文字位置();
-            stScore文字位置4.ch = '3';
-            stScore文字位置4.pt = new Point(72, 0);
-            stScore文字位置Array[3] = stScore文字位置4;
-            ST文字位置 stScore文字位置5 = new ST文字位置();
-            stScore文字位置5.ch = '4';
-            stScore文字位置5.pt = new Point(96, 0);
-            stScore文字位置Array[4] = stScore文字位置5;
-            ST文字位置 stScore文字位置6 = new ST文字位置();
-            stScore文字位置6.ch = '5';
-            stScore文字位置6.pt = new Point(120, 0);
-            stScore文字位置Array[5] = stScore文字位置6;
-            ST文字位置 stScore文字位置7 = new ST文字位置();
-            stScore文字位置7.ch = '6';
-            stScore文字位置7.pt = new Point(144, 0);
-            stScore文字位置Array[6] = stScore文字位置7;
-            ST文字位置 stScore文字位置8 = new ST文字位置();
-            stScore文字位置8.ch = '7';
-            stScore文字位置8.pt = new Point(168, 0);
-            stScore文字位置Array[7] = stScore文字位置8;
-            ST文字位置 stScore文字位置9 = new ST文字位置();
-            stScore文字位置9.ch = '8';
-            stScore文字位置9.pt = new Point(192, 0);
-            stScore文字位置Array[8] = stScore文字位置9;
-            ST文字位置 stScore文字位置10 = new ST文字位置();
-            stScore文字位置10.ch = '9';
-            stScore文字位置10.pt = new Point(216, 0);
-            stScore文字位置Array[9] = stScore文字位置10;
-            this.stScoreFont = stScore文字位置Array;
+			ST文字位置[] stScore文字位置Array = new ST文字位置[10];
+			ST文字位置 stScore文字位置 = new ST文字位置();
+			stScore文字位置.ch = '0';
+			stScore文字位置.pt = new Point(0, 0);
+			stScore文字位置Array[0] = stScore文字位置;
+			ST文字位置 stScore文字位置2 = new ST文字位置();
+			stScore文字位置2.ch = '1';
+			stScore文字位置2.pt = new Point(51, 0);
+			stScore文字位置Array[1] = stScore文字位置2;
+			ST文字位置 stScore文字位置3 = new ST文字位置();
+			stScore文字位置3.ch = '2';
+			stScore文字位置3.pt = new Point(102, 0);
+			stScore文字位置Array[2] = stScore文字位置3;
+			ST文字位置 stScore文字位置4 = new ST文字位置();
+			stScore文字位置4.ch = '3';
+			stScore文字位置4.pt = new Point(153, 0);
+			stScore文字位置Array[3] = stScore文字位置4;
+			ST文字位置 stScore文字位置5 = new ST文字位置();
+			stScore文字位置5.ch = '4';
+			stScore文字位置5.pt = new Point(204, 0);
+			stScore文字位置Array[4] = stScore文字位置5;
+			ST文字位置 stScore文字位置6 = new ST文字位置();
+			stScore文字位置6.ch = '5';
+			stScore文字位置6.pt = new Point(255, 0);
+			stScore文字位置Array[5] = stScore文字位置6;
+			ST文字位置 stScore文字位置7 = new ST文字位置();
+			stScore文字位置7.ch = '6';
+			stScore文字位置7.pt = new Point(306, 0);
+			stScore文字位置Array[6] = stScore文字位置7;
+			ST文字位置 stScore文字位置8 = new ST文字位置();
+			stScore文字位置8.ch = '7';
+			stScore文字位置8.pt = new Point(357, 0);
+			stScore文字位置Array[7] = stScore文字位置8;
+			ST文字位置 stScore文字位置9 = new ST文字位置();
+			stScore文字位置9.ch = '8';
+			stScore文字位置9.pt = new Point(408, 0);
+			stScore文字位置Array[8] = stScore文字位置9;
+			ST文字位置 stScore文字位置10 = new ST文字位置();
+			stScore文字位置10.ch = '9';
+			stScore文字位置10.pt = new Point(459, 0);
+			stScore文字位置Array[9] = stScore文字位置10;
+			this.stScoreFont = stScore文字位置Array;
 
 
 
@@ -351,22 +351,25 @@ namespace TJAPlayer4
 			}
 		}
 
-        protected void tスコア文字表示(int x, int y, string str)
-        {
-            foreach (char ch in str)
-            {
-                for (int i = 0; i < this.stScoreFont.Length; i++)
-                {
-                    if (this.stScoreFont[i].ch == ch)
-                    {
-                        Rectangle rectangle = new Rectangle(this.stScoreFont[ i ].pt.X, 0, 24, 40);
-						TJAPlayer4.Tx.Result_Score_Number?.t2D描画(TJAPlayer4.app.Device, x, y, rectangle);
+		protected void tスコア文字表示(int x, int y, string str)
+		{
+			foreach (char ch in str)
+			{
+				for (int i = 0; i < this.stScoreFont.Length; i++)
+				{
+					if (this.stScoreFont[i].ch == ch)
+					{
+						Rectangle rectangle = new Rectangle(this.stScoreFont[i].pt.X, 0, 51, 72);
+						if (TJAPlayer4.Tx.Result_Score_Number != null)
+						{
+							TJAPlayer4.Tx.Result_Score_Number.t2D中心基準描画(TJAPlayer4.app.Device, x - (str.Length * 33) + 25, y + 30, rectangle);
+						}
 						break;
-                    }
-                }
-                x += 24;
-            }
-        }
+					}
+				}
+				x += 33;
+			}
+		}
 		//-----------------
 		#endregion
 	}

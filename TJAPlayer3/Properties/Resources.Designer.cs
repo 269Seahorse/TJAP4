@@ -73,9 +73,9 @@ namespace TJAPlayer4.Properties {
         /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Icon tjap3 {
+        internal static System.Drawing.Icon tjap4 {
             get {
-                object obj = ResourceManager.GetObject("tjap3", resourceCulture);
+                object obj = ResourceManager.GetObject("tjap4", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

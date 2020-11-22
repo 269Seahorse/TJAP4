@@ -738,6 +738,8 @@ namespace TJAPlayer4
 		public double nBranch条件数値B;
 		private readonly int[] NowProcessingChip = new int[] { 0, 0 };
 
+		private int b;
+
 
 		public void AddMixer( CSound cs, bool _b演奏終了後も再生が続くチップである )
 		{
@@ -1119,17 +1121,17 @@ namespace TJAPlayer4
                     if( TJAPlayer4.DTX[nPlayer].nScoreModeTmp == 0 || TJAPlayer4.DTX[nPlayer].nScoreModeTmp == 1 )
                     {
                         if( pChip.nチャンネル番号 == 0x15 )
-							this.actScore.Add(E楽器パート.TAIKO, (long)(300 * 1.2f), nPlayer);
+							this.actScore.Add(E楽器パート.TAIKO, (long)(100), nPlayer);
 						else
-							this.actScore.Add(E楽器パート.TAIKO, (long)(360 * 1.2f), nPlayer);
+							this.actScore.Add(E楽器パート.TAIKO, (long)(100), nPlayer);
 					}
                     // 新配点
                     else
                     {
                         if( pChip.nチャンネル番号 == 0x15 )
-							this.actScore.Add(E楽器パート.TAIKO, (long)(100 * 1.2f), nPlayer);
+							this.actScore.Add(E楽器パート.TAIKO, (long)(100), nPlayer);
 						else
-							this.actScore.Add(E楽器パート.TAIKO, (long)(200 * 1.2f), nPlayer);
+							this.actScore.Add(E楽器パート.TAIKO, (long)(200), nPlayer);
 					}
                 }
                 else
@@ -1138,9 +1140,9 @@ namespace TJAPlayer4
 					if (TJAPlayer4.DTX[nPlayer].nScoreModeTmp == 0 || TJAPlayer4.DTX[nPlayer].nScoreModeTmp == 1)
 					{
                         if( pChip.nチャンネル番号 == 0x15 )
-							this.actScore.Add(E楽器パート.TAIKO, 300L, nPlayer);
+							this.actScore.Add(E楽器パート.TAIKO, 100L, nPlayer);
 						else
-							this.actScore.Add(E楽器パート.TAIKO, 360L, nPlayer);
+							this.actScore.Add(E楽器パート.TAIKO, 100L, nPlayer);
 					}
                     // 新配点
                     else
@@ -1240,13 +1242,8 @@ namespace TJAPlayer4
 					TJAPlayer4.stage演奏ドラム画面.FlyingNotes.Start(3, nPlayer);
 					TJAPlayer4.stage演奏ドラム画面.Rainbow.Start(nPlayer);
 					//CDTXMania.stage演奏ドラム画面.actChipFireD.Start( 0, player );
-					if (pChip.bGOGOTIME && !TJAPlayer4.ConfigIni.ShinuchiMode[nPlayer])
-					{
-						this.actScore.Add(E楽器パート.TAIKO, 6000L, nPlayer);
-					} else
-                    {
-						this.actScore.Add(E楽器パート.TAIKO, 5000L, nPlayer);
-					}
+					
+					this.actScore.Add(E楽器パート.TAIKO, 100L, nPlayer);
                     pChip.bHit = true;
                     pChip.IsHitted = true;
 					chip現在処理中の連打チップ[nPlayer].bHit = true;
@@ -1265,13 +1262,7 @@ namespace TJAPlayer4
                 }
                 else
                 {
-					if (pChip.bGOGOTIME && !TJAPlayer4.ConfigIni.ShinuchiMode[nPlayer])
-					{
-						this.actScore.Add(E楽器パート.TAIKO, 360L, nPlayer);
-					} else
-                    {
-						this.actScore.Add(E楽器パート.TAIKO, 300L, nPlayer);
-					}
+					this.actScore.Add(E楽器パート.TAIKO, 100L, nPlayer);
 					//CDTXMania.Skin.soundRed.t再生する();
 					this.soundRed[nPlayer]?.t再生を開始する();
 				}
@@ -1772,10 +1763,6 @@ namespace TJAPlayer4
 			}
 			if (((pChip.e楽器パート != E楽器パート.UNKNOWN)) && (eJudgeResult != E判定.Miss) && (eJudgeResult != E判定.Bad) && (eJudgeResult != E判定.Poor) && (pChip.nチャンネル番号 <= 0x14 || pChip.nチャンネル番号 == 0x1A || pChip.nチャンネル番号 == 0x1B))
 			{
-				int nCombos = this.actCombo.n現在のコンボ数[nPlayer];
-				long nInit = TJAPlayer4.DTX[nPlayer].nScoreInit[0, TJAPlayer4.stage選曲.n確定された曲の難易度[nPlayer]];
-				long nDiff = TJAPlayer4.DTX[nPlayer].nScoreDiff[TJAPlayer4.stage選曲.n確定された曲の難易度
-					[nPlayer]];
 				long nAddScore = 0;
 
 				if (TJAPlayer4.ConfigIni.ShinuchiMode[nPlayer])  //2016.07.04 kairera0467 真打モード。
@@ -1808,177 +1795,52 @@ namespace TJAPlayer4
 				}
 				else if (TJAPlayer4.DTX[nPlayer].nScoreModeTmp == 2)
 				{
-					if (nCombos < 10)
+					for (int i = 0; i < TJAPlayer4.DTX[nPlayer].n風船数[2]; i++)
 					{
-						nAddScore = this.nScore[nPlayer][0];
+						this.b += TJAPlayer4.DTX[nPlayer].n風船数[3];
 					}
-					else if (nCombos >= 10 && nCombos <= 29)
-					{
-						nAddScore = this.nScore[nPlayer][1];
-					}
-					else if (nCombos >= 30 && nCombos <= 49)
-					{
-						nAddScore = this.nScore[nPlayer][2];
-					}
-					else if (nCombos >= 50 && nCombos <= 99)
-					{
-						nAddScore = this.nScore[nPlayer][3];
-					}
-					else if (nCombos >= 100)
-					{
-						nAddScore = this.nScore[nPlayer][4];
-					}
+					int num9 = ((this.b - TJAPlayer4.DTX[nPlayer].n風船数[3]) * (100 * TJAPlayer4.DTX[nPlayer].n風船数[3] - 1)) + 1000 * TJAPlayer4.DTX[nPlayer].n風船数[3];
+					nAddScore = (int)(Math.Ceiling((double)((1000000 - num9) / (TJAPlayer4.DTX[nPlayer].nノーツ数[3])) / 10.0) * 10.0);
 
 					if (eJudgeResult == E判定.Great || eJudgeResult == E判定.Good)
 					{
 						nAddScore = nAddScore / 2;
-					}
-
-					if (pChip.bGOGOTIME) //2018.03.11 kairera0467 チップに埋め込んだフラグから読み取る
-					{
-						nAddScore = (int)(nAddScore * 1.2f);
-					}
-
-					//100コンボ毎のボーナス
-					if (nCombos % 100 == 0 && nCombos > 99)
-					{
-						if (this.actScore.ctボーナス加算タイマ[nPlayer].b進行中)
-						{
-							this.actScore.ctボーナス加算タイマ[nPlayer].t停止();
-							this.actScore.BonusAdd(nPlayer);
-						}
-						this.actScore.ctボーナス加算タイマ[nPlayer].n現在の値 = 0;
-						this.actScore.ctボーナス加算タイマ[nPlayer] = new CCounter(0, 2, 1000, TJAPlayer4.Timer);
-
-						//combot = new System.Timers.Timer();
-						//if(nPlayer == 0)
-						//{
-						//    combot.Elapsed += new System.Timers.ElapsedEventHandler(combotimer_event_1);
-						//} else
-						//{
-						//    combot.Elapsed += new System.Timers.ElapsedEventHandler(combotimer_event_2);
-						//}
-
-						//combot.Interval = 2000; // ミリ秒単位で指定
-						//combot.Enabled = true;
-					}
-
-					nAddScore = (int)(nAddScore / 10);
-					nAddScore = (int)(nAddScore * 10);
-
-					//大音符のボーナス
-					if (pChip.nチャンネル番号 == 0x13 || pChip.nチャンネル番号 == 0x14 || pChip.nチャンネル番号 == 0x1A || pChip.nチャンネル番号 == 0x1B)
-					{
-						nAddScore = nAddScore * 2;
 					}
 
 					this.actScore.Add(E楽器パート.TAIKO, nAddScore, nPlayer);
-					//this.actScore.Add( E楽器パート.DRUMS, bIsAutoPlay, nAddScore );
+					//this.actScore.Add( E楽器パート.DRUMS, bIsAutoPlay, nAddScore );              
 				}
 				else if (TJAPlayer4.DTX[nPlayer].nScoreModeTmp == 1)
 				{
-					if (nCombos < 10)
+					for (int i = 0; i < TJAPlayer4.DTX[nPlayer].n風船数[2]; i++)
 					{
-						nAddScore = this.nScore[nPlayer][0];
+						this.b += TJAPlayer4.DTX[nPlayer].n風船数[3];
 					}
-					else if (nCombos >= 10 && nCombos <= 19)
-					{
-						nAddScore = this.nScore[nPlayer][1];
-					}
-					else if (nCombos >= 20 && nCombos <= 29)
-					{
-						nAddScore = this.nScore[nPlayer][2];
-					}
-					else if (nCombos >= 30 && nCombos <= 39)
-					{
-						nAddScore = this.nScore[nPlayer][3];
-					}
-					else if (nCombos >= 40 && nCombos <= 49)
-					{
-						nAddScore = this.nScore[nPlayer][4];
-					}
-					else if (nCombos >= 50 && nCombos <= 59)
-					{
-						nAddScore = this.nScore[nPlayer][5];
-					}
-					else if (nCombos >= 60 && nCombos <= 69)
-					{
-						nAddScore = this.nScore[nPlayer][6];
-					}
-					else if (nCombos >= 70 && nCombos <= 79)
-					{
-						nAddScore = this.nScore[nPlayer][7];
-					}
-					else if (nCombos >= 80 && nCombos <= 89)
-					{
-						nAddScore = this.nScore[nPlayer][8];
-					}
-					else if (nCombos >= 90 && nCombos <= 99)
-					{
-						nAddScore = this.nScore[nPlayer][9];
-					}
-					else if (nCombos >= 100)
-					{
-						nAddScore = this.nScore[nPlayer][10];
-					}
+					int num9 = ((this.b - TJAPlayer4.DTX[nPlayer].n風船数[3]) * (100 * TJAPlayer4.DTX[nPlayer].n風船数[3] - 1)) + 1000 * TJAPlayer4.DTX[nPlayer].n風船数[3];
+					nAddScore = (int)(Math.Ceiling((double)((1000000 - num9) / (TJAPlayer4.DTX[nPlayer].nノーツ数[3])) / 10.0) * 10.0);
 
 					if (eJudgeResult == E判定.Great || eJudgeResult == E判定.Good)
 					{
 						nAddScore = nAddScore / 2;
-					}
-
-
-					if (pChip.bGOGOTIME) //2018.03.11 kairera0467 チップに埋め込んだフラグから読み取る
-						nAddScore = (int)(nAddScore * 1.2f);
-
-					nAddScore = (int)(nAddScore / 10.0);
-					nAddScore = (int)(nAddScore * 10);
-
-					//大音符のボーナス
-					if (pChip.nチャンネル番号 == 0x13 || pChip.nチャンネル番号 == 0x14 || pChip.nチャンネル番号 == 0x1A || pChip.nチャンネル番号 == 0x1B)
-					{
-						nAddScore = nAddScore * 2;
 					}
 
 					this.actScore.Add(E楽器パート.TAIKO, nAddScore, nPlayer);
 				}
 				else
 				{
-					if (eJudgeResult == E判定.Perfect)
+					for (int i = 0; i < TJAPlayer4.DTX[nPlayer].n風船数[2]; i++)
 					{
-						if (nCombos < 200)
-						{
-							nAddScore = 1000;
-						}
-						else
-						{
-							nAddScore = 2000;
-						}
+						this.b += TJAPlayer4.DTX[nPlayer].n風船数[3];
 					}
-					else if (eJudgeResult == E判定.Great || eJudgeResult == E判定.Good)
+					int num9 = ((this.b - TJAPlayer4.DTX[nPlayer].n風船数[3]) * (100 * TJAPlayer4.DTX[nPlayer].n風船数[3] - 1)) + 1000 * TJAPlayer4.DTX[nPlayer].n風船数[3];
+					nAddScore = (int)(Math.Ceiling((double)((1000000 - num9) / (TJAPlayer4.DTX[nPlayer].nノーツ数[3])) / 10.0) * 10.0);
+
+					if (eJudgeResult == E判定.Great || eJudgeResult == E判定.Good)
 					{
-						if (nCombos < 200)
-						{
-							nAddScore = 500;
-						}
-						else
-						{
-							nAddScore = 1000;
-						}
+						nAddScore = nAddScore / 2;
 					}
-
-					if (pChip.bGOGOTIME) //2018.03.11 kairera0467 チップに埋め込んだフラグから読み取る
-						nAddScore = (int)(nAddScore * 1.2f);
-
-					//大音符のボーナス
-					if (pChip.nチャンネル番号 == 0x13 || pChip.nチャンネル番号 == 0x25)
-					{
-						nAddScore = nAddScore * 2;
-					}
-
 
 					this.actScore.Add(E楽器パート.TAIKO, nAddScore, nPlayer);
-					//this.actScore.Add( E楽器パート.DRUMS, bIsAutoPlay, nAddScore );              
 				}
 
 				//キーを押したときにスコア情報 + nAddScoreを置き換える様に
