@@ -8,7 +8,7 @@ using SlimDX;
 using SlimDX.Direct3D9;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActResultImage : CActivity
 	{
@@ -70,7 +70,7 @@ namespace TJAPlayer3
 			}
 			if( base.b初めての進行描画 )
 			{
-				this.ct登場用 = new CCounter( 0, 100, 5, TJAPlayer3.Timer );
+				this.ct登場用 = new CCounter( 0, 100, 5, TJAPlayer4.Timer );
 				base.b初めての進行描画 = false;
 			}
 			this.ct登場用.t進行();
@@ -93,19 +93,19 @@ namespace TJAPlayer3
 
 		private bool tプレビュー画像の指定があれば構築する()
 		{
-			if( string.IsNullOrEmpty( TJAPlayer3.DTX.PREIMAGE ) )
+			if( string.IsNullOrEmpty( TJAPlayer4.DTX[0].PREIMAGE ) )
 			{
 				return false;
 			}
-			TJAPlayer3.tテクスチャの解放( ref this.txリザルト画像 );
+			TJAPlayer4.tテクスチャの解放( ref this.txリザルト画像 );
 			this.r表示するリザルト画像 = null;
-			string path = TJAPlayer3.DTX.strフォルダ名 + TJAPlayer3.DTX.PREIMAGE;
+			string path = TJAPlayer4.DTX[0].strフォルダ名 + TJAPlayer4.DTX[0].PREIMAGE;
 			if( !File.Exists( path ) )
 			{
 				Trace.TraceWarning( "ファイルが存在しません。({0})", new object[] { path } );
 				return false;
 			}
-			this.txリザルト画像 = TJAPlayer3.tテクスチャの生成( path );
+			this.txリザルト画像 = TJAPlayer4.tテクスチャの生成( path );
 			this.r表示するリザルト画像 = this.txリザルト画像;
 			return ( this.r表示するリザルト画像 != null );
 		}

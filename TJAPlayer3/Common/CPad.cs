@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     public class CPad
 	{

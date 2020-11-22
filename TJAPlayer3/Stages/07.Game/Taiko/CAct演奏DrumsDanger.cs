@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏DrumsDanger : CAct演奏Danger共通
 	{
@@ -42,7 +42,7 @@ namespace TJAPlayer3
 		{
 			if( !base.b活性化してない )
 			{
-				TJAPlayer3.tテクスチャの解放( ref this.txDANGER );
+				TJAPlayer4.tテクスチャの解放( ref this.txDANGER );
 				base.OnManagedリソースの解放();
 			}
 		}

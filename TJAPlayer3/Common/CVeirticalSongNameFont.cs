@@ -9,7 +9,7 @@ using System.Diagnostics;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	public class CVerticalSongNameFont
 	{

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     /// <summary>
     /// CDTXStyleExtractor determines if there is a session notation, and if there is then

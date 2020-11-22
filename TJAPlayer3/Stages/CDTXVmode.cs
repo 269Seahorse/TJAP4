@@ -7,7 +7,7 @@ using System.Threading;
 using FDK;
 
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	public class CDTXVmode
 	{
@@ -381,7 +381,7 @@ Trace.TraceInformation( "Command: " + s[ (int) this.Command ] );
 		public void tUpdateConfigIni()
 		{
 			CConfigIni cc = new CConfigIni();
-			string path = TJAPlayer3.strEXEのあるフォルダ + "Config.ini";
+			string path = TJAPlayer4.strEXEのあるフォルダ + "Config.ini";
 			if ( File.Exists( path ) )
 			{
 				FileInfo fi = new FileInfo( path );
@@ -401,10 +401,10 @@ Trace.TraceInformation( "Command: " + s[ (int) this.Command ] );
 				fi = null;
 			}
 
-			cc.nViewerScrollSpeed     = TJAPlayer3.ConfigIni.n譜面スクロール速度;
-			cc.bViewerShowDebugStatus = TJAPlayer3.ConfigIni.b演奏情報を表示する;
-			cc.bViewerVSyncWait       = TJAPlayer3.ConfigIni.b垂直帰線待ちを行う;
-			cc.bViewerTimeStretch     = TJAPlayer3.ConfigIni.bTimeStretch;
+			cc.nViewerScrollSpeed = TJAPlayer4.ConfigIni.n譜面スクロール速度[0];
+			cc.bViewerShowDebugStatus = TJAPlayer4.ConfigIni.b演奏情報を表示する;
+			cc.bViewerVSyncWait       = TJAPlayer4.ConfigIni.b垂直帰線待ちを行う;
+			cc.bViewerTimeStretch     = TJAPlayer4.ConfigIni.bTimeStretch;
 			cc.bViewerDrums有効       = true;
 
 			cc.t書き出し( path );

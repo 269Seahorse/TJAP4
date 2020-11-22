@@ -1,0 +1,80 @@
+作成日:2020.11.11
+最終更新日:2020.11.11
+Write:いっしぃー
+
+基本的に条件の記述方法はTJAPlayer3 ver.1.5.xとほぼ同じです。
+ニジイロだけでなくこれまでのTJAPlayer3で遊んでいた.tjaファイルもお使いいただけます。
+
+・1st
+段位全体を通しての条件の設定は今まで通りで構いません(多分)。
+
+<例>
+TITLE:十段
+BPM:100
+WAVE:Surf Zapping.ogg
+DEMOSTART:99
+SCOREMODE:1
+COURSE:Dan
+LEVEL:10
+BALLOON:5,5,27,8
+
+EXAMGAUGE:100,100,m
+
+EXAM2:jb,7,3,l　　　←----------
+
+#START
+・
+・
+・
+
+******************************************
+
+・2nd
+ゲージ固定の条件の仕方は、
+
+EXAMGAUGE: 赤合格の条件 , 金合格の条件 , 未満か以上か
+
+の順番で次のように記述してください。
+
+<例>
+TITLE:十段
+BPM:100
+WAVE:Surf Zapping.ogg
+DEMOSTART:99
+SCOREMODE:1
+COURSE:Dan
+LEVEL:10
+BALLOON:5,5,27,8
+
+EXAMGAUGE:100,100,m　　　←----------
+
+EXAM2:jb,7,3,l 
+
+#START
+・
+・
+・
+
+******************************************
+
+・3rd
+曲ごとに条件が変わるものは　#NEXTSONG　の後に記述してください。
+
+<例>
+#START
+#NEXTSONG Surf Zapping,t+pazolite 「シンクロニカ」より,,Surf Zapping.ogg,340,100
+
+EXAM1:jg,30,13,l　　　←----------
+EXAM3:r,26,31,m　　　 ←----------
+
+#BPMCHANGE 100
+#MEASURE 4/4
+#SCROLL 1.0
+#DELAY 2.99
+11211020,
+・
+・
+・
+
+******************************************
+

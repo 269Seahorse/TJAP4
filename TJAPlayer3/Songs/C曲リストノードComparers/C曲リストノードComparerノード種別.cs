@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TJAPlayer3.C曲リストノードComparers
+namespace TJAPlayer4.C曲リストノードComparers
 {
     internal sealed class C曲リストノードComparerノード種別 : IComparer<C曲リストノード>
     {

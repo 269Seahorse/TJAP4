@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActSelectステータスパネル : CActivity
 	{

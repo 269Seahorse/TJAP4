@@ -6,7 +6,7 @@ using System.Drawing;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏Combo共通 : CActivity
 	{
@@ -69,12 +69,12 @@ namespace TJAPlayer3
 				set
 				{
 					this.p1 = value;
-					if( this.p1 > this.P1最高値 )
+					if (this.p1 > this.最高値[0])
 					{
-						this.P1最高値 = this.p1;
+						this.最高値[0] = this.p1;
 					}
 					this.act.status.P1.nCOMBO値 = this.p1;
-					this.act.status.P1.n最高COMBO値 = this.P1最高値;
+					this.act.status.P1.n最高COMBO値 = this.最高値[0];
 				}
 			}
 			public int P2
@@ -86,12 +86,12 @@ namespace TJAPlayer3
 				set
 				{
 					this.p2 = value;
-					if( this.p2 > this.P2最高値 )
+					if (this.p2 > this.最高値[1])
 					{
-						this.P2最高値 = this.p2;
+						this.最高値[1] = this.p2;
 					}
 					this.act.status.P2.nCOMBO値 = this.p2;
-					this.act.status.P2.n最高COMBO値 = this.P2最高値;
+					this.act.status.P2.n最高COMBO値 = this.最高値[1];
 				}
 			}
 			public int P3
@@ -103,12 +103,12 @@ namespace TJAPlayer3
 				set
 				{
 					this.p3 = value;
-					if( this.p3 > this.P3最高値 )
+					if (this.p3 > this.最高値[2])
 					{
-						this.P3最高値 = this.p3;
+						this.最高値[2] = this.p3;
 					}
 					this.act.status.P3.nCOMBO値 = this.p3;
-					this.act.status.P3.n最高COMBO値 = this.P3最高値;
+					this.act.status.P3.n最高COMBO値 = this.最高値[2];
 				}
 			}
 			public int P4
@@ -120,18 +120,16 @@ namespace TJAPlayer3
 				set
 				{
 					this.p4 = value;
-					if( this.p4 > this.P4最高値 )
+					if (this.p4 > this.最高値[3])
 					{
-						this.P4最高値 = this.p4;
+						this.最高値[3] = this.p4;
 					}
 					this.act.status.P4.nCOMBO値 = this.p4;
-					this.act.status.P4.n最高COMBO値 = this.P4最高値;
+					this.act.status.P4.n最高COMBO値 = this.最高値[3];
 				}
 			}
-			public int P1最高値 { get; private set; }
-			public int P2最高値 { get; private set; }
-			public int P3最高値 { get; private set; }
-			public int P4最高値 { get; private set; }
+			public int[] 最高値 { get; set; }
+			//public int[] 最高値 { get; private set; }
 
 			private int p1;
 			private int p2;
@@ -350,7 +348,7 @@ namespace TJAPlayer3
 
             //X右座標を元にして、右座標 - ( コンボの幅 * 桁数 ) でX座標を求めていく?
 
-			int nY上辺位置px = TJAPlayer3.ConfigIni.bReverse.Drums ? 350 : 10;
+			int nY上辺位置px = TJAPlayer4.ConfigIni.bReverse.Drums ? 350 : 10;
 			int n数字とCOMBOを合わせた画像の全長px = ( ( 44 ) * n桁数 );
 			int x = 245 + ( n数字とCOMBOを合わせた画像の全長px / 2 );
 			//int y = 212;
@@ -359,11 +357,11 @@ namespace TJAPlayer3
             #region[ コンボ文字 ]
             if( n桁数 <= 2 )
             {
-                TJAPlayer3.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Y[nPlayer], new Rectangle(0, 0, TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[1]));
+                TJAPlayer4.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer4.Skin.Game_Taiko_Combo_Text_Y[nPlayer], new Rectangle(0, 0, TJAPlayer4.Skin.Game_Taiko_Combo_Text_Size[0], TJAPlayer4.Skin.Game_Taiko_Combo_Text_Size[1]));
             }
             else
             {
-                TJAPlayer3.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Y[nPlayer], new Rectangle(0, TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[1], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Text_Size[1]));
+                TJAPlayer4.Tx.Taiko_Combo_Text?.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.Game_Taiko_Combo_Text_X[nPlayer], TJAPlayer4.Skin.Game_Taiko_Combo_Text_Y[nPlayer], new Rectangle(0, TJAPlayer4.Skin.Game_Taiko_Combo_Text_Size[1], TJAPlayer4.Skin.Game_Taiko_Combo_Text_Size[0], TJAPlayer4.Skin.Game_Taiko_Combo_Text_Size[1]));
             }
             #endregion
 
@@ -372,22 +370,22 @@ namespace TJAPlayer3
             if( n桁数 == 1)
             {
                 // 一桁ならそのままSkinConfigの座標を使用する。
-                rightX = TJAPlayer3.Skin.Game_Taiko_Combo_X[nPlayer];
+                rightX = TJAPlayer4.Skin.Game_Taiko_Combo_X[nPlayer];
             }
             else if( n桁数 == 2)
             {
                 // 二桁ならSkinConfigの座標+パディング/2を使用する
-                rightX = TJAPlayer3.Skin.Game_Taiko_Combo_X[nPlayer] + TJAPlayer3.Skin.Game_Taiko_Combo_Padding[0] / 2;
+                rightX = TJAPlayer4.Skin.Game_Taiko_Combo_X[nPlayer] + TJAPlayer4.Skin.Game_Taiko_Combo_Padding[0] / 2;
             }
             else if( n桁数 == 3)
             {
                 // 三桁ならSkinConfigの座標+パディングを使用する
-                rightX = TJAPlayer3.Skin.Game_Taiko_Combo_Ex_X[nPlayer] + TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1];
+                rightX = TJAPlayer4.Skin.Game_Taiko_Combo_Ex_X[nPlayer] + TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1];
             }
             else if (n桁数 == 4)
             {
                 // 四桁ならSkinconfigの座標+パディング/2 + パディングを使用する
-                rightX = TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_X[nPlayer] + TJAPlayer3.Skin.Game_Taiko_Combo_Padding[2] / 2 + TJAPlayer3.Skin.Game_Taiko_Combo_Padding[2];
+                rightX = TJAPlayer4.Skin.Game_Taiko_Combo_Ex4_X[nPlayer] + TJAPlayer4.Skin.Game_Taiko_Combo_Padding[2] / 2 + TJAPlayer4.Skin.Game_Taiko_Combo_Padding[2];
             }
             else
             {
@@ -400,14 +398,14 @@ namespace TJAPlayer3
                         // パディング/2を足す必要がある
                         // 右に表示される桁数を求め、-1する
                         rightDigit = n桁数 / 2 - 1;
-                        rightX = TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_X[nPlayer] + TJAPlayer3.Skin.Game_Taiko_Combo_Padding[2] / 2 + TJAPlayer3.Skin.Game_Taiko_Combo_Padding[2] * rightDigit;
+                        rightX = TJAPlayer4.Skin.Game_Taiko_Combo_Ex4_X[nPlayer] + TJAPlayer4.Skin.Game_Taiko_Combo_Padding[2] / 2 + TJAPlayer4.Skin.Game_Taiko_Combo_Padding[2] * rightDigit;
                         break;
                     case 1:
                         // 2で割るとあまりが出る
                         // そのままパディングを足していく
                         // 右に表示される桁数を求める(中央除く -1)
                         rightDigit = (n桁数 - 1) /2;
-                        rightX = TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_X[nPlayer] + TJAPlayer3.Skin.Game_Taiko_Combo_Padding[2] * rightDigit;
+                        rightX = TJAPlayer4.Skin.Game_Taiko_Combo_Ex4_X[nPlayer] + TJAPlayer4.Skin.Game_Taiko_Combo_Padding[2] * rightDigit;
                         break;
                     default:
                         break;
@@ -419,113 +417,113 @@ namespace TJAPlayer3
             for ( int i = 0; i < n桁数; i++ )
             {
 
-                TJAPlayer3.Tx.Taiko_Combo[0].n透明度 = 255;
-                TJAPlayer3.Tx.Taiko_Combo[1].n透明度 = 255;
+                TJAPlayer4.Tx.Taiko_Combo[0].Opacity = 255;
+                TJAPlayer4.Tx.Taiko_Combo[1].Opacity = 255;
 
                 if ( n桁数 <= 1 )
                 {
-				    if(TJAPlayer3.Tx.Taiko_Combo[0] != null )
+				    if(TJAPlayer4.Tx.Taiko_Combo[0] != null )
 				    {
                         var yScalling = ComboScale[this.ctコンボ加算[nPlayer].n現在の値];
-                        TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.Y = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[0] + yScalling;
-                        TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.X = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[0];
-                        TJAPlayer3.Tx.Taiko_Combo[0].t2D拡大率考慮下中心基準描画( TJAPlayer3.app.Device, rightX, TJAPlayer3.Skin.Game_Taiko_Combo_Y[nPlayer] , new Rectangle( n位の数[ i ] * TJAPlayer3.Skin.Game_Taiko_Combo_Size[0], 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size[1]) );
+                        TJAPlayer4.Tx.Taiko_Combo[0].vc拡大縮小倍率.Y = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[0] + yScalling;
+                        TJAPlayer4.Tx.Taiko_Combo[0].vc拡大縮小倍率.X = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[0];
+                        TJAPlayer4.Tx.Taiko_Combo[0].t2D拡大率考慮下中心基準描画( TJAPlayer4.app.Device, rightX, TJAPlayer4.Skin.Game_Taiko_Combo_Y[nPlayer] , new Rectangle( n位の数[ i ] * TJAPlayer4.Skin.Game_Taiko_Combo_Size[0], 0, TJAPlayer4.Skin.Game_Taiko_Combo_Size[0], TJAPlayer4.Skin.Game_Taiko_Combo_Size[1]) );
 				    }
                 }
                 else if( n桁数 <= 2 )
                 {
                     //int[] arComboX = { CDTXMania.Skin.Game_Taiko_Combo_X[nPlayer] + CDTXMania.Skin.Game_Taiko_Combo_Padding[0], CDTXMania.Skin.Game_Taiko_Combo_X[nPlayer] - CDTXMania.Skin.Game_Taiko_Combo_Padding[0] };
-                    if (TJAPlayer3.Tx.Taiko_Combo[0] != null )
+                    if (TJAPlayer4.Tx.Taiko_Combo[0] != null )
 				    {
                         var yScalling = ComboScale[this.ctコンボ加算[nPlayer].n現在の値];
-                        TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.Y = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[0] + yScalling;
-                        TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.X = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[0];
-                        TJAPlayer3.Tx.Taiko_Combo[0].t2D拡大率考慮下中心基準描画( TJAPlayer3.app.Device, rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[0] * i, TJAPlayer3.Skin.Game_Taiko_Combo_Y[nPlayer], new Rectangle( n位の数[ i ] * TJAPlayer3.Skin.Game_Taiko_Combo_Size[0], 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size[1]) );
+                        TJAPlayer4.Tx.Taiko_Combo[0].vc拡大縮小倍率.Y = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[0] + yScalling;
+                        TJAPlayer4.Tx.Taiko_Combo[0].vc拡大縮小倍率.X = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[0];
+                        TJAPlayer4.Tx.Taiko_Combo[0].t2D拡大率考慮下中心基準描画( TJAPlayer4.app.Device, rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[0] * i, TJAPlayer4.Skin.Game_Taiko_Combo_Y[nPlayer], new Rectangle( n位の数[ i ] * TJAPlayer4.Skin.Game_Taiko_Combo_Size[0], 0, TJAPlayer4.Skin.Game_Taiko_Combo_Size[0], TJAPlayer4.Skin.Game_Taiko_Combo_Size[1]) );
 				    }
                 }
                 else if( n桁数 == 3 )
                 {
-                    if (TJAPlayer3.Tx.Taiko_Combo[1] != null )
+                    if (TJAPlayer4.Tx.Taiko_Combo[1] != null )
 				    {
                         var yScalling = ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 0];
-                        TJAPlayer3.Tx.Taiko_Combo[1].vc拡大縮小倍率.Y = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[1] + yScalling;
-                        TJAPlayer3.Tx.Taiko_Combo[1].vc拡大縮小倍率.X = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[1];
-                        var yJumping = TJAPlayer3.Skin.Game_Taiko_Combo_Ex_IsJumping ? (int)ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 1] : 0;
-                        TJAPlayer3.Tx.Taiko_Combo[1].t2D拡大率考慮下中心基準描画( TJAPlayer3.app.Device, rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1] * i, TJAPlayer3.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] + yJumping, new Rectangle( n位の数[ i ] * TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0], 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1]) );
+                        TJAPlayer4.Tx.Taiko_Combo[1].vc拡大縮小倍率.Y = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[1] + yScalling;
+                        TJAPlayer4.Tx.Taiko_Combo[1].vc拡大縮小倍率.X = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[1];
+                        var yJumping = TJAPlayer4.Skin.Game_Taiko_Combo_Ex_IsJumping ? (int)ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 1] : 0;
+                        TJAPlayer4.Tx.Taiko_Combo[1].t2D拡大率考慮下中心基準描画( TJAPlayer4.app.Device, rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1] * i, TJAPlayer4.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] + yJumping, new Rectangle( n位の数[ i ] * TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0], 0, TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0], TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1]) );
                     }
-                    if(TJAPlayer3.Tx.Taiko_Combo_Effect != null )
+                    if(TJAPlayer4.Tx.Taiko_Combo_Effect != null )
                     {
-                        TJAPlayer3.Tx.Taiko_Combo_Effect.b加算合成 = true;
+                        TJAPlayer4.Tx.Taiko_Combo_Effect.b加算合成 = true;
                         if( this.ctコンボラメ.n現在の値 < 14)
                         {
                             // ひだり
                             #region[透明度制御]
-                            if (this.ctコンボラメ.n現在の値 < 7) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = 255;
-                            else if (this.ctコンボラメ.n現在の値 >= 7 && this.ctコンボラメ.n現在の値 < 14) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = (int)(204 - (24 * this.ctコンボラメ.n現在の値));
+                            if (this.ctコンボラメ.n現在の値 < 7) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = 255;
+                            else if (this.ctコンボラメ.n現在の値 >= 7 && this.ctコンボラメ.n現在の値 < 14) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = (int)(204 - (24 * this.ctコンボラメ.n現在の値));
                             #endregion
-                            TJAPlayer3.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, (rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1] * i) - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[1]), TJAPlayer3.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[1]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
+                            TJAPlayer4.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, (rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1] * i) - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[1]), TJAPlayer4.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[1]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
                         }
                         if(ctコンボラメ.n現在の値 > 4 && ctコンボラメ.n現在の値 < 24)
                         {
                             // みぎ
                             #region[透明度制御]
-                            if (this.ctコンボラメ.n現在の値 < 11) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = 255;
-                            else if (this.ctコンボラメ.n現在の値 >= 11 && this.ctコンボラメ.n現在の値 < 24) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = (int)(204 - (12 * this.ctコンボラメ.n現在の値));
+                            if (this.ctコンボラメ.n現在の値 < 11) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = 255;
+                            else if (this.ctコンボラメ.n現在の値 >= 11 && this.ctコンボラメ.n現在の値 < 24) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = (int)(204 - (12 * this.ctコンボラメ.n現在の値));
                             #endregion
-                            TJAPlayer3.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, (rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1] * i) + ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[1]), TJAPlayer3.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[1]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
+                            TJAPlayer4.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, (rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1] * i) + ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[1]), TJAPlayer4.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[1]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
 
                         }
                         if (ctコンボラメ.n現在の値 > 14)
                         {
                             // まんなか
                             #region[透明度制御]
-                            if (this.ctコンボラメ.n現在の値 < 252) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = 255;
-                            else if (this.ctコンボラメ.n現在の値 >= 22 && this.ctコンボラメ.n現在の値 < 30) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = (int)(204 - (6 * this.ctコンボラメ.n現在の値));
+                            if (this.ctコンボラメ.n現在の値 < 252) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = 255;
+                            else if (this.ctコンボラメ.n現在の値 >= 22 && this.ctコンボラメ.n現在の値 < 30) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = (int)(204 - (6 * this.ctコンボラメ.n現在の値));
                             #endregion
-                            TJAPlayer3.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, (rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1] * i), TJAPlayer3.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[1]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
+                            TJAPlayer4.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, (rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1] * i), TJAPlayer4.Skin.Game_Taiko_Combo_Ex_Y[nPlayer] - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[1]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
                         }
                     }
                 }
                 else
                 {
-                    if (TJAPlayer3.Tx.Taiko_Combo[1] != null)
+                    if (TJAPlayer4.Tx.Taiko_Combo[1] != null)
                     {
                         var yScalling = ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 0];
-                        TJAPlayer3.Tx.Taiko_Combo[1].vc拡大縮小倍率.Y = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2] + yScalling;
-                        TJAPlayer3.Tx.Taiko_Combo[1].vc拡大縮小倍率.X = TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2];
-                        var yJumping = TJAPlayer3.Skin.Game_Taiko_Combo_Ex_IsJumping ? (int)ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 1] : 0;
-                        TJAPlayer3.Tx.Taiko_Combo[1].t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[2] * i, TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] + yJumping, new Rectangle(n位の数[i] * TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0], 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1]));
+                        TJAPlayer4.Tx.Taiko_Combo[1].vc拡大縮小倍率.Y = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[2] + yScalling;
+                        TJAPlayer4.Tx.Taiko_Combo[1].vc拡大縮小倍率.X = TJAPlayer4.Skin.Game_Taiko_Combo_Scale[2];
+                        var yJumping = TJAPlayer4.Skin.Game_Taiko_Combo_Ex_IsJumping ? (int)ComboScale_Ex[this.ctコンボ加算[nPlayer].n現在の値, 1] : 0;
+                        TJAPlayer4.Tx.Taiko_Combo[1].t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[2] * i, TJAPlayer4.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] + yJumping, new Rectangle(n位の数[i] * TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0], 0, TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0], TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1]));
                     }
-                    if (TJAPlayer3.Tx.Taiko_Combo_Effect != null)
+                    if (TJAPlayer4.Tx.Taiko_Combo_Effect != null)
                     {
-                        TJAPlayer3.Tx.Taiko_Combo_Effect.b加算合成 = true;
+                        TJAPlayer4.Tx.Taiko_Combo_Effect.b加算合成 = true;
                         if (this.ctコンボラメ.n現在の値 < 14)
                         {
                             // ひだり
                             #region[透明度制御]
-                            if (this.ctコンボラメ.n現在の値 < 7) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = 255;
-                            else if (this.ctコンボラメ.n現在の値 >= 7 && this.ctコンボラメ.n現在の値 < 14) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = (int)(204 - (24 * this.ctコンボラメ.n現在の値));
+                            if (this.ctコンボラメ.n現在の値 < 7) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = 255;
+                            else if (this.ctコンボラメ.n現在の値 >= 7 && this.ctコンボラメ.n現在の値 < 14) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = (int)(204 - (24 * this.ctコンボラメ.n現在の値));
                             #endregion
-                            TJAPlayer3.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, (rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1] * i) - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2]), TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
+                            TJAPlayer4.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, (rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1] * i) - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[2]), TJAPlayer4.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[2]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
                         }
                         if (ctコンボラメ.n現在の値 > 4 && ctコンボラメ.n現在の値 < 24)
                         {
                             // みぎ
                             #region[透明度制御]
-                            if (this.ctコンボラメ.n現在の値 < 11) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = 255;
-                            else if (this.ctコンボラメ.n現在の値 >= 11 && this.ctコンボラメ.n現在の値 < 24) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = (int)(204 - (12 * this.ctコンボラメ.n現在の値));
+                            if (this.ctコンボラメ.n現在の値 < 11) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = 255;
+                            else if (this.ctコンボラメ.n現在の値 >= 11 && this.ctコンボラメ.n現在の値 < 24) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = (int)(204 - (12 * this.ctコンボラメ.n現在の値));
                             #endregion
-                            TJAPlayer3.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, (rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1] * i) + ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2]), TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
+                            TJAPlayer4.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, (rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1] * i) + ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[0] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[2]), TJAPlayer4.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[2]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
 
                         }
                         if (ctコンボラメ.n現在の値 > 14)
                         {
                             // まんなか
                             #region[透明度制御]
-                            if (this.ctコンボラメ.n現在の値 < 22) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = 255;
-                            else if (this.ctコンボラメ.n現在の値 >= 22 && this.ctコンボラメ.n現在の値 < 30) TJAPlayer3.Tx.Taiko_Combo_Effect.n透明度 = (int)(204 - (6 * this.ctコンボラメ.n現在の値));
+                            if (this.ctコンボラメ.n現在の値 < 22) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = 255;
+                            else if (this.ctコンボラメ.n現在の値 >= 22 && this.ctコンボラメ.n現在の値 < 30) TJAPlayer4.Tx.Taiko_Combo_Effect.Opacity = (int)(204 - (6 * this.ctコンボラメ.n現在の値));
                             #endregion
-                            TJAPlayer3.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer3.app.Device, (rightX - TJAPlayer3.Skin.Game_Taiko_Combo_Padding[1] * i), TJAPlayer3.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] - ((TJAPlayer3.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer3.Skin.Game_Taiko_Combo_Scale[2]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
+                            TJAPlayer4.Tx.Taiko_Combo_Effect.t2D拡大率考慮下中心基準描画(TJAPlayer4.app.Device, (rightX - TJAPlayer4.Skin.Game_Taiko_Combo_Padding[1] * i), TJAPlayer4.Skin.Game_Taiko_Combo_Ex4_Y[nPlayer] - ((TJAPlayer4.Skin.Game_Taiko_Combo_Size_Ex[1] / 4) * TJAPlayer4.Skin.Game_Taiko_Combo_Scale[2]) - (int)(1.05 * this.ctコンボラメ.n現在の値));
 
                         }
                     }
@@ -561,6 +559,7 @@ namespace TJAPlayer3
 		public override void On活性化()
 		{
 			this.n現在のコンボ数 = new STCOMBO() { act = this };
+			this.n現在のコンボ数.最高値 = new int[4];
 			this.status = new CSTATUS();
             this.ctコンボ加算 = new CCounter[ 4 ];
 			for( int i = 0; i < 4; i++ )
@@ -573,9 +572,9 @@ namespace TJAPlayer3
 				this.status[ i ].nジャンプインデックス値 = 99999;
 				this.status[ i ].n前回の時刻_ジャンプ用 = -1;
 				this.status[ i ].nコンボが切れた時刻 = -1;
-                this.ctコンボ加算[ i ] = new CCounter( 0, 12, 12, TJAPlayer3.Timer );
+                this.ctコンボ加算[ i ] = new CCounter( 0, 12, 12, TJAPlayer4.Timer );
 			}
-            this.ctコンボラメ = new CCounter( 0, 29, 20, TJAPlayer3.Timer );
+            this.ctコンボラメ = new CCounter( 0, 29, 20, TJAPlayer4.Timer );
 			base.On活性化();
 		}
 		public override void On非活性化()
@@ -616,7 +615,7 @@ namespace TJAPlayer3
 				{
 					e今回の状態遷移イベント = EEvent.ミス通知;
 				}
-				else if( ( this.status[ i ].n現在表示中のCOMBO値 < TJAPlayer3.ConfigIni.n表示可能な最小コンボ数.Drums ) && ( this.status[ i ].nCOMBO値 < TJAPlayer3.ConfigIni.n表示可能な最小コンボ数.Drums ) )
+				else if( ( this.status[ i ].n現在表示中のCOMBO値 < TJAPlayer4.ConfigIni.n表示可能な最小コンボ数.Drums ) && ( this.status[ i ].nCOMBO値 < TJAPlayer4.ConfigIni.n表示可能な最小コンボ数.Drums ) )
 				{
 					e今回の状態遷移イベント = EEvent.非表示;
 				}
@@ -631,11 +630,11 @@ namespace TJAPlayer3
 				//-----------------
 				if( this.status[ i ].nジャンプインデックス値 < 360 )
 				{
-					if( ( this.status[ i ].n前回の時刻_ジャンプ用 == -1 ) || ( TJAPlayer3.Timer.n現在時刻 < this.status[ i ].n前回の時刻_ジャンプ用 ) )
-						this.status[ i ].n前回の時刻_ジャンプ用 = TJAPlayer3.Timer.n現在時刻;
+					if( ( this.status[ i ].n前回の時刻_ジャンプ用 == -1 ) || ( TJAPlayer4.Timer.n現在時刻 < this.status[ i ].n前回の時刻_ジャンプ用 ) )
+						this.status[ i ].n前回の時刻_ジャンプ用 = TJAPlayer4.Timer.n現在時刻;
 
 					const long INTERVAL = 2;
-					while( ( TJAPlayer3.Timer.n現在時刻 - this.status[ i ].n前回の時刻_ジャンプ用 ) >= INTERVAL )
+					while( ( TJAPlayer4.Timer.n現在時刻 - this.status[ i ].n前回の時刻_ジャンプ用 ) >= INTERVAL )
 					{
 						if( this.status[ i ].nジャンプインデックス値 < 2000 )
 							this.status[ i ].nジャンプインデックス値 += 3;
@@ -660,7 +659,7 @@ namespace TJAPlayer3
 							// モード変更
 							this.status[ i ].e現在のモード = EMode.進行表示中;
 							this.status[ i ].nジャンプインデックス値 = 0;
-							this.status[ i ].n前回の時刻_ジャンプ用 = TJAPlayer3.Timer.n現在時刻;
+							this.status[ i ].n前回の時刻_ジャンプ用 = TJAPlayer4.Timer.n現在時刻;
 							goto Retry;
 						}
 
@@ -678,14 +677,14 @@ namespace TJAPlayer3
 							// モード変更
 							this.status[ i ].e現在のモード = EMode.残像表示中;
 							this.status[ i ].n残像表示中のCOMBO値 = this.status[ i ].n現在表示中のCOMBO値;
-							this.status[ i ].nコンボが切れた時刻 = TJAPlayer3.Timer.n現在時刻;
+							this.status[ i ].nコンボが切れた時刻 = TJAPlayer4.Timer.n現在時刻;
 							goto Retry;
 						}
 
 						if( e今回の状態遷移イベント == EEvent.数値更新 )
 						{
 							this.status[ i ].nジャンプインデックス値 = 0;
-							this.status[ i ].n前回の時刻_ジャンプ用 = TJAPlayer3.Timer.n現在時刻;
+							this.status[ i ].n前回の時刻_ジャンプ用 = TJAPlayer4.Timer.n現在時刻;
 						}
 
 						this.status[ i ].n現在表示中のCOMBO値 = this.status[ i ].nCOMBO値;
@@ -720,7 +719,7 @@ namespace TJAPlayer3
 							this.status[ i ].e現在のモード = EMode.進行表示中;
 							goto Retry;
 						}
-						if( ( TJAPlayer3.Timer.n現在時刻 - this.status[ i ].nコンボが切れた時刻 ) > 1000 )
+						if( ( TJAPlayer4.Timer.n現在時刻 - this.status[ i ].nコンボが切れた時刻 ) > 1000 )
 						{
 							// モード変更２
 							this.status[ i ].e現在のモード = EMode.非表示中;

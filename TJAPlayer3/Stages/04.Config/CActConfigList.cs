@@ -7,7 +7,7 @@ using System.Threading;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActConfigList : CActivity
 	{
@@ -87,17 +87,17 @@ namespace TJAPlayer3
             //    new string[] { "OFF", "HALF", "FULL" } );
             //this.list項目リスト.Add( this.iCommonDark );
 
-            this.iTaikoPlayerCount = new CItemInteger( "プレイ人数", 1, 2, TJAPlayer3.ConfigIni.nPlayerCount,
+            this.iTaikoPlayerCount = new CItemInteger( "プレイ人数", 1, 2, TJAPlayer4.ConfigIni.nPlayerCount,
                 "プレイ人数切り替え：\n2にすると演奏画面が2人プレイ専用のレイアウトになり、2P専用譜面を読み込むようになります。",
                 "" );
             this.list項目リスト.Add( this.iTaikoPlayerCount );
 
-			this.iSystemRisky = new CItemInteger( "Risky", 0, 10, TJAPlayer3.ConfigIni.nRisky,
+			this.iSystemRisky = new CItemInteger( "Risky", 0, 10, TJAPlayer4.ConfigIni.nRisky,
 				"Riskyモードの設定:\n1以上の値にすると、その回数分の\nPoor/MissでFAILEDとなります。\n0にすると無効になり、\nDamageLevelに従ったゲージ増減と\nなります。\nStageFailedの設定と併用できます。",
 				"Risky mode:\nSet over 1, in case you'd like to specify\n the number of Poor/Miss times to be\n FAILED.\nSet 0 to disable Risky mode." );
 			this.list項目リスト.Add( this.iSystemRisky );
 
-			this.iCommonPlaySpeed = new CItemInteger("再生速度", 5, 40, TJAPlayer3.ConfigIni.n演奏速度,
+			this.iCommonPlaySpeed = new CItemInteger("再生速度", 5, 400, TJAPlayer4.ConfigIni.n演奏速度,
 				"曲の演奏速度を、速くしたり遅くした\n" +
 				"りすることができます。\n" +
 				"（※一部のサウンドカードでは正しく\n" +
@@ -116,7 +116,7 @@ namespace TJAPlayer3
 				"lag occurs slower than x0.900.");
 			this.list項目リスト.Add( this.iCommonPlaySpeed );
 
-			this.iSystemTimeStretch = new CItemToggle( "TimeStretch", TJAPlayer3.ConfigIni.bTimeStretch,
+			this.iSystemTimeStretch = new CItemToggle( "TimeStretch", TJAPlayer4.ConfigIni.bTimeStretch,
 				"演奏速度の変更方式:\n" + 
 				"ONにすると、演奏速度の変更を、\n" +
 				"周波数変更ではなく\n" +
@@ -136,15 +136,15 @@ namespace TJAPlayer3
 			this.list項目リスト.Add( this.iSystemTimeStretch );
 
 
-			this.iSystemFullscreen = new CItemToggle( "Fullscreen", TJAPlayer3.ConfigIni.b全画面モード,
+			this.iSystemFullscreen = new CItemToggle( "Fullscreen", TJAPlayer4.ConfigIni.b全画面モード,
 				"画面モード設定：\nON で全画面モード、OFF でウィンド\nウモードになります。",
 				"Fullscreen mode or window mode." );
 			this.list項目リスト.Add( this.iSystemFullscreen );
-			this.iSystemStageFailed = new CItemToggle( "StageFailed", TJAPlayer3.ConfigIni.bSTAGEFAILED有効,
+			this.iSystemStageFailed = new CItemToggle( "StageFailed", TJAPlayer4.ConfigIni.bSTAGEFAILED有効,
 				"STAGE FAILED 有効：\nON にすると、ゲージがなくなった時\nに STAGE FAILED となり演奏が中断\nされます。OFF の場合は、ゲージが\nなくなっても最後まで演奏できます。",
 				"Turn OFF if you don't want to encount\n GAME OVER." );
 			this.list項目リスト.Add( this.iSystemStageFailed );
-			this.iSystemRandomFromSubBox = new CItemToggle( "RandSubBox", TJAPlayer3.ConfigIni.bランダムセレクトで子BOXを検索対象とする,
+			this.iSystemRandomFromSubBox = new CItemToggle( "RandSubBox", TJAPlayer4.ConfigIni.bランダムセレクトで子BOXを検索対象とする,
 				"子BOXをRANDOMの対象とする：\nON にすると、RANDOM SELECT 時\nに子BOXも選択対象とします。",
 				"Turn ON to use child BOX (subfolders)\n at RANDOM SELECT." );
 			this.list項目リスト.Add( this.iSystemRandomFromSubBox );
@@ -169,35 +169,35 @@ namespace TJAPlayer3
 			//	"Note: This setting is effetive\n" +
 			//	" only when DirectSound is used.");
 			//this.list項目リスト.Add( this.iSystemAdjustWaves );
-			this.iSystemVSyncWait = new CItemToggle( "VSyncWait", TJAPlayer3.ConfigIni.b垂直帰線待ちを行う,
+			this.iSystemVSyncWait = new CItemToggle( "VSyncWait", TJAPlayer4.ConfigIni.b垂直帰線待ちを行う,
 				"垂直帰線同期：\n画面の描画をディスプレイの垂直帰\n線中に行なう場合には ON を指定し\nます。ON にすると、ガタつきのない\n滑らかな画面描画が実現されます。",
 				"Turn ON to wait VSync (Vertical\n Synchronizing signal) at every\n drawings. (so FPS becomes 60)\nIf you have enough CPU/GPU power,\n the scroll would become smooth." );
 			this.list項目リスト.Add( this.iSystemVSyncWait );
-			this.iSystemAVI = new CItemToggle( "AVI", TJAPlayer3.ConfigIni.bAVI有効,
+			this.iSystemAVI = new CItemToggle( "AVI", TJAPlayer4.ConfigIni.bAVI有効,
 				"AVIの使用：\n動画(AVI)を再生可能にする場合に\nON にします。AVI の再生には、それ\nなりのマシンパワーが必要とされます。",
 				"To use AVI playback or not." );
 			this.list項目リスト.Add( this.iSystemAVI );
-			this.iSystemBGA = new CItemToggle( "BGA", TJAPlayer3.ConfigIni.bBGA有効,
+			this.iSystemBGA = new CItemToggle( "BGA", TJAPlayer4.ConfigIni.bBGA有効,
 				"BGAの使用：\n画像(BGA)を表示可能にする場合に\nON にします。BGA の再生には、それ\nなりのマシンパワーが必要とされます。",
 				"To draw BGA (back ground animations)\n or not." );
 			this.list項目リスト.Add( this.iSystemBGA );
-			this.iSystemPreviewSoundWait = new CItemInteger( "PreSoundWait", 0, 0x2710, TJAPlayer3.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms,
+			this.iSystemPreviewSoundWait = new CItemInteger( "PreSoundWait", 0, 0x2710, TJAPlayer4.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms,
 				"プレビュー音演奏までの時間：\n曲にカーソルが合わされてからプレ\nビュー音が鳴り始めるまでの時間を\n指定します。\n0 ～ 10000 [ms] が指定可能です。",
 				"Delay time(ms) to start playing preview\n sound in SELECT MUSIC screen.\nYou can specify from 0ms to 10000ms." );
 			this.list項目リスト.Add( this.iSystemPreviewSoundWait );
-			this.iSystemPreviewImageWait = new CItemInteger( "PreImageWait", 0, 0x2710, TJAPlayer3.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms,
+			this.iSystemPreviewImageWait = new CItemInteger( "PreImageWait", 0, 0x2710, TJAPlayer4.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms,
 				"プレビュー画像表示までの時間：\n曲にカーソルが合わされてからプレ\nビュー画像が表示されるまでの時間\nを指定します。\n0 ～ 10000 [ms] が指定可能です。",
 				"Delay time(ms) to show preview image\n in SELECT MUSIC screen.\nYou can specify from 0ms to 10000ms." );
 			this.list項目リスト.Add( this.iSystemPreviewImageWait );
-			this.iSystemDebugInfo = new CItemToggle( "Debug Info", TJAPlayer3.ConfigIni.b演奏情報を表示する,
+			this.iSystemDebugInfo = new CItemToggle( "Debug Info", TJAPlayer4.ConfigIni.b演奏情報を表示する,
 				"演奏情報の表示：\n演奏中、BGA領域の下部に演奏情報\n（FPS、BPM、演奏時間など）を表示し\nます。\nまた、小節線の横に小節番号が表示\nされるようになります。",
 				"To show song informations on playing\n BGA area. (FPS, BPM, total time etc)\nYou can ON/OFF the indications\n by pushing [Del] while playing drums,\n guitar or bass." );
 			this.list項目リスト.Add( this.iSystemDebugInfo );
-			this.iSystemBGAlpha = new CItemInteger( "BG Alpha", 0, 0xff, TJAPlayer3.ConfigIni.n背景の透過度,
+			this.iSystemBGAlpha = new CItemInteger( "BG Alpha", 0, 0xff, TJAPlayer4.ConfigIni.n背景の透過度,
 				"背景画像の半透明割合：\n背景画像をDTXManiaのフレーム画像\nと合成する際の、背景画像の透明度\nを指定します。\n0 が完全透明で、255 が完全不透明\nとなります。",
 				"The degree for transparing playing\n screen and wallpaper.\n\n0=completely transparent,\n255=no transparency" );
 			this.list項目リスト.Add( this.iSystemBGAlpha );
-			this.iSystemBGMSound = new CItemToggle( "BGM Sound", TJAPlayer3.ConfigIni.bBGM音を発声する,
+			this.iSystemBGMSound = new CItemToggle( "BGM Sound", TJAPlayer4.ConfigIni.bBGM音を発声する,
 				"BGMの再生：\nこれをOFFにすると、BGM を再生しな\nくなります。",
 				"Turn OFF if you don't want to play\n BGM." );
 			this.list項目リスト.Add( this.iSystemBGMSound );
@@ -210,52 +210,52 @@ namespace TJAPlayer3
             //    "Damage level at missing (and\n recovering level) at playing.\nThis setting is ignored when Risky >= 1.",
             //    new string[] { "Small", "Normal", "Large" } );
             //this.list項目リスト.Add( this.iSystemDamageLevel );
-			this.iSystemSaveScore = new CItemToggle( "SaveScore", TJAPlayer3.ConfigIni.bScoreIniを出力する,
+			this.iSystemSaveScore = new CItemToggle( "SaveScore", TJAPlayer4.ConfigIni.bScoreIniを出力する,
 				"演奏記録の保存：\nON で演奏記録を ～.score.ini ファイ\nルに保存します。\n",
 				"To save high-scores/skills, turn it ON.\nTurn OFF in case your song data are\n in read-only media (CD-ROM etc).\nNote that the score files also contain\n 'BGM Adjust' parameter. So if you\n want to keep adjusting parameter,\n you need to set SaveScore=ON." );
 			this.list項目リスト.Add( this.iSystemSaveScore );
 
-		    this.iSystemApplyLoudnessMetadata = new CItemToggle( "Apply Loudness Metadata", TJAPlayer3.ConfigIni.ApplyLoudnessMetadata,
+		    this.iSystemApplyLoudnessMetadata = new CItemToggle( "Apply Loudness Metadata", TJAPlayer4.ConfigIni.ApplyLoudnessMetadata,
 		        "BS1770GAIN によるラウドネスメータの測量を適用します。\n利用するにはBS1770GAINが必要です。", 
 		        "To apply BS1770GAIN loudness\nmetadata when playing songs, turn it ON.\nTurn OFF if you prefer to use only\nthe main song level controls.\nIt needs BS1770GAIN." );
 		    this.list項目リスト.Add( this.iSystemApplyLoudnessMetadata );
 
-		    this.iSystemTargetLoudness = new CItemInteger( "Target Loudness", (int)Math.Round(CSound.MinimumLufs.ToDouble() * 10.0), (int)Math.Round(CSound.MaximumLufs.ToDouble() * 10.0), (int)Math.Round(TJAPlayer3.ConfigIni.TargetLoudness * 10.0),
+		    this.iSystemTargetLoudness = new CItemInteger( "Target Loudness", (int)Math.Round(CSound.MinimumLufs.ToDouble() * 10.0), (int)Math.Round(CSound.MaximumLufs.ToDouble() * 10.0), (int)Math.Round(TJAPlayer4.ConfigIni.TargetLoudness * 10.0),
 		        "BS1770GAIN によるラウドネスメータの目標値を指定します。",
                 "When applying BS1770GAIN loudness\nmetadata while playing songs, song levels\nwill be adjusted to target this loudness,\nmeasured in cB (centibels) relative to full scale.\n");
 		    this.list項目リスト.Add( this.iSystemTargetLoudness );
 
-		    this.iSystemApplySongVol = new CItemToggle( "Apply SONGVOL", TJAPlayer3.ConfigIni.ApplySongVol,
+		    this.iSystemApplySongVol = new CItemToggle( "Apply SONGVOL", TJAPlayer4.ConfigIni.ApplySongVol,
 		        ".tjaファイルのSONGVOLヘッダを音源の音量に適用します。設定による音量調整を使用する場合はこの設定をOFFにしてください。",
 		        "To apply .tja SONGVOL properties when playing\nsongs, turn it ON. Turn OFF if you prefer to\nuse only the main song level controls." );
 		    this.list項目リスト.Add( this.iSystemApplySongVol );
 
-		    this.iSystemSoundEffectLevel = new CItemInteger( "Sound Effect Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer3.ConfigIni.SoundEffectLevel,
+		    this.iSystemSoundEffectLevel = new CItemInteger( "Sound Effect Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer4.ConfigIni.SoundEffectLevel,
 		        $"効果音の音量を調節します。\n{CSound.MinimumGroupLevel} ～ {CSound.MaximumGroupLevel} % の値が指定可能です。\n",
 		        $"The level adjustment for sound effects.\nYou can specify from {CSound.MinimumGroupLevel} to {CSound.MaximumGroupLevel}%." );
 		    this.list項目リスト.Add( this.iSystemSoundEffectLevel );
 
-		    this.iSystemVoiceLevel = new CItemInteger( "Voice Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer3.ConfigIni.VoiceLevel,
+		    this.iSystemVoiceLevel = new CItemInteger( "Voice Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer4.ConfigIni.VoiceLevel,
 		        $"各画面で流れるボイス、コンボボイスの音量を調節します。\n{CSound.MinimumGroupLevel} ～ {CSound.MaximumGroupLevel} % の値が指定可能です。\n",
 		        $"The level adjustment for voices.\nYou can specify from {CSound.MinimumGroupLevel} to {CSound.MaximumGroupLevel}%." );
 		    this.list項目リスト.Add( this.iSystemVoiceLevel );
 
-		    this.iSystemSongPreviewLevel = new CItemInteger( "Song Preview Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer3.ConfigIni.SongPreviewLevel,
+		    this.iSystemSongPreviewLevel = new CItemInteger( "Song Preview Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer4.ConfigIni.SongPreviewLevel,
 		        $"選曲画面のプレビュー時の音量を調節します。\n{CSound.MinimumGroupLevel} ～ {CSound.MaximumGroupLevel} % の値が指定可能です。\n",
 		        $"The level adjustment for song previews.\nYou can specify from {CSound.MinimumGroupLevel} to {CSound.MaximumGroupLevel}%." );
 		    this.list項目リスト.Add( this.iSystemSongPreviewLevel );
 
-		    this.iSystemSongPlaybackLevel = new CItemInteger( "Song Playback Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer3.ConfigIni.SongPlaybackLevel,
+		    this.iSystemSongPlaybackLevel = new CItemInteger( "Song Playback Level", CSound.MinimumGroupLevel, CSound.MaximumGroupLevel, TJAPlayer4.ConfigIni.SongPlaybackLevel,
 		        $"ゲーム中の音源の音量を調節します。\n{CSound.MinimumGroupLevel} ～ {CSound.MaximumGroupLevel} % の値が指定可能です。\n",
 		        $"The level adjustment for songs during gameplay.\nYou can specify from {CSound.MinimumGroupLevel} to {CSound.MaximumGroupLevel}%." );
 		    this.list項目リスト.Add( this.iSystemSongPlaybackLevel );
 
-		    this.iSystemKeyboardSoundLevelIncrement = new CItemInteger( "Keyboard Level Increment", 1, 20, TJAPlayer3.ConfigIni.KeyboardSoundLevelIncrement,
+		    this.iSystemKeyboardSoundLevelIncrement = new CItemInteger( "Keyboard Level Increment", 1, 20, TJAPlayer4.ConfigIni.KeyboardSoundLevelIncrement,
 		        "キーボードで音量調整をするときの増加量、減少量を指定します。\n1 ～ 20 の値が指定可能です。\n",
 		        "The amount of sound level change for each press\nof a sound level control key.\nYou can specify from 1 to 20." );
 		    this.list項目リスト.Add( this.iSystemKeyboardSoundLevelIncrement );
 
-            this.MusicPreTimeMs = new CItemInteger("MusicPreTimeMs", 0, 10000, TJAPlayer3.ConfigIni.MusicPreTimeMs,
+            this.MusicPreTimeMs = new CItemInteger("MusicPreTimeMs", 0, 10000, TJAPlayer4.ConfigIni.MusicPreTimeMs,
                 "音源再生前の空白時間 (ms)。\n",
                 "Blank time before music source to play. (ms)\n");
             this.list項目リスト.Add(this.MusicPreTimeMs);
@@ -269,13 +269,13 @@ namespace TJAPlayer3
             //    "About displaying the lag from\n the \"just timing\".\n  OFF: Don't show it.\n  ON: Show it.\n  GREAT-: Show it except you've\n  gotten PERFECT.",
             //    new string[] { "OFF", "ON", "GREAT-" } );
             //this.list項目リスト.Add( this.iSystemShowLag );
-            this.iSystemAutoResultCapture = new CItemToggle( "Autosaveresult", TJAPlayer3.ConfigIni.bIsAutoResultCapture,
+            this.iSystemAutoResultCapture = new CItemToggle( "Autosaveresult", TJAPlayer4.ConfigIni.bIsAutoResultCapture,
 				"リザルト画像自動保存機能：\nONにすると、ハイスコア/ハイスキル時に\n自動でリザルト画像を曲データと同じ\nフォルダに保存します。",
 				"AutoSaveResult:\nTurn ON to save your result screen\n image automatically when you get\n hiscore/hiskill." );
 			this.list項目リスト.Add( this.iSystemAutoResultCapture );
 
             SendDiscordPlayingInformation = new CItemToggle(nameof(SendDiscordPlayingInformation),
-                TJAPlayer3.ConfigIni.SendDiscordPlayingInformation,
+                TJAPlayer4.ConfigIni.SendDiscordPlayingInformation,
                 "Discordに再生中の譜面情報を送信する",
                 "Share Playing .tja file infomation on Discord.");
             list項目リスト.Add(SendDiscordPlayingInformation);
@@ -294,17 +294,17 @@ namespace TJAPlayer3
             //    new string[] { "Under", "Over" } );
             //this.list項目リスト.Add( this.iSystemJudgeDispPriority );	
 
-            this.iSystemBufferedInput = new CItemToggle( "BufferedInput", TJAPlayer3.ConfigIni.bバッファ入力を行う,
+            this.iSystemBufferedInput = new CItemToggle( "BufferedInput", TJAPlayer4.ConfigIni.bバッファ入力を行う,
 				"バッファ入力モード：\nON にすると、FPS を超える入力解像\n度を実現します。\nOFF にすると、入力解像度は FPS に\n等しくなります。",
 				"To select joystick input method.\n\nON to use buffer input. No lost/lags.\nOFF to use realtime input. It may\n causes lost/lags for input.\n Moreover, input frequency is\n synchronized with FPS." );
 			this.list項目リスト.Add( this.iSystemBufferedInput );
-			this.iLogOutputLog = new CItemToggle( "TraceLog", TJAPlayer3.ConfigIni.bログ出力,
+			this.iLogOutputLog = new CItemToggle( "TraceLog", TJAPlayer4.ConfigIni.bログ出力,
 				"Traceログ出力：\nDTXManiaLog.txt にログを出力します。\n変更した場合は、DTXMania の再起動\n後に有効となります。",
 				"Turn ON to put debug log to\n DTXManiaLog.txt\nTo take it effective, you need to\n re-open DTXMania." );
 			this.list項目リスト.Add( this.iLogOutputLog );
 
 			// #24820 2013.1.3 yyagi
-			this.iSystemSoundType = new CItemList("SoundType", CItemList.Eパネル種別.通常, TJAPlayer3.ConfigIni.nSoundDeviceType,
+			this.iSystemSoundType = new CItemList("SoundType", CItemList.Eパネル種別.通常, TJAPlayer4.ConfigIni.nSoundDeviceType,
 				"サウンドの出力方式:\n" +
 				"WASAPI, ASIO, DSound(DirectSound)\n" +
 				"の中からサウンド出力方式を選択\n" +
@@ -333,7 +333,7 @@ namespace TJAPlayer3
 			this.list項目リスト.Add(this.iSystemSoundType);
 
 			// #24820 2013.1.15 yyagi
-			this.iSystemWASAPIBufferSizeMs = new CItemInteger( "WASAPIBufSize", 0, 99999, TJAPlayer3.ConfigIni.nWASAPIBufferSizeMs,
+			this.iSystemWASAPIBufferSizeMs = new CItemInteger( "WASAPIBufSize", 0, 99999, TJAPlayer4.ConfigIni.nWASAPIBufferSizeMs,
 			    "WASAPI使用時のバッファサイズ:\n" +
 			    "0～99999ms を指定可能です。\n" +
 			    "0を指定すると、OSがバッファの\n" +
@@ -356,7 +356,7 @@ namespace TJAPlayer3
 
 			// #24820 2013.1.17 yyagi
 			string[] asiodevs = CEnumerateAllAsioDevices.GetAllASIODevices();
-			this.iSystemASIODevice = new CItemList( "ASIO device", CItemList.Eパネル種別.通常, TJAPlayer3.ConfigIni.nASIODevice,
+			this.iSystemASIODevice = new CItemList( "ASIO device", CItemList.Eパネル種別.通常, TJAPlayer4.ConfigIni.nASIODevice,
 				"ASIOデバイス:\n" +
 				"ASIO使用時のサウンドデバイスを\n" +
 				"選択します。\n" +
@@ -399,7 +399,7 @@ namespace TJAPlayer3
 			//this.list項目リスト.Add( this.iSystemASIOBufferSizeMs );
 
 			// #33689 2014.6.17 yyagi
-			this.iSystemSoundTimerType = new CItemToggle( "UseOSTimer", TJAPlayer3.ConfigIni.bUseOSTimer,
+			this.iSystemSoundTimerType = new CItemToggle( "UseOSTimer", TJAPlayer4.ConfigIni.bUseOSTimer,
 				"OSタイマーを使用するかどうか:\n" +
 				"演奏タイマーとして、DTXMania独自の\n" +
 				"タイマーを使うか、OS標準のタイマー\n" +
@@ -426,41 +426,41 @@ namespace TJAPlayer3
 			this.list項目リスト.Add( this.iSystemSoundTimerType );
 
 
-            ShowChara = new CItemToggle("ShowChara", TJAPlayer3.ConfigIni.ShowChara,
+            ShowChara = new CItemToggle("ShowChara", TJAPlayer4.ConfigIni.ShowChara,
                 "キャラクター画像を表示するかどうか\n",
                 "Show Character Images.\n" +
                 "");
             this.list項目リスト.Add(ShowChara);
 
-            ShowDancer = new CItemToggle("ShowDancer", TJAPlayer3.ConfigIni.ShowDancer,
+            ShowDancer = new CItemToggle("ShowDancer", TJAPlayer4.ConfigIni.ShowDancer,
                 "ダンサー画像を表示するかどうか\n",
                 "Show Dancer Images.\n" +
                 "");
             this.list項目リスト.Add(ShowDancer);
 
-            ShowMob = new CItemToggle("ShowMob", TJAPlayer3.ConfigIni.ShowMob,
+            ShowMob = new CItemToggle("ShowMob", TJAPlayer4.ConfigIni.ShowMob,
                 "モブ画像を表示するかどうか\n",
                 "Show Mob Images.\n" +
                 "");
             this.list項目リスト.Add(ShowMob);
 
-            ShowRunner = new CItemToggle("ShowRunner", TJAPlayer3.ConfigIni.ShowRunner,
+            ShowRunner = new CItemToggle("ShowRunner", TJAPlayer4.ConfigIni.ShowRunner,
                 "ランナー画像を表示するかどうか\n",
                 "Show Runner Images.\n" +
                 "");
             this.list項目リスト.Add(ShowRunner);
 
-            ShowFooter = new CItemToggle("ShowFooter", TJAPlayer3.ConfigIni.ShowFooter,
+            ShowFooter = new CItemToggle("ShowFooter", TJAPlayer4.ConfigIni.ShowFooter,
                 "フッター画像を表示するかどうか\n",
                 "Show Footer Image.\n" +
                 "");
             this.list項目リスト.Add(ShowFooter);
 
-            FastRender = new CItemToggle(nameof(FastRender), TJAPlayer3.ConfigIni.FastRender,
+            FastRender = new CItemToggle(nameof(FastRender), TJAPlayer4.ConfigIni.FastRender,
                 "事前画像描画機能を使うかどうか。\n",
                 "Use pre-textures render.\n");
             this.list項目リスト.Add(FastRender);
-            ShowPuchiChara = new CItemToggle("ShowPuchiChara", TJAPlayer3.ConfigIni.ShowPuchiChara,
+            ShowPuchiChara = new CItemToggle("ShowPuchiChara", TJAPlayer4.ConfigIni.ShowPuchiChara,
                 "ぷちキャラ画像を表示するかどうか\n",
                 "Show PuchiChara Images.\n" +
                 "");
@@ -515,84 +515,84 @@ namespace TJAPlayer3
 			this.list項目リスト.Add( this.iDrumsReturnToMenu );
 
 			#region [ AutoPlay ]
-            //this.iDrumsAutoPlayAll = new CItemThreeState( "AutoPlay (All)", CItemThreeState.E状態.不定,
-            //    "全パッドの自動演奏の ON/OFF を\n" +
-            //    "まとめて切り替えます。",
-            //    "You can change whether Auto or not\n" +
-            //    " for all drums lanes at once." );
-            //this.list項目リスト.Add( this.iDrumsAutoPlayAll );
+			//this.iDrumsAutoPlayAll = new CItemThreeState( "AutoPlay (All)", CItemThreeState.E状態.不定,
+			//    "全パッドの自動演奏の ON/OFF を\n" +
+			//    "まとめて切り替えます。",
+			//    "You can change whether Auto or not\n" +
+			//    " for all drums lanes at once." );
+			//this.list項目リスト.Add( this.iDrumsAutoPlayAll );
 
-            //this.iDrumsLeftCymbal = new CItemToggle( "    LeftCymbal", CDTXMania.ConfigIni.bAutoPlay.LC,
-            //    "左シンバルを自動で演奏します。",
-            //    "To play LeftCymbal automatically." );
-            //this.list項目リスト.Add( this.iDrumsLeftCymbal );
+			//this.iDrumsLeftCymbal = new CItemToggle( "    LeftCymbal", CDTXMania.ConfigIni.bAutoPlay.LC,
+			//    "左シンバルを自動で演奏します。",
+			//    "To play LeftCymbal automatically." );
+			//this.list項目リスト.Add( this.iDrumsLeftCymbal );
 
-            //this.iDrumsHiHat = new CItemToggle( "    HiHat", CDTXMania.ConfigIni.bAutoPlay.HH,
-            //    "ハイハットを自動で演奏します。\n" +
-            //    "（クローズ、オープンとも）",
-            //    "To play HiHat automatically.\n" +
-            //    "(It effects to both HH-close and\n HH-open)" );
-            //this.list項目リスト.Add( this.iDrumsHiHat );
+			//this.iDrumsHiHat = new CItemToggle( "    HiHat", CDTXMania.ConfigIni.bAutoPlay.HH,
+			//    "ハイハットを自動で演奏します。\n" +
+			//    "（クローズ、オープンとも）",
+			//    "To play HiHat automatically.\n" +
+			//    "(It effects to both HH-close and\n HH-open)" );
+			//this.list項目リスト.Add( this.iDrumsHiHat );
 
-            //this.iDrumsSnare = new CItemToggle( "    Snare", CDTXMania.ConfigIni.bAutoPlay.SD,
-            //    "スネアを自動で演奏します。",
-            //    "To play Snare automatically." );
-            //this.list項目リスト.Add( this.iDrumsSnare );
+			//this.iDrumsSnare = new CItemToggle( "    Snare", CDTXMania.ConfigIni.bAutoPlay.SD,
+			//    "スネアを自動で演奏します。",
+			//    "To play Snare automatically." );
+			//this.list項目リスト.Add( this.iDrumsSnare );
 
-            //this.iDrumsBass = new CItemToggle( "    BassDrum", CDTXMania.ConfigIni.bAutoPlay.BD,
-            //    "バスドラムを自動で演奏します。",
-            //    "To play Bass Drum automatically." );
-            //this.list項目リスト.Add( this.iDrumsBass );
+			//this.iDrumsBass = new CItemToggle( "    BassDrum", CDTXMania.ConfigIni.bAutoPlay.BD,
+			//    "バスドラムを自動で演奏します。",
+			//    "To play Bass Drum automatically." );
+			//this.list項目リスト.Add( this.iDrumsBass );
 
-            //this.iDrumsHighTom = new CItemToggle( "    HighTom", CDTXMania.ConfigIni.bAutoPlay.HT,
-            //    "ハイタムを自動で演奏します。",
-            //    "To play High Tom automatically." );
-            //this.list項目リスト.Add( this.iDrumsHighTom );
+			//this.iDrumsHighTom = new CItemToggle( "    HighTom", CDTXMania.ConfigIni.bAutoPlay.HT,
+			//    "ハイタムを自動で演奏します。",
+			//    "To play High Tom automatically." );
+			//this.list項目リスト.Add( this.iDrumsHighTom );
 
-            //this.iDrumsLowTom = new CItemToggle( "    LowTom", CDTXMania.ConfigIni.bAutoPlay.LT,
-            //    "ロータムを自動で演奏します。",
-            //    "To play Low Tom automatically." );
-            //this.list項目リスト.Add( this.iDrumsLowTom );
+			//this.iDrumsLowTom = new CItemToggle( "    LowTom", CDTXMania.ConfigIni.bAutoPlay.LT,
+			//    "ロータムを自動で演奏します。",
+			//    "To play Low Tom automatically." );
+			//this.list項目リスト.Add( this.iDrumsLowTom );
 
-            //this.iDrumsFloorTom = new CItemToggle( "    FloorTom", CDTXMania.ConfigIni.bAutoPlay.FT,
-            //    "フロアタムを自動で演奏します。",
-            //    "To play Floor Tom automatically." );
-            //this.list項目リスト.Add( this.iDrumsFloorTom );
+			//this.iDrumsFloorTom = new CItemToggle( "    FloorTom", CDTXMania.ConfigIni.bAutoPlay.FT,
+			//    "フロアタムを自動で演奏します。",
+			//    "To play Floor Tom automatically." );
+			//this.list項目リスト.Add( this.iDrumsFloorTom );
 
-            //this.iDrumsCymbalRide = new CItemToggle( "    Cym/Ride", CDTXMania.ConfigIni.bAutoPlay.CY,
-            //    "右シンバルとライドシンバルを自動で\n" +
-            //    "演奏します。",
-            //    "To play both right- and Ride-Cymbal\n" +
-            //    " automatically." );
-            //this.list項目リスト.Add( this.iDrumsCymbalRide );
+			//this.iDrumsCymbalRide = new CItemToggle( "    Cym/Ride", CDTXMania.ConfigIni.bAutoPlay.CY,
+			//    "右シンバルとライドシンバルを自動で\n" +
+			//    "演奏します。",
+			//    "To play both right- and Ride-Cymbal\n" +
+			//    " automatically." );
+			//this.list項目リスト.Add( this.iDrumsCymbalRide );
 
-            //this.iDrumsLeftPedal = new CItemToggle( "    LeftPedal", CDTXMania.ConfigIni.bAutoPlay.LP,
-            //    "左ペダルを自動で演奏します。",
-            //    "To play Floor Tom automatically." );
-            //this.list項目リスト.Add( this.iDrumsLeftPedal );
+			//this.iDrumsLeftPedal = new CItemToggle( "    LeftPedal", CDTXMania.ConfigIni.bAutoPlay.LP,
+			//    "左ペダルを自動で演奏します。",
+			//    "To play Floor Tom automatically." );
+			//this.list項目リスト.Add( this.iDrumsLeftPedal );
 
-            //this.iDrumsLeftBassDrum = new CItemToggle( "    LeftBassDrum", CDTXMania.ConfigIni.bAutoPlay.LBD,
-            //    "左バスドラムを自動で\n" +
-            //    "演奏します。",
-            //    "To play both LeftBassDrum\n" +
-            //    " automatically." );
-            //this.list項目リスト.Add( this.iDrumsLeftBassDrum );
+			//this.iDrumsLeftBassDrum = new CItemToggle( "    LeftBassDrum", CDTXMania.ConfigIni.bAutoPlay.LBD,
+			//    "左バスドラムを自動で\n" +
+			//    "演奏します。",
+			//    "To play both LeftBassDrum\n" +
+			//    " automatically." );
+			//this.list項目リスト.Add( this.iDrumsLeftBassDrum );
 
-			this.iTaikoAutoPlay = new CItemToggle( "AUTO PLAY", TJAPlayer3.ConfigIni.b太鼓パートAutoPlay,
+			this.iTaikoAutoPlay = new CItemToggle("AUTO PLAY", TJAPlayer4.ConfigIni.bAutoPlay[0],
 				"すべての音符を自動で演奏します。\n" +
 				"",
 				"To play both Taiko\n" +
 				" automatically." );
 			this.list項目リスト.Add( this.iTaikoAutoPlay );
 
-			this.iTaikoAutoPlay2P = new CItemToggle( "AUTO PLAY 2P", TJAPlayer3.ConfigIni.b太鼓パートAutoPlay,
-				"すべての音符を自動で演奏します。\n" +
+			this.iTaikoAutoPlay2P = new CItemToggle("AUTO PLAY 2P", TJAPlayer4.ConfigIni.bAutoPlay[1],
+			    "すべての音符を自動で演奏します。\n" +
 				"",
 				"To play both Taiko\n" +
 				" automatically." );
 			this.list項目リスト.Add( this.iTaikoAutoPlay2P );
 
-			this.iTaikoAutoRoll = new CItemToggle( "AUTO Roll", TJAPlayer3.ConfigIni.bAuto先生の連打,
+			this.iTaikoAutoRoll = new CItemToggle( "AUTO Roll", TJAPlayer4.ConfigIni.bAuto先生の連打,
 				"OFFにするとAUTO先生が黄色連打を\n" +
 				"叩かなくなります。",
 				"To play both Taiko\n" +
@@ -600,47 +600,57 @@ namespace TJAPlayer3
 			this.list項目リスト.Add( this.iTaikoAutoRoll );
 			#endregion
 
-			this.iDrumsScrollSpeed = new CItemInteger( "ScrollSpeed", 0, 0x7cf, TJAPlayer3.ConfigIni.n譜面スクロール速度.Drums,
-				"演奏時のドラム譜面のスクロールの\n" +
+			this.iDrumsScrollSpeed1P = new CItemInteger("ScrollSpeed", 0, 0x7cf, TJAPlayer4.ConfigIni.n譜面スクロール速度[0].Drums,
+			    "演奏時のドラム譜面のスクロールの\n" +
 				"速度を指定します。\n" +
 				"x0.5 ～ x1000.0 を指定可能です。",
 				"To change the scroll speed for the\n" +
 				"drums lanes.\n" +
 				"You can set it from x0.5 to x1000.0.\n" +
 				"(ScrollSpeed=x0.5 means half speed)" );
-			this.list項目リスト.Add( this.iDrumsScrollSpeed );
+			this.list項目リスト.Add(this.iDrumsScrollSpeed1P);
 
-            //this.iDrumsSudHid = new CItemList( "Sud+Hid", CItemBase.Eパネル種別.通常, getDefaultSudHidValue(E楽器パート.DRUMS ),
-            //    "ドラムチップの表示方式:\n" +
-            //    "OFF:　　チップを常に表示します。\n" +
-            //    "Sudden: チップが譜面の下の方から\n" +
-            //    "　　　　表示されるようになります。\n" +
-            //    "Hidden: チップが譜面の下の方で表示\n" +
-            //    "　　　　されなくなります。\n" +
-            //    "Sud+Hid: SuddenとHiddenの効果を\n" +
-            //    "　　　　同時にかけます。\n" +
-            //    "S(emi)-Invisible:\n" +
-            //    "　　　　通常はチップを透明にしますが、\n" +
-            //    "　　　　Poor/Miss時しばらく表示します。\n" +
-            //    "F(ull)-Invisible:\n" +
-            //    "　　　　チップを常に透明にします。\n" +
-            //    "　　　　暗譜での練習にお使いください。",
+			this.iDrumsScrollSpeed2P = new CItemInteger("ScrollSpeed 2P", 0, 0x7cf, TJAPlayer4.ConfigIni.n譜面スクロール速度[1].Drums,
+				"演奏時のドラム譜面のスクロールの\n" +
+				"速度を指定します。\n" +
+				"x0.5 ～ x1000.0 を指定可能です。",
+				"To change the scroll speed for the\n" +
+				"drums lanes.\n" +
+				"You can set it from x0.5 to x1000.0.\n" +
+				"(ScrollSpeed=x0.5 means half speed)");
+			this.list項目リスト.Add(this.iDrumsScrollSpeed2P);
 
-            //    "Drums chips display type:\n" +
-            //    "OFF:    Always show chips.\n" +
-            //    "Sudden: The chips are disappered\n" +
-            //    "        until they come near the hit\n" +
-            //    "        bar, and suddenly appears.\n" +
-            //    "Hidden: The chips are hidden by\n" +
-            //    "        approaching to the hit bar.\n" +
-            //    "Sud+Hid: Both Sudden and Hidden.\n" +
-            //    "S(emi)-Invisible:\n" +
-            //    "        Usually you can't see the chips\n" +
-            //    "        except you've gotten Poor/Miss.\n" +
-            //    "F(ull)-Invisible:\n" +
-            //    "        You can't see the chips at all.",
-            //    new string[] { "OFF", "Sudden", "Hidden", "Sud+Hid", "S-Invisible", "F-Invisible" } );
-            //this.list項目リスト.Add( this.iDrumsSudHid );
+			//this.iDrumsSudHid = new CItemList( "Sud+Hid", CItemBase.Eパネル種別.通常, getDefaultSudHidValue(E楽器パート.DRUMS ),
+			//    "ドラムチップの表示方式:\n" +
+			//    "OFF:　　チップを常に表示します。\n" +
+			//    "Sudden: チップが譜面の下の方から\n" +
+			//    "　　　　表示されるようになります。\n" +
+			//    "Hidden: チップが譜面の下の方で表示\n" +
+			//    "　　　　されなくなります。\n" +
+			//    "Sud+Hid: SuddenとHiddenの効果を\n" +
+			//    "　　　　同時にかけます。\n" +
+			//    "S(emi)-Invisible:\n" +
+			//    "　　　　通常はチップを透明にしますが、\n" +
+			//    "　　　　Poor/Miss時しばらく表示します。\n" +
+			//    "F(ull)-Invisible:\n" +
+			//    "　　　　チップを常に透明にします。\n" +
+			//    "　　　　暗譜での練習にお使いください。",
+
+			//    "Drums chips display type:\n" +
+			//    "OFF:    Always show chips.\n" +
+			//    "Sudden: The chips are disappered\n" +
+			//    "        until they come near the hit\n" +
+			//    "        bar, and suddenly appears.\n" +
+			//    "Hidden: The chips are hidden by\n" +
+			//    "        approaching to the hit bar.\n" +
+			//    "Sud+Hid: Both Sudden and Hidden.\n" +
+			//    "S(emi)-Invisible:\n" +
+			//    "        Usually you can't see the chips\n" +
+			//    "        except you've gotten Poor/Miss.\n" +
+			//    "F(ull)-Invisible:\n" +
+			//    "        You can't see the chips at all.",
+			//    new string[] { "OFF", "Sudden", "Hidden", "Sud+Hid", "S-Invisible", "F-Invisible" } );
+			//this.list項目リスト.Add( this.iDrumsSudHid );
 
 			//this.iDrumsSudden = new CItemToggle( "Sudden", CDTXMania.ConfigIni.bSudden.Drums,
 			//    "ドラムチップが譜面の下の方から表\n" +
@@ -672,28 +682,28 @@ namespace TJAPlayer3
 			//    new string[] { "OFF", "SEMI", "FULL" } );
 			//this.list項目リスト.Add( this.iDrumsInvisible );
 
-            //this.iCommonDark = new CItemList( "Dark", CItemBase.Eパネル種別.通常, (int) CDTXMania.ConfigIni.eDark,
-            //    "HALF: 背景、レーン、ゲージが表示\n" +
-            //    "されなくなります。\n" +
-            //    "FULL: さらに小節線、拍線、判定ラ\n" +
-            //    "イン、パッドも表示されなくなります。",
-            //    "OFF: all display parts are shown.\n" +
-            //    "HALF: wallpaper, lanes and gauge are\n" +
-            //    " disappeared.\n" +
-            //    "FULL: additionaly to HALF, bar/beat\n" +
-            //    " lines, hit bar, pads are disappeared.",
-            //    new string[] { "OFF", "HALF", "FULL" } );
-            //this.list項目リスト.Add( this.iCommonDark );
+			//this.iCommonDark = new CItemList( "Dark", CItemBase.Eパネル種別.通常, (int) CDTXMania.ConfigIni.eDark,
+			//    "HALF: 背景、レーン、ゲージが表示\n" +
+			//    "されなくなります。\n" +
+			//    "FULL: さらに小節線、拍線、判定ラ\n" +
+			//    "イン、パッドも表示されなくなります。",
+			//    "OFF: all display parts are shown.\n" +
+			//    "HALF: wallpaper, lanes and gauge are\n" +
+			//    " disappeared.\n" +
+			//    "FULL: additionaly to HALF, bar/beat\n" +
+			//    " lines, hit bar, pads are disappeared.",
+			//    new string[] { "OFF", "HALF", "FULL" } );
+			//this.list項目リスト.Add( this.iCommonDark );
 
 
-            //this.iDrumsReverse = new CItemToggle( "Reverse", CDTXMania.ConfigIni.bReverse.Drums,
-            //    "ドラムチップが譜面の下から上に流\n" +
-            //    "れるようになります。",
-            //    "The scroll way is reversed. Drums chips\n"
-            //    + "flow from the bottom to the top." );
-            //this.list項目リスト.Add( this.iDrumsReverse );
+			//this.iDrumsReverse = new CItemToggle( "Reverse", CDTXMania.ConfigIni.bReverse.Drums,
+			//    "ドラムチップが譜面の下から上に流\n" +
+			//    "れるようになります。",
+			//    "The scroll way is reversed. Drums chips\n"
+			//    + "flow from the bottom to the top." );
+			//this.list項目リスト.Add( this.iDrumsReverse );
 
-			this.iSystemRisky = new CItemInteger( "Risky", 0, 10, TJAPlayer3.ConfigIni.nRisky,
+			this.iSystemRisky = new CItemInteger("Risky", 0, 10, TJAPlayer4.ConfigIni.nRisky,
 				"Riskyモードの設定:\n" +
 				"1以上の値にすると、その回数分の\n" +
 				"不可で演奏が強制終了します。\n" +
@@ -708,41 +718,55 @@ namespace TJAPlayer3
 				"Set 0 to disable Risky mode." );
 			this.list項目リスト.Add( this.iSystemRisky );
 
-			this.iTaikoRandom = new CItemList( "Random", CItemBase.Eパネル種別.通常, (int) TJAPlayer3.ConfigIni.eRandom.Taiko,
-				"いわゆるランダム。\n  RANDOM: ちょっと変わる\n  MIRROR: あべこべ \n  SUPER: そこそこヤバい\n  HYPER: 結構ヤバい\nなお、実装は適当な模様",
+			this.iTaikoRandom1P = new CItemList("Random", CItemBase.Eパネル種別.通常, (int)TJAPlayer4.ConfigIni.eRandom[0].Taiko,
+			   "いわゆるランダム。\n  RANDOM: ちょっと変わる\n  MIRROR: あべこべ \n  SUPER: そこそこヤバい\n  HYPER: 結構ヤバい\nなお、実装は適当な模様",
 				"Notes come randomly.\n\n Part: swapping lanes randomly for each\n  measures.\n Super: swapping chip randomly\n Hyper: swapping randomly\n  (number of lanes also changes)",
 				new string[] { "OFF", "RANDOM", "MIRROR", "SUPER", "HYPER" } );
-			this.list項目リスト.Add( this.iTaikoRandom );
+			this.list項目リスト.Add(this.iTaikoRandom1P);
 
-			this.iTaikoStealth = new CItemList( "Stealth", CItemBase.Eパネル種別.通常, (int) TJAPlayer3.ConfigIni.eSTEALTH,
-				"DORON:ドロン\n"+
+			this.iTaikoRandom2P = new CItemList("Random 2P", CItemBase.Eパネル種別.通常, (int)TJAPlayer4.ConfigIni.eRandom[1].Taiko,
+				"いわゆるランダム。\n  RANDOM: ちょっと変わる\n  MIRROR: あべこべ \n  SUPER: そこそこヤバい\n  HYPER: 結構ヤバい\nなお、実装は適当な模様",
+				"Notes come randomly.\n\n Part: swapping lanes randomly for each\n  measures.\n Super: swapping chip randomly\n Hyper: swapping randomly\n  (number of lanes also changes)",
+				new string[] { "OFF", "RANDOM", "MIRROR", "SUPER", "HYPER" });
+			this.list項目リスト.Add(this.iTaikoRandom2P);
+
+			this.iTaikoStealth1P = new CItemList("Stealth", CItemBase.Eパネル種別.通常, (int)TJAPlayer4.ConfigIni.eSTEALTH[0],
+		        "DORON:ドロン\n" +
                 "STEALTH:ステルス",
 				"DORON:Hidden for NoteImage.\n"+
                 "STEALTH:Hidden for NoteImage and SeNotes",
 				new string[] { "OFF", "DORON", "STEALTH" } );
-			this.list項目リスト.Add( this.iTaikoStealth );
+			this.list項目リスト.Add(this.iTaikoStealth1P);
 
-			this.iTaikoNoInfo = new CItemToggle( "NoInfo", TJAPlayer3.ConfigIni.bNoInfo,
+			this.iTaikoStealth2P = new CItemList("Stealth 2P", CItemBase.Eパネル種別.通常, (int)TJAPlayer4.ConfigIni.eSTEALTH[1],
+				"DORON:ドロン\n" +
+				"STEALTH:ステルス",
+				"DORON:Hidden for NoteImage.\n" +
+				"STEALTH:Hidden for NoteImage and SeNotes",
+				new string[] { "OFF", "DORON", "STEALTH" });
+			this.list項目リスト.Add(this.iTaikoStealth2P);
+
+			this.iTaikoNoInfo = new CItemToggle( "NoInfo", TJAPlayer4.ConfigIni.bNoInfo,
 				"有効にすると曲情報などが見えなくなります。\n" +
 				"",
 				"It becomes MISS to hit pad without\n" +
 				" chip." );
 			this.list項目リスト.Add( this.iTaikoNoInfo );
 
-			this.iTaikoJust = new CItemToggle( "JUST", TJAPlayer3.ConfigIni.bJust,
+			this.iTaikoJust = new CItemToggle( "JUST", TJAPlayer4.ConfigIni.bJust,
 				"有効にすると「良」以外の判定が全て不可になります。\n" +
 				"",
 				"有効にすると「良」以外の判定が全て不可になります。" );
 			this.list項目リスト.Add( this.iTaikoJust );
 
-			this.iDrumsTight = new CItemToggle( "Tight", TJAPlayer3.ConfigIni.bTight,
+			this.iDrumsTight = new CItemToggle( "Tight", TJAPlayer4.ConfigIni.bTight,
 				"ドラムチップのないところでパッドを\n" +
 				"叩くとミスになります。",
 				"It becomes MISS to hit pad without\n" +
 				" chip." );
 			this.list項目リスト.Add( this.iDrumsTight );
             
-			this.iSystemMinComboDrums = new CItemInteger( "D-MinCombo", 1, 0x1869f, TJAPlayer3.ConfigIni.n表示可能な最小コンボ数.Drums,
+			this.iSystemMinComboDrums = new CItemInteger( "D-MinCombo", 1, 0x1869f, TJAPlayer4.ConfigIni.n表示可能な最小コンボ数.Drums,
 				"表示可能な最小コンボ数（ドラム）：\n" +
 				"画面に表示されるコンボの最小の数\n" +
 				"を指定します。\n" +
@@ -754,7 +778,7 @@ namespace TJAPlayer3
 
 
 			// #23580 2011.1.3 yyagi
-			this.iInputAdjustTimeMs = new CItemInteger( "InputAdjust", -99, 99, TJAPlayer3.ConfigIni.nInputAdjustTimeMs,
+			this.iInputAdjustTimeMs = new CItemInteger( "InputAdjust", -99, 99, TJAPlayer4.ConfigIni.nInputAdjustTimeMs,
 				"ドラムの入力タイミングの微調整を\n" +
 				"行います。\n" +
 				"-99 ～ 99ms まで指定可能です。\n" +
@@ -781,14 +805,14 @@ namespace TJAPlayer3
             //    "");
             //this.list項目リスト.Add(this.iTaikoHispeedRandom);
 
-            this.iTaikoDefaultCourse = new CItemList( "DefaultCourse", CItemBase.Eパネル種別.通常, TJAPlayer3.ConfigIni.nDefaultCourse,
+            this.iTaikoDefaultCourse = new CItemList( "DefaultCourse", CItemBase.Eパネル種別.通常, TJAPlayer4.ConfigIni.nDefaultCourse,
                 "デフォルトで選択される難易度\n" +
                 " \n" +
                 " ",
                 new string[] { "Easy", "Normal", "Hard", "Oni", "Edit" });
             this.list項目リスト.Add(this.iTaikoDefaultCourse);
 
-            this.iTaikoScoreMode = new CItemList("ScoreMode", CItemBase.Eパネル種別.通常, TJAPlayer3.ConfigIni.nScoreMode,
+            this.iTaikoScoreMode = new CItemList("ScoreMode", CItemBase.Eパネル種別.通常, TJAPlayer4.ConfigIni.nScoreMode,
                 "スコア計算方法\n" +
                 "TYPE-A: 旧配点\n" +
                 "TYPE-B: 旧筐体配点\n" +
@@ -799,19 +823,24 @@ namespace TJAPlayer3
                 new string[] { "TYPE-A", "TYPE-B", "TYPE-C"});
             this.list項目リスト.Add(this.iTaikoScoreMode);
 
-            ShinuchiMode = new CItemToggle(nameof(ShinuchiMode), TJAPlayer3.ConfigIni.ShinuchiMode, CItemBase.Eパネル種別.通常,
-                "真打モードを有効にする。",
+			ShinuchiMode1P = new CItemToggle("ShinuchiMode 1P", TJAPlayer4.ConfigIni.ShinuchiMode[0], CItemBase.Eパネル種別.通常,
+			    "真打モードを有効にする。",
                 "Turn on fixed score mode.");
-            this.list項目リスト.Add(this.ShinuchiMode);
+			this.list項目リスト.Add(this.ShinuchiMode1P);
 
-            this.iTaikoBranchGuide = new CItemToggle("BranchGuide", TJAPlayer3.ConfigIni.bBranchGuide,
+			ShinuchiMode2P = new CItemToggle("ShinuchiMode 2P", TJAPlayer4.ConfigIni.ShinuchiMode[1], CItemBase.Eパネル種別.通常,
+	"真打モードを有効にする。",
+	"Turn on fixed score mode.");
+			this.list項目リスト.Add(this.ShinuchiMode2P);
+
+			this.iTaikoBranchGuide = new CItemToggle("BranchGuide", TJAPlayer4.ConfigIni.bBranchGuide,
                 "譜面分岐の参考になる数値などを表示します。\n" +
                 "オートプレイだと表示されません。",
                 "\n" +
                 "");
             this.list項目リスト.Add(this.iTaikoBranchGuide);
 
-            this.iTaikoBranchAnime = new CItemList("BranchAnime", CItemBase.Eパネル種別.通常, TJAPlayer3.ConfigIni.nBranchAnime,
+            this.iTaikoBranchAnime = new CItemList("BranchAnime", CItemBase.Eパネル種別.通常, TJAPlayer4.ConfigIni.nBranchAnime,
                 "譜面分岐時のアニメーション\n" +
                 "TYPE-A: 太鼓7～太鼓14\n" +
                 "TYPE-B: 太鼓15～\n" +
@@ -822,7 +851,7 @@ namespace TJAPlayer3
                 new string[] { "TYPE-A", "TYPE-B" });
             this.list項目リスト.Add(this.iTaikoBranchAnime);
 
-            this.iTaikoGameMode = new CItemList("GameMode", CItemBase.Eパネル種別.通常, (int)TJAPlayer3.ConfigIni.eGameMode,
+            this.iTaikoGameMode = new CItemList("GameMode", CItemBase.Eパネル種別.通常, (int)TJAPlayer4.ConfigIni.eGameMode,
                 "ゲームモード\n" +
                 "(1人プレイ専用)\n" +
                 "TYPE-A: 完走!叩ききりまショー!\n" +
@@ -834,12 +863,12 @@ namespace TJAPlayer3
                 new string[] { "OFF", "TYPE-A", "TYPE-B" });
             this.list項目リスト.Add( this.iTaikoGameMode );
 
-            this.iTaikoBigNotesJudge = new CItemToggle( "BigNotesJudge", TJAPlayer3.ConfigIni.b大音符判定,
+            this.iTaikoBigNotesJudge = new CItemToggle( "BigNotesJudge", TJAPlayer4.ConfigIni.b大音符判定,
                 "大音符の両手判定を有効にします。",
                 "大音符の両手判定を有効にします。");
             this.list項目リスト.Add( this.iTaikoBigNotesJudge );
 
-            this.iTaikoJudgeCountDisp = new CItemToggle( "JudgeCountDisp", TJAPlayer3.ConfigIni.bJudgeCountDisplay,
+            this.iTaikoJudgeCountDisp = new CItemToggle( "JudgeCountDisp", TJAPlayer4.ConfigIni.bJudgeCountDisplay,
                 "左下に判定数を表示します。\n" +
                 "(1人プレイ専用)",
                 "Show the JudgeCount\n" +
@@ -908,14 +937,14 @@ namespace TJAPlayer3
 		{
 			int defvar;
 			int nInst = (int) eInst;
-			if ( TJAPlayer3.ConfigIni.eInvisible[ nInst ] != EInvisible.OFF )
+			if ( TJAPlayer4.ConfigIni.eInvisible[ nInst ] != EInvisible.OFF )
 			{
-				defvar = (int) TJAPlayer3.ConfigIni.eInvisible[ nInst ] + 3;
+				defvar = (int) TJAPlayer4.ConfigIni.eInvisible[ nInst ] + 3;
 			}
 			else
 			{
-				defvar = ( TJAPlayer3.ConfigIni.bSudden[ nInst ] ? 1 : 0 ) +
-						 ( TJAPlayer3.ConfigIni.bHidden[ nInst ] ? 2 : 0 );
+				defvar = ( TJAPlayer4.ConfigIni.bSudden[ nInst ] ? 1 : 0 ) +
+						 ( TJAPlayer4.ConfigIni.bHidden[ nInst ] ? 2 : 0 );
 			}
 			return defvar;
 		}
@@ -950,7 +979,7 @@ namespace TJAPlayer3
 		}
 		public void tEnter押下()
 		{
-			TJAPlayer3.Skin.sound決定音.t再生する();
+			TJAPlayer4.Skin.sound決定音.t再生する();
 			if( this.b要素値にフォーカス中 )
 			{
 				this.b要素値にフォーカス中 = false;
@@ -967,148 +996,148 @@ namespace TJAPlayer3
 			#region [ 個々のキーアサイン ]
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsLC )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LC );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LC );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsHHC )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.HH );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.HH );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsHHO )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.HHO );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.HHO );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsSD )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.SD );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.SD );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsBD )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.BD );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.BD );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsHT )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.HT );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.HT );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsLT )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LT );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LT );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsFT )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.FT );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.FT );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsCY )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.CY );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.CY );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsRD )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RD );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RD );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsLP )			// #27029 2012.1.4 from
 			{																							//
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LP );	//
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LP );	//
 			}																							//
             else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignDrumsLBD )
             {
-                TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LBD);
+                TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LBD);
             }
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignGuitarR )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.R );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.R );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignGuitarG )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.G );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.G );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignGuitarB )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.B );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.B );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignGuitarPick )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Pick );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Pick );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignGuitarWail )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Wail );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Wail );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignGuitarDecide )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Decide );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Decide );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignGuitarCancel )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Cancel );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.GUITAR, EKeyConfigPad.Cancel );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignBassR )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.R );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.R );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignBassG )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.G );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.G );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignBassB )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.B );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.B );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignBassPick )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Pick );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Pick );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignBassWail )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Wail );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Wail );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignBassDecide )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Decide );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Decide );
 			}
 			else if ( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignBassCancel )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Cancel );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.BASS, EKeyConfigPad.Cancel );
 			}
 
             //太鼓のキー設定。
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoLRed )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LRed );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LRed );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoRRed )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RRed );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RRed );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoLBlue )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LBlue );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LBlue );
 			}
 			else if ( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoRBlue )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RBlue );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RBlue );
 			}
 
             //太鼓のキー設定。2P
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoLRed2P )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LRed2P );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LRed2P );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoRRed2P )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RRed2P );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RRed2P );
 			}
 			else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoLBlue2P )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LBlue2P );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.LBlue2P );
 			}
 			else if ( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignTaikoRBlue2P )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RBlue2P );
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.DRUMS, EKeyConfigPad.RBlue2P );
 			}
 
 			else if ( this.list項目リスト[ this.n現在の選択項目 ] == this.iKeyAssignSystemCapture )
 			{
-				TJAPlayer3.stageコンフィグ.tパッド選択通知( EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
+				TJAPlayer4.stageコンフィグ.tパッド選択通知( EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
 			}
 			#endregion
 			else
@@ -1130,12 +1159,12 @@ namespace TJAPlayer3
 
 				if( this.list項目リスト[ this.n現在の選択項目 ] == this.iSystemFullscreen )
 				{
-					TJAPlayer3.app.b次のタイミングで全画面_ウィンドウ切り替えを行う = true;
+					TJAPlayer4.app.b次のタイミングで全画面_ウィンドウ切り替えを行う = true;
 				}
 				else if( this.list項目リスト[ this.n現在の選択項目 ] == this.iSystemVSyncWait )
 				{
-					TJAPlayer3.ConfigIni.b垂直帰線待ちを行う = this.iSystemVSyncWait.bON;
-					TJAPlayer3.app.b次のタイミングで垂直帰線同期切り替えを行う = true;
+					TJAPlayer4.ConfigIni.b垂直帰線待ちを行う = this.iSystemVSyncWait.bON;
+					TJAPlayer4.app.b次のタイミングで垂直帰線同期切り替えを行う = true;
 				}
 				#region [ AutoPlay #23886 2012.5.8 yyagi ]
 				else if ( this.list項目リスト[ this.n現在の選択項目 ] == this.iDrumsAutoPlayAll )
@@ -1198,17 +1227,17 @@ namespace TJAPlayer3
 				#region [ 曲データ一覧の再読み込み ]
 				else if ( this.list項目リスト[ this.n現在の選択項目 ] == this.iSystemReloadDTX )				// #32081 2013.10.21 yyagi
 				{
-					if ( TJAPlayer3.EnumSongs.IsEnumerating )
+					if ( TJAPlayer4.EnumSongs.IsEnumerating )
 					{
 						// Debug.WriteLine( "バックグラウンドでEnumeratingSongs中だったので、一旦中断します。" );
-						TJAPlayer3.EnumSongs.Abort();
-						TJAPlayer3.actEnumSongs.On非活性化();
+						TJAPlayer4.EnumSongs.Abort();
+						TJAPlayer4.actEnumSongs.On非活性化();
 					}
 
-					TJAPlayer3.EnumSongs.StartEnumFromDisk();
-					TJAPlayer3.EnumSongs.ChangeEnumeratePriority( ThreadPriority.Normal );
-					TJAPlayer3.actEnumSongs.bコマンドでの曲データ取得 = true;
-					TJAPlayer3.actEnumSongs.On活性化();
+					TJAPlayer4.EnumSongs.StartEnumFromDisk();
+					TJAPlayer4.EnumSongs.ChangeEnumeratePriority( ThreadPriority.Normal );
+					TJAPlayer4.actEnumSongs.bコマンドでの曲データ取得 = true;
+					TJAPlayer4.actEnumSongs.On活性化();
 				}
 				#endregion
 			}
@@ -1229,9 +1258,9 @@ namespace TJAPlayer3
 					0, 0, bmSrc.Width, bmSrc.Height, GraphicsUnit.Pixel );
 				if ( txSkinSample1 != null )
 				{
-					TJAPlayer3.t安全にDisposeする( ref txSkinSample1 );
+					TJAPlayer4.t安全にDisposeする( ref txSkinSample1 );
 				}
-				txSkinSample1 = TJAPlayer3.tテクスチャの生成( bmDest, false );
+				txSkinSample1 = TJAPlayer4.tテクスチャの生成( bmDest, false );
 				g.Dispose();
 				bmDest.Dispose();
 				bmSrc.Dispose();
@@ -1454,7 +1483,7 @@ namespace TJAPlayer3
 		#endregion
 		public void t次に移動()
 		{
-			TJAPlayer3.Skin.soundカーソル移動音.t再生する();
+			TJAPlayer4.Skin.soundカーソル移動音.t再生する();
 			if( this.b要素値にフォーカス中 )
 			{
 				this.list項目リスト[ this.n現在の選択項目 ].t項目値を前へ移動();
@@ -1467,7 +1496,7 @@ namespace TJAPlayer3
 		}
 		public void t前に移動()
 		{
-			TJAPlayer3.Skin.soundカーソル移動音.t再生する();
+			TJAPlayer4.Skin.soundカーソル移動音.t再生する();
 			if( this.b要素値にフォーカス中 )
 			{
 				this.list項目リスト[ this.n現在の選択項目 ].t項目値を次へ移動();
@@ -1498,18 +1527,18 @@ namespace TJAPlayer3
 			this.eメニュー種別 = Eメニュー種別.Unknown;
 
 			#region [ スキン選択肢と、現在選択中のスキン(index)の準備 #28195 2012.5.2 yyagi ]
-			int ns = ( TJAPlayer3.Skin.strSystemSkinSubfolders == null ) ? 0 : TJAPlayer3.Skin.strSystemSkinSubfolders.Length;
-			int nb = ( TJAPlayer3.Skin.strBoxDefSkinSubfolders == null ) ? 0 : TJAPlayer3.Skin.strBoxDefSkinSubfolders.Length;
+			int ns = ( TJAPlayer4.Skin.strSystemSkinSubfolders == null ) ? 0 : TJAPlayer4.Skin.strSystemSkinSubfolders.Length;
+			int nb = ( TJAPlayer4.Skin.strBoxDefSkinSubfolders == null ) ? 0 : TJAPlayer4.Skin.strBoxDefSkinSubfolders.Length;
 			skinSubFolders = new string[ ns + nb ];
 			for ( int i = 0; i < ns; i++ )
 			{
-				skinSubFolders[ i ] = TJAPlayer3.Skin.strSystemSkinSubfolders[ i ];
+				skinSubFolders[ i ] = TJAPlayer4.Skin.strSystemSkinSubfolders[ i ];
 			}
 			for ( int i = 0; i < nb; i++ )
 			{
-				skinSubFolders[ ns + i ] = TJAPlayer3.Skin.strBoxDefSkinSubfolders[ i ];
+				skinSubFolders[ ns + i ] = TJAPlayer4.Skin.strBoxDefSkinSubfolders[ i ];
 			}
-			skinSubFolder_org = TJAPlayer3.Skin.GetCurrentSkinSubfolderFullName( true );
+			skinSubFolder_org = TJAPlayer4.Skin.GetCurrentSkinSubfolderFullName( true );
 			Array.Sort( skinSubFolders );
 			skinNames = CSkin.GetSkinName( skinSubFolders );
 			nSkinIndex = Array.BinarySearch( skinSubFolders, skinSubFolder_org );
@@ -1520,8 +1549,8 @@ namespace TJAPlayer3
 			nSkinSampleIndex = -1;
 			#endregion
 
-            if ( !string.IsNullOrEmpty(TJAPlayer3.ConfigIni.FontName))
-			    this.prvFont = new CPrivateFastFont(new FontFamily(TJAPlayer3.ConfigIni.FontName), 20 );	// t項目リストの設定 の前に必要
+            if ( !string.IsNullOrEmpty(TJAPlayer4.ConfigIni.FontName))
+			    this.prvFont = new CPrivateFastFont(new FontFamily(TJAPlayer4.ConfigIni.FontName), 20 );	// t項目リストの設定 の前に必要
             else
                 this.prvFont = new CPrivateFastFont(new FontFamily("MS UI Gothic"), 20);
 
@@ -1556,9 +1585,9 @@ namespace TJAPlayer3
 			prvFont.Dispose();
 			base.On非活性化();
 			#region [ Skin変更 ]
-			if ( TJAPlayer3.Skin.GetCurrentSkinSubfolderFullName( true ) != this.skinSubFolder_org )
+			if ( TJAPlayer4.Skin.GetCurrentSkinSubfolderFullName( true ) != this.skinSubFolder_org )
 			{
-                TJAPlayer3.app.RefleshSkin();
+                TJAPlayer4.app.RefleshSkin();
             }
 			#endregion
 
@@ -1588,13 +1617,13 @@ namespace TJAPlayer3
 						break;
 				}
 
-				TJAPlayer3.Sound管理.t初期化( soundDeviceType,
+				TJAPlayer4.Sound管理.t初期化( soundDeviceType,
 										this.iSystemWASAPIBufferSizeMs.n現在の値,
 										0,
 										// this.iSystemASIOBufferSizeMs.n現在の値,
 										this.iSystemASIODevice.n現在選択されている項目番号,
 										this.iSystemSoundTimerType.bON );
-				TJAPlayer3.app.ShowWindowTitleWithSoundType();
+				TJAPlayer4.app.ShowWindowTitleWithSoundType();
 			}
 			#endregion
 			#region [ サウンドのタイムストレッチモード変更 ]
@@ -1617,7 +1646,7 @@ namespace TJAPlayer3
 			if( this.b活性化してない )
 				return;
 
-			TJAPlayer3.tテクスチャの解放( ref this.txSkinSample1 );
+			TJAPlayer4.tテクスチャの解放( ref this.txSkinSample1 );
 			//CDTXMania.tテクスチャの解放( ref this.tx通常項目行パネル );
 			//CDTXMania.tテクスチャの解放( ref this.txその他項目行パネル );
 			//CDTXMania.tテクスチャの解放( ref this.tx三角矢印 );
@@ -1666,8 +1695,8 @@ namespace TJAPlayer3
 			//-----------------
 			if( base.b初めての進行描画 )
 			{
-                this.nスクロール用タイマ値 = CSound管理.rc演奏用タイマ.n現在時刻;
-				this.ct三角矢印アニメ.t開始( 0, 9, 50, TJAPlayer3.Timer );
+				this.nスクロール用タイマ値 = (long)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer4.ConfigIni.n演奏速度) / 20.0));
+				this.ct三角矢印アニメ.t開始( 0, 9, 50, TJAPlayer4.Timer );
 			
 				base.b初めての進行描画 = false;
 			}
@@ -1678,7 +1707,7 @@ namespace TJAPlayer3
 
 			#region [ 項目スクロールの進行 ]
 			//-----------------
-			long n現在時刻 = TJAPlayer3.Timer.n現在時刻;
+			long n現在時刻 = TJAPlayer4.Timer.n現在時刻;
 			if( n現在時刻 < this.nスクロール用タイマ値 ) this.nスクロール用タイマ値 = n現在時刻;
 
 			const int INTERVAL = 2;	// [ms]
@@ -1738,7 +1767,7 @@ namespace TJAPlayer3
 					this.n目標のスクロールカウンタ -= 100;
 					if( this.n目標のスクロールカウンタ == 0 )
 					{
-						TJAPlayer3.stageコンフィグ.t項目変更通知();
+						TJAPlayer4.stageコンフィグ.t項目変更通知();
 					}
 				}
 				else if( this.n現在のスクロールカウンタ <= -100 )
@@ -1748,7 +1777,7 @@ namespace TJAPlayer3
 					this.n目標のスクロールカウンタ += 100;
 					if( this.n目標のスクロールカウンタ == 0 )
 					{
-						TJAPlayer3.stageコンフィグ.t項目変更通知();
+						TJAPlayer4.stageコンフィグ.t項目変更通知();
 					}
 				}
 				//-----------------
@@ -1801,8 +1830,8 @@ namespace TJAPlayer3
 				{
 					case CItemBase.Eパネル種別.通常:
                     case CItemBase.Eパネル種別.その他:
-                        if ( TJAPlayer3.Tx.Config_ItemBox != null )
-                            TJAPlayer3.Tx.Config_ItemBox.t2D描画( TJAPlayer3.app.Device, x, y );
+                        if ( TJAPlayer4.Tx.Config_ItemBox != null )
+                            TJAPlayer4.Tx.Config_ItemBox.t2D描画( TJAPlayer4.app.Device, x, y );
 						break;
 				}
 				//-----------------
@@ -1811,13 +1840,13 @@ namespace TJAPlayer3
 				//-----------------
 				if ( listMenu[ nItem ].txMenuItemRight != null )	// 自前のキャッシュに含まれているようなら、再レンダリングせずキャッシュを使用
 				{
-                    listMenu[nItem].txMenuItemRight.t2D描画(TJAPlayer3.app.Device, x + 20 + TJAPlayer3.Skin.Config_ItemText_Correction_X, y + 12 + TJAPlayer3.Skin.Config_ItemText_Correction_Y);
+                    listMenu[nItem].txMenuItemRight.t2D描画(TJAPlayer4.app.Device, x + 20 + TJAPlayer4.Skin.Config_ItemText_Correction_X, y + 12 + TJAPlayer4.Skin.Config_ItemText_Correction_Y);
 				}
 				else
 				{
 					using (var bmpItem = prvFont.DrawPrivateFont( this.list項目リスト[ nItem ].str項目名, Color.White, Color.Black ))
 					{
-					    listMenu[ nItem ].txMenuItemRight = TJAPlayer3.tテクスチャの生成( bmpItem );
+					    listMenu[ nItem ].txMenuItemRight = TJAPlayer4.tテクスチャの生成( bmpItem );
 					    // ctItem.t2D描画( CDTXMania.app.Device, ( x + 0x12 ) * Scale.X, ( y + 12 ) * Scale.Y - 20 );
 					    // CDTXMania.tテクスチャの解放( ref ctItem );
 					}
@@ -1860,18 +1889,18 @@ namespace TJAPlayer3
 						//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, "ON" );
 						break;
 					//-----------------
-						#endregion
+					#endregion
 
-					case CItemBase.E種別.整数:		// #24789 2011.4.8 yyagi: add PlaySpeed supports (copied them from OPTION)
+					case CItemBase.E種別.整数:      // #24789 2011.4.8 yyagi: add PlaySpeed supports (copied them from OPTION)
 						#region [ *** ]
 						//-----------------
-						if ( this.list項目リスト[ nItem ] == this.iCommonPlaySpeed )
+						if (this.list項目リスト[nItem] == this.iCommonPlaySpeed)
 						{
-							double d = ( (double) ( (CItemInteger) this.list項目リスト[ nItem ] ).n現在の値 ) / 20.0;
+							double d = ((double)((CItemInteger)this.list項目リスト[nItem]).n現在の値) / 20.0;
 							//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, d.ToString( "0.000" ), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
-							strParam = d.ToString( "0.000" );
+							strParam = d.ToString("0.000");
 						}
-						else if ( this.list項目リスト[ nItem ] == this.iDrumsScrollSpeed || this.list項目リスト[ nItem ] == this.iGuitarScrollSpeed || this.list項目リスト[ nItem ] == this.iBassScrollSpeed )
+						else if (this.list項目リスト[nItem] == this.iDrumsScrollSpeed1P || this.list項目リスト[nItem] == this.iDrumsScrollSpeed2P || this.list項目リスト[nItem] == this.iGuitarScrollSpeed || this.list項目リスト[nItem] == this.iBassScrollSpeed)
 						{
 							float f = ( ( (CItemInteger) this.list項目リスト[ nItem ] ).n現在の値 + 1 ) * 0.5f;
 							//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, f.ToString( "x0.0" ), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
@@ -1901,7 +1930,7 @@ namespace TJAPlayer3
 								tGenerateSkinSample();		// 最初にSkinの選択肢にきたとき(Enterを押す前)に限り、サンプル生成が発生する。
 								if ( txSkinSample1 != null )
 								{
-									txSkinSample1.t2D描画( TJAPlayer3.app.Device, 124, 409 );
+									txSkinSample1.t2D描画( TJAPlayer4.app.Device, 124, 409 );
 								}
 							}
 							#endregion
@@ -1914,9 +1943,9 @@ namespace TJAPlayer3
 				{
 				    using (var bmpStr = prvFont.DrawPrivateFont(strParam, Color.Black, Color.White, Color.Yellow, Color.OrangeRed))
 				    {
-				        using (var txStr = TJAPlayer3.tテクスチャの生成( bmpStr, false ))
+				        using (var txStr = TJAPlayer4.tテクスチャの生成( bmpStr, false ))
 				        {
-				            txStr.t2D描画( TJAPlayer3.app.Device, x + 400 + TJAPlayer3.Skin.Config_ItemText_Correction_X, y + 12 + TJAPlayer3.Skin.Config_ItemText_Correction_Y );
+				            txStr.t2D描画( TJAPlayer4.app.Device, x + 400 + TJAPlayer4.Skin.Config_ItemText_Correction_X, y + 12 + TJAPlayer4.Skin.Config_ItemText_Correction_Y );
 				        }
 				    }
 				}
@@ -1932,12 +1961,12 @@ namespace TJAPlayer3
 
 						using (var bmpStr = prvFont.DrawPrivateFont( strParam, Color.White, Color.Black ))
 						{
-						    stm.txParam = TJAPlayer3.tテクスチャの生成( bmpStr, false );
+						    stm.txParam = TJAPlayer4.tテクスチャの生成( bmpStr, false );
 						}
 
 						listMenu[ nItem ] = stm;
 					}
-					listMenu[ nItem ].txParam.t2D描画( TJAPlayer3.app.Device,  x + 400 + TJAPlayer3.Skin.Config_ItemText_Correction_X, y + 12 + TJAPlayer3.Skin.Config_ItemText_Correction_Y );
+					listMenu[ nItem ].txParam.t2D描画( TJAPlayer4.app.Device,  x + 400 + TJAPlayer4.Skin.Config_ItemText_Correction_X, y + 12 + TJAPlayer4.Skin.Config_ItemText_Correction_Y );
 				}
 				//-----------------
 				#endregion
@@ -1972,10 +2001,10 @@ namespace TJAPlayer3
 
 				// 描画。
 				
-				if( TJAPlayer3.Tx.Config_Arrow != null )
+				if( TJAPlayer4.Tx.Config_Arrow != null )
 				{
-                    TJAPlayer3.Tx.Config_Arrow.t2D描画( TJAPlayer3.app.Device, x, y_upper, new Rectangle( 0, 0, 0x40, 0x18 ) );
-                    TJAPlayer3.Tx.Config_Arrow.t2D描画( TJAPlayer3.app.Device, x, y_lower, new Rectangle( 0, 0x18, 0x40, 0x18 ) );
+                    TJAPlayer4.Tx.Config_Arrow.t2D描画( TJAPlayer4.app.Device, x, y_upper, new Rectangle( 0, 0, 0x40, 0x18 ) );
+                    TJAPlayer4.Tx.Config_Arrow.t2D描画( TJAPlayer4.app.Device, x, y_lower, new Rectangle( 0, 0x18, 0x40, 0x18 ) );
 				}
 			}
 			//-----------------
@@ -2185,7 +2214,8 @@ namespace TJAPlayer3
 		private CItemList iDrumsPosition;
 		private CItemBase iDrumsReturnToMenu;
 		private CItemToggle iDrumsReverse;
-		private CItemInteger iDrumsScrollSpeed;
+		private CItemInteger iDrumsScrollSpeed1P;
+		private CItemInteger iDrumsScrollSpeed2P;
 		private CItemToggle iDrumsSnare;
 		//private CItemToggle iDrumsSudden;
 		private CItemToggle iDrumsTight;
@@ -2204,9 +2234,11 @@ namespace TJAPlayer3
         private CItemList iTaikoBranchAnime;
         private CItemToggle iTaikoChara;
         private CItemToggle iTaikoNoInfo;
-		private CItemList iTaikoRandom;
-        private CItemList iTaikoStealth;
-        private CItemList iTaikoGameMode;
+		private CItemList iTaikoRandom1P;
+		private CItemList iTaikoRandom2P;
+		private CItemList iTaikoStealth1P;
+		private CItemList iTaikoStealth2P;
+		private CItemList iTaikoGameMode;
         private CItemToggle iTaikoJust;
         private CItemToggle iTaikoJudgeCountDisp;
         private CItemToggle iTaikoBigNotesJudge;
@@ -2217,8 +2249,9 @@ namespace TJAPlayer3
         CItemToggle ShowMob;
         CItemToggle ShowFooter;
         CItemToggle ShowPuchiChara;
-        CItemToggle ShinuchiMode;
-        CItemToggle FastRender;
+		CItemToggle ShinuchiMode1P;
+		CItemToggle ShinuchiMode2P;
+		CItemToggle FastRender;
         CItemInteger MusicPreTimeMs;
 		//private CItemToggle iGuitarAutoPlay;
 		private CItemThreeState iGuitarAutoPlayAll;			// #23886 2012.5.8 yyagi
@@ -2314,117 +2347,121 @@ namespace TJAPlayer3
 		private void tConfigIniへ記録する_System()
 		{
             //CDTXMania.ConfigIni.eDark = (Eダークモード) this.iCommonDark.n現在選択されている項目番号;
-			TJAPlayer3.ConfigIni.n演奏速度 = this.iCommonPlaySpeed.n現在の値;
+			TJAPlayer4.ConfigIni.n演奏速度 = this.iCommonPlaySpeed.n現在の値;
 
             //CDTXMania.ConfigIni.bGuitar有効 = ( ( ( this.iSystemGRmode.n現在選択されている項目番号 + 1 ) / 2 ) == 1 );
                 //this.iSystemGuitar.bON;
             //CDTXMania.ConfigIni.bDrums有効 = ( ( ( this.iSystemGRmode.n現在選択されている項目番号 + 1 ) % 2 ) == 1 );
                 //this.iSystemDrums.bON;
 
-			TJAPlayer3.ConfigIni.b全画面モード = this.iSystemFullscreen.bON;
-			TJAPlayer3.ConfigIni.bSTAGEFAILED有効 = this.iSystemStageFailed.bON;
-			TJAPlayer3.ConfigIni.bランダムセレクトで子BOXを検索対象とする = this.iSystemRandomFromSubBox.bON;
+			TJAPlayer4.ConfigIni.b全画面モード = this.iSystemFullscreen.bON;
+			TJAPlayer4.ConfigIni.bSTAGEFAILED有効 = this.iSystemStageFailed.bON;
+			TJAPlayer4.ConfigIni.bランダムセレクトで子BOXを検索対象とする = this.iSystemRandomFromSubBox.bON;
 
 			//CDTXMania.ConfigIni.bWave再生位置自動調整機能有効 = this.iSystemAdjustWaves.bON;
-			TJAPlayer3.ConfigIni.b垂直帰線待ちを行う = this.iSystemVSyncWait.bON;
-			TJAPlayer3.ConfigIni.bバッファ入力を行う = this.iSystemBufferedInput.bON;
-			TJAPlayer3.ConfigIni.bAVI有効 = this.iSystemAVI.bON;
-			TJAPlayer3.ConfigIni.bBGA有効 = this.iSystemBGA.bON;
+			TJAPlayer4.ConfigIni.b垂直帰線待ちを行う = this.iSystemVSyncWait.bON;
+			TJAPlayer4.ConfigIni.bバッファ入力を行う = this.iSystemBufferedInput.bON;
+			TJAPlayer4.ConfigIni.bAVI有効 = this.iSystemAVI.bON;
+			TJAPlayer4.ConfigIni.bBGA有効 = this.iSystemBGA.bON;
 //			CDTXMania.ConfigIni.bGraph有効 = this.iSystemGraph.bON;#24074 2011.01.23 comment-out ikanick オプション(Drums)へ移行
-			TJAPlayer3.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = this.iSystemPreviewSoundWait.n現在の値;
-			TJAPlayer3.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = this.iSystemPreviewImageWait.n現在の値;
-			TJAPlayer3.ConfigIni.b演奏情報を表示する = this.iSystemDebugInfo.bON;
-			TJAPlayer3.ConfigIni.n背景の透過度 = this.iSystemBGAlpha.n現在の値;
-			TJAPlayer3.ConfigIni.bBGM音を発声する = this.iSystemBGMSound.bON;
+			TJAPlayer4.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = this.iSystemPreviewSoundWait.n現在の値;
+			TJAPlayer4.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = this.iSystemPreviewImageWait.n現在の値;
+			TJAPlayer4.ConfigIni.b演奏情報を表示する = this.iSystemDebugInfo.bON;
+			TJAPlayer4.ConfigIni.n背景の透過度 = this.iSystemBGAlpha.n現在の値;
+			TJAPlayer4.ConfigIni.bBGM音を発声する = this.iSystemBGMSound.bON;
 			//CDTXMania.ConfigIni.b歓声を発声する = this.iSystemAudienceSound.bON;
 			//CDTXMania.ConfigIni.eダメージレベル = (Eダメージレベル) this.iSystemDamageLevel.n現在選択されている項目番号;
-			TJAPlayer3.ConfigIni.bScoreIniを出力する = this.iSystemSaveScore.bON;
+			TJAPlayer4.ConfigIni.bScoreIniを出力する = this.iSystemSaveScore.bON;
 
-		    TJAPlayer3.ConfigIni.ApplyLoudnessMetadata = this.iSystemApplyLoudnessMetadata.bON;
-		    TJAPlayer3.ConfigIni.TargetLoudness = this.iSystemTargetLoudness.n現在の値 / 10.0;
-		    TJAPlayer3.ConfigIni.ApplySongVol = this.iSystemApplySongVol.bON;
-		    TJAPlayer3.ConfigIni.SoundEffectLevel = this.iSystemSoundEffectLevel.n現在の値;
-		    TJAPlayer3.ConfigIni.VoiceLevel = this.iSystemVoiceLevel.n現在の値;
-		    TJAPlayer3.ConfigIni.SongPreviewLevel = this.iSystemSongPreviewLevel.n現在の値;
-		    TJAPlayer3.ConfigIni.SongPlaybackLevel = this.iSystemSongPlaybackLevel.n現在の値;
-		    TJAPlayer3.ConfigIni.KeyboardSoundLevelIncrement = this.iSystemKeyboardSoundLevelIncrement.n現在の値;
-            TJAPlayer3.ConfigIni.MusicPreTimeMs = this.MusicPreTimeMs.n現在の値;
+		    TJAPlayer4.ConfigIni.ApplyLoudnessMetadata = this.iSystemApplyLoudnessMetadata.bON;
+		    TJAPlayer4.ConfigIni.TargetLoudness = this.iSystemTargetLoudness.n現在の値 / 10.0;
+		    TJAPlayer4.ConfigIni.ApplySongVol = this.iSystemApplySongVol.bON;
+		    TJAPlayer4.ConfigIni.SoundEffectLevel = this.iSystemSoundEffectLevel.n現在の値;
+		    TJAPlayer4.ConfigIni.VoiceLevel = this.iSystemVoiceLevel.n現在の値;
+		    TJAPlayer4.ConfigIni.SongPreviewLevel = this.iSystemSongPreviewLevel.n現在の値;
+		    TJAPlayer4.ConfigIni.SongPlaybackLevel = this.iSystemSongPlaybackLevel.n現在の値;
+		    TJAPlayer4.ConfigIni.KeyboardSoundLevelIncrement = this.iSystemKeyboardSoundLevelIncrement.n現在の値;
+            TJAPlayer4.ConfigIni.MusicPreTimeMs = this.MusicPreTimeMs.n現在の値;
 
-			TJAPlayer3.ConfigIni.bログ出力 = this.iLogOutputLog.bON;
+			TJAPlayer4.ConfigIni.bログ出力 = this.iLogOutputLog.bON;
 			//CDTXMania.ConfigIni.bストイックモード = this.iSystemStoicMode.bON;
 
 			//CDTXMania.ConfigIni.nShowLagType = this.iSystemShowLag.n現在選択されている項目番号;				// #25370 2011.6.3 yyagi
-			TJAPlayer3.ConfigIni.bIsAutoResultCapture = this.iSystemAutoResultCapture.bON;					// #25399 2011.6.9 yyagi
-            TJAPlayer3.ConfigIni.SendDiscordPlayingInformation = this.SendDiscordPlayingInformation.bON;
+			TJAPlayer4.ConfigIni.bIsAutoResultCapture = this.iSystemAutoResultCapture.bON;					// #25399 2011.6.9 yyagi
+            TJAPlayer4.ConfigIni.SendDiscordPlayingInformation = this.SendDiscordPlayingInformation.bON;
 
-			TJAPlayer3.ConfigIni.nRisky = this.iSystemRisky.n現在の値;										// #23559 2011.7.27 yyagi
+			TJAPlayer4.ConfigIni.nRisky = this.iSystemRisky.n現在の値;										// #23559 2011.7.27 yyagi
 
-			TJAPlayer3.ConfigIni.strSystemSkinSubfolderFullName = skinSubFolders[ nSkinIndex ];				// #28195 2012.5.2 yyagi
-			TJAPlayer3.Skin.SetCurrentSkinSubfolderFullName( TJAPlayer3.ConfigIni.strSystemSkinSubfolderFullName, true );
+			TJAPlayer4.ConfigIni.strSystemSkinSubfolderFullName = skinSubFolders[ nSkinIndex ];				// #28195 2012.5.2 yyagi
+			TJAPlayer4.Skin.SetCurrentSkinSubfolderFullName( TJAPlayer4.ConfigIni.strSystemSkinSubfolderFullName, true );
 
-			TJAPlayer3.ConfigIni.nSoundDeviceType = this.iSystemSoundType.n現在選択されている項目番号;		// #24820 2013.1.3 yyagi
-			TJAPlayer3.ConfigIni.nWASAPIBufferSizeMs = this.iSystemWASAPIBufferSizeMs.n現在の値;				// #24820 2013.1.15 yyagi
+			TJAPlayer4.ConfigIni.nSoundDeviceType = this.iSystemSoundType.n現在選択されている項目番号;		// #24820 2013.1.3 yyagi
+			TJAPlayer4.ConfigIni.nWASAPIBufferSizeMs = this.iSystemWASAPIBufferSizeMs.n現在の値;				// #24820 2013.1.15 yyagi
 //			CDTXMania.ConfigIni.nASIOBufferSizeMs = this.iSystemASIOBufferSizeMs.n現在の値;					// #24820 2013.1.3 yyagi
-			TJAPlayer3.ConfigIni.nASIODevice = this.iSystemASIODevice.n現在選択されている項目番号;			// #24820 2013.1.17 yyagi
-			TJAPlayer3.ConfigIni.bUseOSTimer = this.iSystemSoundTimerType.bON;								// #33689 2014.6.17 yyagi
+			TJAPlayer4.ConfigIni.nASIODevice = this.iSystemASIODevice.n現在選択されている項目番号;			// #24820 2013.1.17 yyagi
+			TJAPlayer4.ConfigIni.bUseOSTimer = this.iSystemSoundTimerType.bON;								// #33689 2014.6.17 yyagi
 
-			TJAPlayer3.ConfigIni.bTimeStretch = this.iSystemTimeStretch.bON;									// #23664 2013.2.24 yyagi
+			TJAPlayer4.ConfigIni.bTimeStretch = this.iSystemTimeStretch.bON;									// #23664 2013.2.24 yyagi
 //Trace.TraceInformation( "saved" );
 //Trace.TraceInformation( "Skin現在Current : " + CDTXMania.Skin.GetCurrentSkinSubfolderFullName(true) );
 //Trace.TraceInformation( "Skin現在System  : " + CSkin.strSystemSkinSubfolderFullName );
 //Trace.TraceInformation( "Skin現在BoxDef  : " + CSkin.strBoxDefSkinSubfolderFullName );
 			//CDTXMania.ConfigIni.nMasterVolume = this.iSystemMasterVolume.n現在の値;							// #33700 2014.4.26 yyagi
 			//CDTXMania.ConfigIni.e判定表示優先度 = (E判定表示優先度) this.iSystemJudgeDispPriority.n現在選択されている項目番号;
-            TJAPlayer3.ConfigIni.ShowChara = this.ShowChara.bON;
-            TJAPlayer3.ConfigIni.ShowDancer = this.ShowDancer.bON;
-            TJAPlayer3.ConfigIni.ShowRunner = this.ShowRunner.bON;
-            TJAPlayer3.ConfigIni.ShowMob = this.ShowMob.bON;
-            TJAPlayer3.ConfigIni.ShowFooter = this.ShowFooter.bON;
-            TJAPlayer3.ConfigIni.ShowPuchiChara = this.ShowPuchiChara.bON;
-            TJAPlayer3.ConfigIni.nPlayerCount = this.iTaikoPlayerCount.n現在の値;
-            TJAPlayer3.ConfigIni.FastRender = this.FastRender.bON;
+            TJAPlayer4.ConfigIni.ShowChara = this.ShowChara.bON;
+            TJAPlayer4.ConfigIni.ShowDancer = this.ShowDancer.bON;
+            TJAPlayer4.ConfigIni.ShowRunner = this.ShowRunner.bON;
+            TJAPlayer4.ConfigIni.ShowMob = this.ShowMob.bON;
+            TJAPlayer4.ConfigIni.ShowFooter = this.ShowFooter.bON;
+            TJAPlayer4.ConfigIni.ShowPuchiChara = this.ShowPuchiChara.bON;
+            TJAPlayer4.ConfigIni.nPlayerCount = this.iTaikoPlayerCount.n現在の値;
+            TJAPlayer4.ConfigIni.FastRender = this.FastRender.bON;
 		}
 		private void tConfigIniへ記録する_Bass()
 		{
 		}
 		private void tConfigIniへ記録する_Drums()
 		{
-            TJAPlayer3.ConfigIni.b太鼓パートAutoPlay = this.iTaikoAutoPlay.bON;
-            TJAPlayer3.ConfigIni.b太鼓パートAutoPlay2P = this.iTaikoAutoPlay2P.bON;
-            TJAPlayer3.ConfigIni.bAuto先生の連打 = this.iTaikoAutoRoll.bON;
+			TJAPlayer4.ConfigIni.bAutoPlay[0] = this.iTaikoAutoPlay.bON;
+			TJAPlayer4.ConfigIni.bAutoPlay[1] = this.iTaikoAutoPlay2P.bON;
+			TJAPlayer4.ConfigIni.bAuto先生の連打 = this.iTaikoAutoRoll.bON;
 
-			TJAPlayer3.ConfigIni.n譜面スクロール速度.Drums = this.iDrumsScrollSpeed.n現在の値;
-            //CDTXMania.ConfigIni.bドラムコンボ表示 = this.iDrumsComboDisp.bON;
-												// "Sudden" || "Sud+Hid"
-            //CDTXMania.ConfigIni.bSudden.Drums = ( this.iDrumsSudHid.n現在選択されている項目番号 == 1 || this.iDrumsSudHid.n現在選択されている項目番号 == 3 ) ? true : false;
-												// "Hidden" || "Sud+Hid"
-            //CDTXMania.ConfigIni.bHidden.Drums = ( this.iDrumsSudHid.n現在選択されている項目番号 == 2 || this.iDrumsSudHid.n現在選択されている項目番号 == 3 ) ? true : false;
-            //if      ( this.iDrumsSudHid.n現在選択されている項目番号 == 4 ) CDTXMania.ConfigIni.eInvisible.Drums = EInvisible.SEMI;	// "S-Invisible"
-            //else if ( this.iDrumsSudHid.n現在選択されている項目番号 == 5 ) CDTXMania.ConfigIni.eInvisible.Drums = EInvisible.FULL;	// "F-Invisible"
-            //else                                                           CDTXMania.ConfigIni.eInvisible.Drums = EInvisible.OFF;
-            //CDTXMania.ConfigIni.bReverse.Drums = this.iDrumsReverse.bON;
-            //CDTXMania.ConfigIni.判定文字表示位置.Drums = (E判定文字表示位置) this.iDrumsPosition.n現在選択されている項目番号;
-			TJAPlayer3.ConfigIni.bTight = this.iDrumsTight.bON;
+			TJAPlayer4.ConfigIni.bAutoPlay[0] = this.iTaikoAutoPlay.bON;
+			TJAPlayer4.ConfigIni.bAutoPlay[1] = this.iTaikoAutoPlay2P.bON;
+			//CDTXMania.ConfigIni.bドラムコンボ表示 = this.iDrumsComboDisp.bON;
+			// "Sudden" || "Sud+Hid"
+			//CDTXMania.ConfigIni.bSudden.Drums = ( this.iDrumsSudHid.n現在選択されている項目番号 == 1 || this.iDrumsSudHid.n現在選択されている項目番号 == 3 ) ? true : false;
+			// "Hidden" || "Sud+Hid"
+			//CDTXMania.ConfigIni.bHidden.Drums = ( this.iDrumsSudHid.n現在選択されている項目番号 == 2 || this.iDrumsSudHid.n現在選択されている項目番号 == 3 ) ? true : false;
+			//if      ( this.iDrumsSudHid.n現在選択されている項目番号 == 4 ) CDTXMania.ConfigIni.eInvisible.Drums = EInvisible.SEMI;	// "S-Invisible"
+			//else if ( this.iDrumsSudHid.n現在選択されている項目番号 == 5 ) CDTXMania.ConfigIni.eInvisible.Drums = EInvisible.FULL;	// "F-Invisible"
+			//else                                                           CDTXMania.ConfigIni.eInvisible.Drums = EInvisible.OFF;
+			//CDTXMania.ConfigIni.bReverse.Drums = this.iDrumsReverse.bON;
+			//CDTXMania.ConfigIni.判定文字表示位置.Drums = (E判定文字表示位置) this.iDrumsPosition.n現在選択されている項目番号;
+			TJAPlayer4.ConfigIni.bTight = this.iDrumsTight.bON;
 
-		    TJAPlayer3.ConfigIni.nInputAdjustTimeMs = this.iInputAdjustTimeMs.n現在の値;
+		    TJAPlayer4.ConfigIni.nInputAdjustTimeMs = this.iInputAdjustTimeMs.n現在の値;
 
-			TJAPlayer3.ConfigIni.n表示可能な最小コンボ数.Drums = this.iSystemMinComboDrums.n現在の値;
-			TJAPlayer3.ConfigIni.nRisky = this.iSystemRisky.n現在の値;						// #23559 2911.7.27 yyagi
+			TJAPlayer4.ConfigIni.n表示可能な最小コンボ数.Drums = this.iSystemMinComboDrums.n現在の値;
+			TJAPlayer4.ConfigIni.nRisky = this.iSystemRisky.n現在の値;						// #23559 2911.7.27 yyagi
 			//CDTXMania.ConfigIni.e判定表示優先度.Drums = (E判定表示優先度) this.iDrumsJudgeDispPriority.n現在選択されている項目番号;
 
-            TJAPlayer3.ConfigIni.bBranchGuide = this.iTaikoBranchGuide.bON;
-            TJAPlayer3.ConfigIni.nDefaultCourse = this.iTaikoDefaultCourse.n現在選択されている項目番号;
-            TJAPlayer3.ConfigIni.nScoreMode = this.iTaikoScoreMode.n現在選択されている項目番号;
-            TJAPlayer3.ConfigIni.ShinuchiMode = this.ShinuchiMode.bON;
-            TJAPlayer3.ConfigIni.nBranchAnime = this.iTaikoBranchAnime.n現在選択されている項目番号;
+            TJAPlayer4.ConfigIni.bBranchGuide = this.iTaikoBranchGuide.bON;
+            TJAPlayer4.ConfigIni.nDefaultCourse = this.iTaikoDefaultCourse.n現在選択されている項目番号;
+            TJAPlayer4.ConfigIni.nScoreMode = this.iTaikoScoreMode.n現在選択されている項目番号;
+			TJAPlayer4.ConfigIni.ShinuchiMode[0] = this.ShinuchiMode1P.bON;
+			TJAPlayer4.ConfigIni.ShinuchiMode[1] = this.ShinuchiMode2P.bON;
+			TJAPlayer4.ConfigIni.nBranchAnime = this.iTaikoBranchAnime.n現在選択されている項目番号;
             //CDTXMania.ConfigIni.bHispeedRandom = this.iTaikoHispeedRandom.bON;
-            TJAPlayer3.ConfigIni.bNoInfo = this.iTaikoNoInfo.bON;
-            TJAPlayer3.ConfigIni.eRandom.Taiko = (Eランダムモード)this.iTaikoRandom.n現在選択されている項目番号;
-            TJAPlayer3.ConfigIni.eSTEALTH = (Eステルスモード)this.iTaikoStealth.n現在選択されている項目番号;
-            TJAPlayer3.ConfigIni.eGameMode = (EGame)this.iTaikoGameMode.n現在選択されている項目番号;
-            TJAPlayer3.ConfigIni.bJust = this.iTaikoJust.bON;
-            TJAPlayer3.ConfigIni.bJudgeCountDisplay = this.iTaikoJudgeCountDisp.bON;
-            TJAPlayer3.ConfigIni.b大音符判定 = this.iTaikoBigNotesJudge.bON;
+            TJAPlayer4.ConfigIni.bNoInfo = this.iTaikoNoInfo.bON;
+			TJAPlayer4.ConfigIni.eRandom[0].Taiko = (Eランダムモード)this.iTaikoRandom1P.n現在選択されている項目番号;
+			TJAPlayer4.ConfigIni.eRandom[1].Taiko = (Eランダムモード)this.iTaikoRandom2P.n現在選択されている項目番号;
+			TJAPlayer4.ConfigIni.eSTEALTH[0] = (Eステルスモード)this.iTaikoStealth1P.n現在選択されている項目番号;
+			TJAPlayer4.ConfigIni.eSTEALTH[1] = (Eステルスモード)this.iTaikoStealth2P.n現在選択されている項目番号;
+			TJAPlayer4.ConfigIni.eGameMode = (EGame)this.iTaikoGameMode.n現在選択されている項目番号;
+            TJAPlayer4.ConfigIni.bJust = this.iTaikoJust.bON;
+            TJAPlayer4.ConfigIni.bJudgeCountDisplay = this.iTaikoJudgeCountDisp.bON;
+            TJAPlayer4.ConfigIni.b大音符判定 = this.iTaikoBigNotesJudge.bON;
 		}
 		private void tConfigIniへ記録する_Guitar()
 		{

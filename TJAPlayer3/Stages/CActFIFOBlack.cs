@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Diagnostics;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActFIFOBlack : CActivity
 	{
@@ -14,12 +14,12 @@ namespace TJAPlayer3
 		public void tフェードアウト開始()
 		{
 			this.mode = EFIFOモード.フェードアウト;
-			this.counter = new CCounter( 0, 100, 5, TJAPlayer3.Timer );
+			this.counter = new CCounter( 0, 100, 5, TJAPlayer4.Timer );
 		}
 		public void tフェードイン開始()
 		{
 			this.mode = EFIFOモード.フェードイン;
-			this.counter = new CCounter( 0, 100, 5, TJAPlayer3.Timer );
+			this.counter = new CCounter( 0, 100, 5, TJAPlayer4.Timer );
 		}
 
 		
@@ -49,14 +49,14 @@ namespace TJAPlayer3
 			}
 			this.counter.t進行();
 			// Size clientSize = CDTXMania.app.Window.ClientSize;	// #23510 2010.10.31 yyagi: delete as of no one use this any longer.
-			if (TJAPlayer3.Tx.Tile_Black != null)
+			if (TJAPlayer4.Tx.Tile_Black != null)
 			{
-                TJAPlayer3.Tx.Tile_Black.n透明度 = ( this.mode == EFIFOモード.フェードイン ) ? ( ( ( 100 - this.counter.n現在の値 ) * 0xff ) / 100 ) : ( ( this.counter.n現在の値 * 0xff ) / 100 );
+                TJAPlayer4.Tx.Tile_Black.Opacity = ( this.mode == EFIFOモード.フェードイン ) ? ( ( ( 100 - this.counter.n現在の値 ) * 0xff ) / 100 ) : ( ( this.counter.n現在の値 * 0xff ) / 100 );
 				for (int i = 0; i <= (SampleFramework.GameWindowSize.Width / 64); i++)		// #23510 2010.10.31 yyagi: change "clientSize.Width" to "640" to fix FIFO drawing size
 				{
 					for (int j = 0; j <= (SampleFramework.GameWindowSize.Height / 64); j++)	// #23510 2010.10.31 yyagi: change "clientSize.Height" to "480" to fix FIFO drawing size
 					{
-                        TJAPlayer3.Tx.Tile_Black.t2D描画( TJAPlayer3.app.Device, i * 64, j * 64 );
+                        TJAPlayer4.Tx.Tile_Black.t2D描画( TJAPlayer4.app.Device, i * 64, j * 64 );
 					}
 				}
 			}

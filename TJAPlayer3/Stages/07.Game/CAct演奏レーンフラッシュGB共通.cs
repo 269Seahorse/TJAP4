@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏レーンフラッシュGB共通 : CActivity
 	{

@@ -4,9 +4,9 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using FDK;
-using static TJAPlayer3.PlayerLane;
+using static TJAPlayer4.PlayerLane;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class TaikoLaneFlash : CActivity
 	{
@@ -20,8 +20,8 @@ namespace TJAPlayer3
 
 		public override void On活性化()
 		{
-            PlayerLane = new PlayerLane[TJAPlayer3.ConfigIni.nPlayerCount];
-            for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
+            PlayerLane = new PlayerLane[TJAPlayer4.ConfigIni.nPlayerCount];
+            for (int i = 0; i < TJAPlayer4.ConfigIni.nPlayerCount; i++)
             {
                 PlayerLane[i] = new PlayerLane(i);
             }
@@ -29,7 +29,7 @@ namespace TJAPlayer3
 		}
 		public override void On非活性化()
 		{
-            for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
+            for (int i = 0; i < TJAPlayer4.ConfigIni.nPlayerCount; i++)
             {
                 PlayerLane[i] = null;
             }
@@ -38,7 +38,7 @@ namespace TJAPlayer3
 
         public override int On進行描画()
         {
-            for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
+            for (int i = 0; i < TJAPlayer4.ConfigIni.nPlayerCount; i++)
             {
                 for (int j = 0; j < (int)FlashType.Total; j++)
                 {
@@ -61,13 +61,13 @@ namespace TJAPlayer3
                 switch (i)
                 {
                     case (int)FlashType.Red:
-                        Flash[i] = new LaneFlash(ref TJAPlayer3.Tx.Lane_Red, player);
+                        Flash[i] = new LaneFlash(ref TJAPlayer4.Tx.Lane_Red, player);
                         break;
                     case (int)FlashType.Blue:
-                        Flash[i] = new LaneFlash(ref TJAPlayer3.Tx.Lane_Blue, player);
+                        Flash[i] = new LaneFlash(ref TJAPlayer4.Tx.Lane_Blue, player);
                         break;
                     case (int)FlashType.Hit:
-                        Flash[i] = new LaneFlash(ref TJAPlayer3.Tx.Lane_Yellow, player);
+                        Flash[i] = new LaneFlash(ref TJAPlayer4.Tx.Lane_Yellow, player);
                         break;
                     default:
                         break;

@@ -6,7 +6,7 @@ using DirectShowLib;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CStage終了 : CStage
 	{
@@ -79,7 +79,7 @@ namespace TJAPlayer3
 		}
 		public override int On進行描画()
 		{
-            if( !TJAPlayer3.ConfigIni.bEndingAnime ) //2017.01.27 DD
+            if( !TJAPlayer4.ConfigIni.bEndingAnime ) //2017.01.27 DD
             {
                 return 1;
             }
@@ -93,15 +93,15 @@ namespace TJAPlayer3
 			{
 				if( base.b初めての進行描画 )
 				{
-					TJAPlayer3.Skin.soundゲーム終了音.t再生する();
-					this.ct時間稼ぎ.t開始( 0, 3000, 1, TJAPlayer3.Timer );
+					TJAPlayer4.Skin.soundゲーム終了音.t再生する();
+					this.ct時間稼ぎ.t開始( 0, 3000, 1, TJAPlayer4.Timer );
                     base.b初めての進行描画 = false;
 				}
 
 
 				this.ct時間稼ぎ.t進行();
 
-				if( TJAPlayer3.Tx.Exit_Background != null )
+				if( TJAPlayer4.Tx.Exit_Background != null )
 				{
                     //if( this.ds背景 != null )
                     //{
@@ -111,7 +111,7 @@ namespace TJAPlayer3
                     //        this.tx背景.t2D描画( CDTXMania.app.Device, 0, 0 );
                     //}
                     //else
-                    TJAPlayer3.Tx.Exit_Background.t2D描画( TJAPlayer3.app.Device, 0, 0 );
+                    TJAPlayer4.Tx.Exit_Background.t2D描画( TJAPlayer4.app.Device, 0, 0 );
 				}
 
 
@@ -156,7 +156,7 @@ namespace TJAPlayer3
 			        //}
            //     }
 
-                if( this.ct時間稼ぎ.b終了値に達した && !TJAPlayer3.Skin.soundゲーム終了音.b再生中 )
+                if( this.ct時間稼ぎ.b終了値に達した && !TJAPlayer4.Skin.soundゲーム終了音.b再生中 )
 				{
 					return 1;
 				}

@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     internal class CAct演奏DrumsRunner : CActivity
     {
@@ -19,7 +19,7 @@ namespace TJAPlayer3
 
         public void Start(int Player, bool IsMiss, CDTX.CChip pChip)
         {
-            if (TJAPlayer3.Tx.Runner != null)
+            if (TJAPlayer4.Tx.Runner != null)
             {
                 while (stRunners[Index].b使用中)
                 {
@@ -44,7 +44,7 @@ namespace TJAPlayer3
                         {
                             stRunners[Index].nType = random.Next(1, Type + 1);
                         }
-                        stRunners[Index].ct進行 = new CCounter(0, 1280, TJAPlayer3.Skin.Game_Runner_Timer, TJAPlayer3.Timer);
+                        stRunners[Index].ct進行 = new CCounter(0, 1280, TJAPlayer4.Skin.Game_Runner_Timer, TJAPlayer4.Timer);
                         stRunners[Index].nOldValue = 0;
                         stRunners[Index].nNowPtn = 0;
                         stRunners[Index].fX = 0;
@@ -64,11 +64,11 @@ namespace TJAPlayer3
             }
 
             // フィールド上で代入してたためこちらへ移動。
-            Size = TJAPlayer3.Skin.Game_Runner_Size;
-            Ptn = TJAPlayer3.Skin.Game_Runner_Ptn;
-            Type = TJAPlayer3.Skin.Game_Runner_Type;
-            StartPoint_X = TJAPlayer3.Skin.Game_Runner_StartPoint_X;
-            StartPoint_Y = TJAPlayer3.Skin.Game_Runner_StartPoint_Y;
+            Size = TJAPlayer4.Skin.Game_Runner_Size;
+            Ptn = TJAPlayer4.Skin.Game_Runner_Ptn;
+            Type = TJAPlayer4.Skin.Game_Runner_Type;
+            StartPoint_X = TJAPlayer4.Skin.Game_Runner_StartPoint_X;
+            StartPoint_Y = TJAPlayer4.Skin.Game_Runner_StartPoint_Y;
             base.On活性化();
         }
 
@@ -106,19 +106,19 @@ namespace TJAPlayer3
                     }
                     for (int n = stRunners[i].nOldValue; n < stRunners[i].ct進行.n現在の値; n++)
                     {
-                        stRunners[i].fX += (float)TJAPlayer3.stage演奏ドラム画面.actPlayInfo.dbBPM / 18;
+                        stRunners[i].fX += (float)TJAPlayer4.stage演奏ドラム画面.actPlayInfo.dbBPM / 18;
                         int Width = 1280 / Ptn;
                         stRunners[i].nNowPtn = (int)stRunners[i].fX / Width;
                     }
-                    if (TJAPlayer3.Tx.Runner != null)
+                    if (TJAPlayer4.Tx.Runner != null)
                     {
                         if (stRunners[i].nPlayer == 0)
                         {
-                            TJAPlayer3.Tx.Runner.t2D描画(TJAPlayer3.app.Device, (int)(StartPoint_X[0] + stRunners[i].fX), StartPoint_Y[0], new Rectangle(stRunners[i].nNowPtn * Size[0], stRunners[i].nType * Size[1], Size[0], Size[1]));
+                            TJAPlayer4.Tx.Runner.t2D描画(TJAPlayer4.app.Device, (int)(StartPoint_X[0] + stRunners[i].fX), StartPoint_Y[0], new Rectangle(stRunners[i].nNowPtn * Size[0], stRunners[i].nType * Size[1], Size[0], Size[1]));
                         }
                         else
                         {
-                            TJAPlayer3.Tx.Runner.t2D描画(TJAPlayer3.app.Device, (int)(StartPoint_X[1] + stRunners[i].fX), StartPoint_Y[1], new Rectangle(stRunners[i].nNowPtn * Size[0], stRunners[i].nType * Size[1], Size[0], Size[1]));
+                            TJAPlayer4.Tx.Runner.t2D描画(TJAPlayer4.app.Device, (int)(StartPoint_X[1] + stRunners[i].fX), StartPoint_Y[1], new Rectangle(stRunners[i].nNowPtn * Size[0], stRunners[i].nType * Size[1], Size[0], Size[1]));
                         }
                     }
                 }

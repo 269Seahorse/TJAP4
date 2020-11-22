@@ -2,8 +2,9 @@
 using System.IO;
 using System.Text;
 using NUnit.Framework;
+using TJAPlayer4;
 
-namespace TJAPlayer3.Tests
+namespace TJAPlayer4.Tests
 {
     [TestFixture]
     public sealed class CDTXStyleExtractorTests

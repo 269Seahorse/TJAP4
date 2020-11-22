@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	/// <summary>
 	/// すべてのアイテムの基本クラス。
@@ -103,7 +103,7 @@ namespace TJAPlayer3
 		public virtual void t初期化(string str項目名, Eパネル種別 eパネル種別, string str説明文jp, string str説明文en) {
 			this.str項目名 = str項目名;
 			this.eパネル種別 = eパネル種別;
-			this.str説明文 = (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ? str説明文jp : str説明文en;
+			this.str説明文 = (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ja") ? str説明文jp : str説明文en;
 		}
 		public virtual object obj現在値()
 		{

@@ -1,6 +1,6 @@
 ﻿using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     /// <summary>
     /// KeyboardSoundGroupLevelControlHandler is called by the song selection

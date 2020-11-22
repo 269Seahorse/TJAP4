@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏Drums連打キャラ : CActivity
 	{
@@ -52,24 +52,24 @@ namespace TJAPlayer3
                 if(!RollCharas[i].IsUsing)
                 {
                     RollCharas[i].IsUsing = true;
-                    RollCharas[i].Type = random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_Ptn);
+                    RollCharas[i].Type = random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_Ptn);
                     RollCharas[i].OldValue = 0;
-                    RollCharas[i].Counter = new CCounter(0, 5000, 1, TJAPlayer3.Timer);
-                    if (TJAPlayer3.stage演奏ドラム画面.bDoublePlay)
+                    RollCharas[i].Counter = new CCounter(0, 5000, 1, TJAPlayer4.Timer);
+                    if (TJAPlayer4.stage演奏ドラム画面.bDoublePlay)
                     {
                         switch (player)
                         {
                             case 0:
-                                RollCharas[i].X = TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_1P_X[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_1P_X.Length)];
-                                RollCharas[i].Y = TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_1P_Y[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_1P_Y.Length)];
-                                RollCharas[i].XAdd = TJAPlayer3.Skin.Game_Effect_Roll_Speed_1P_X[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_Speed_1P_X.Length)];
-                                RollCharas[i].YAdd = TJAPlayer3.Skin.Game_Effect_Roll_Speed_1P_Y[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_Speed_1P_Y.Length)];
+                                RollCharas[i].X = TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_1P_X[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_1P_X.Length)];
+                                RollCharas[i].Y = TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_1P_Y[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_1P_Y.Length)];
+                                RollCharas[i].XAdd = TJAPlayer4.Skin.Game_Effect_Roll_Speed_1P_X[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_Speed_1P_X.Length)];
+                                RollCharas[i].YAdd = TJAPlayer4.Skin.Game_Effect_Roll_Speed_1P_Y[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_Speed_1P_Y.Length)];
                                 break;
                             case 1:
-                                RollCharas[i].X = TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_2P_X[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_2P_X.Length)];
-                                RollCharas[i].Y = TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_2P_Y[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_2P_Y.Length)];
-                                RollCharas[i].XAdd = TJAPlayer3.Skin.Game_Effect_Roll_Speed_2P_X[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_Speed_2P_X.Length)];
-                                RollCharas[i].YAdd = TJAPlayer3.Skin.Game_Effect_Roll_Speed_2P_Y[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_Speed_2P_Y.Length)];
+                                RollCharas[i].X = TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_2P_X[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_2P_X.Length)];
+                                RollCharas[i].Y = TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_2P_Y[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_2P_Y.Length)];
+                                RollCharas[i].XAdd = TJAPlayer4.Skin.Game_Effect_Roll_Speed_2P_X[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_Speed_2P_X.Length)];
+                                RollCharas[i].YAdd = TJAPlayer4.Skin.Game_Effect_Roll_Speed_2P_Y[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_Speed_2P_Y.Length)];
                                 break;
                             default:
                                 return;
@@ -77,10 +77,10 @@ namespace TJAPlayer3
                     }
                     else
                     {
-                        RollCharas[i].X = TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_X[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_X.Length)];
-                        RollCharas[i].Y = TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_Y[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_StartPoint_Y.Length)];
-                        RollCharas[i].XAdd = TJAPlayer3.Skin.Game_Effect_Roll_Speed_X[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_Speed_X.Length)];
-                        RollCharas[i].YAdd = TJAPlayer3.Skin.Game_Effect_Roll_Speed_Y[random.Next(0, TJAPlayer3.Skin.Game_Effect_Roll_Speed_Y.Length)];
+                        RollCharas[i].X = TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_X[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_X.Length)];
+                        RollCharas[i].Y = TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_Y[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_StartPoint_Y.Length)];
+                        RollCharas[i].XAdd = TJAPlayer4.Skin.Game_Effect_Roll_Speed_X[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_Speed_X.Length)];
+                        RollCharas[i].YAdd = TJAPlayer4.Skin.Game_Effect_Roll_Speed_Y[random.Next(0, TJAPlayer4.Skin.Game_Effect_Roll_Speed_Y.Length)];
                     }
                     break;
                 }
@@ -189,14 +189,14 @@ namespace TJAPlayer3
                             RollCharas[i].X += RollCharas[i].XAdd;
                             RollCharas[i].Y += RollCharas[i].YAdd;
                         }
-                        TJAPlayer3.Tx.Effects_Roll[RollCharas[i].Type]?.t2D描画(TJAPlayer3.app.Device, RollCharas[i].X, RollCharas[i].Y);
+                        TJAPlayer4.Tx.Effects_Roll[RollCharas[i].Type]?.t2D描画(TJAPlayer4.app.Device, RollCharas[i].X, RollCharas[i].Y);
                         // 画面外にいたら描画をやめさせる
-                        if(RollCharas[i].X < 0 - TJAPlayer3.Tx.Effects_Roll[RollCharas[i].Type].szテクスチャサイズ.Width || RollCharas[i].X > 1280)
+                        if(RollCharas[i].X < 0 - TJAPlayer4.Tx.Effects_Roll[RollCharas[i].Type].szテクスチャサイズ.Width || RollCharas[i].X > 1280)
                         {
                             RollCharas[i].Counter.t停止();
                             RollCharas[i].IsUsing = false;
                         }
-                        if (RollCharas[i].Y < 0 - TJAPlayer3.Tx.Effects_Roll[RollCharas[i].Type].szテクスチャサイズ.Height || RollCharas[i].Y > 720)
+                        if (RollCharas[i].Y < 0 - TJAPlayer4.Tx.Effects_Roll[RollCharas[i].Type].szテクスチャサイズ.Height || RollCharas[i].Y > 720)
                         {
                             RollCharas[i].Counter.t停止();
                             RollCharas[i].IsUsing = false;

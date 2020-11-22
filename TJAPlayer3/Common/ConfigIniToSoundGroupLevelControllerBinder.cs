@@ -1,7 +1,7 @@
 ﻿using System;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     /// <summary>
     /// The ConfigIniToSoundGroupLevelControllerBinder allows for updated sound

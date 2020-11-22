@@ -7,7 +7,7 @@ using System.IO;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏Drumsグラフ : CActivity
 	{

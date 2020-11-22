@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	[Serializable]
 	internal class C曲リストノード
@@ -41,10 +41,10 @@ namespace TJAPlayer3
         public bool IsChangedBackColor;
 		public List<C曲リストノード> listランダム用ノードリスト;
 		public List<C曲リストノード> list子リスト;
-		public int nGood範囲ms = -1;
-		public int nGreat範囲ms = -1;
-		public int nPerfect範囲ms = -1;
-		public int nPoor範囲ms = -1;
+		public double dbGood範囲ms = -1;
+		public double dbGreat範囲ms = -1;
+		public double dbPerfect範囲ms = -1;
+		public double dbPoor範囲ms = -1;
 		public int nスコア数;
 		public C曲リストノード r親ノード;
 		public Stack<int> stackランダム演奏番号 = new Stack<int>();

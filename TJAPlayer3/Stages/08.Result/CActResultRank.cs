@@ -5,7 +5,7 @@ using System.Drawing;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActResultRank : CActivity
 	{

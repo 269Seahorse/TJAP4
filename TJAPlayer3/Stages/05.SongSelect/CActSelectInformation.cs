@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActSelectInformation : CActivity
 	{
@@ -27,7 +27,7 @@ namespace TJAPlayer3
 			this.n画像Index下 = 0;
 
             this.bFirst = true;
-            this.ct進行用 = new CCounter( 0, 3000, 3, TJAPlayer3.Timer );
+            this.ct進行用 = new CCounter( 0, 3000, 3, TJAPlayer4.Timer );
 			base.On活性化();
 		}
 		public override void On非活性化()
@@ -39,9 +39,9 @@ namespace TJAPlayer3
 		{
 			if( !base.b活性化してない )
 			{
-                this.txInfo_Back = TJAPlayer3.tテクスチャの生成( CSkin.Path( @"Graphics\5_information_BG.png" ) );
-                this.txInfo[ 0 ] = TJAPlayer3.tテクスチャの生成( CSkin.Path( @"Graphics\5_information.png" ) );
-                this.txInfo[ 1 ] = TJAPlayer3.tテクスチャの生成( CSkin.Path( @"Graphics\5_information2.png" ) );
+                this.txInfo_Back = TJAPlayer4.tテクスチャの生成( CSkin.Path( @"Graphics\5_information_BG.png" ) );
+                this.txInfo[ 0 ] = TJAPlayer4.tテクスチャの生成( CSkin.Path( @"Graphics\5_information.png" ) );
+                this.txInfo[ 1 ] = TJAPlayer4.tテクスチャの生成( CSkin.Path( @"Graphics\5_information2.png" ) );
 				base.OnManagedリソースの作成();
 			}
 		}
@@ -49,9 +49,9 @@ namespace TJAPlayer3
 		{
 			if( !base.b活性化してない )
 			{
-				TJAPlayer3.tテクスチャの解放( ref this.txInfo_Back );
-				TJAPlayer3.tテクスチャの解放( ref this.txInfo[ 0 ] );
-				TJAPlayer3.tテクスチャの解放( ref this.txInfo[ 1 ] );
+				TJAPlayer4.tテクスチャの解放( ref this.txInfo_Back );
+				TJAPlayer4.tテクスチャの解放( ref this.txInfo[ 0 ] );
+				TJAPlayer4.tテクスチャの解放( ref this.txInfo[ 1 ] );
 				base.OnManagedリソースの解放();
 			}
 		}
@@ -65,7 +65,7 @@ namespace TJAPlayer3
 				}
 
                 if( this.txInfo_Back != null )
-                    this.txInfo_Back.t2D描画( TJAPlayer3.app.Device, 340, 600 );
+                    this.txInfo_Back.t2D描画( TJAPlayer4.app.Device, 340, 600 );
 
 
 				this.ct進行用.t進行Loop();
@@ -79,28 +79,28 @@ namespace TJAPlayer3
                 {
                     if( this.ct進行用.n現在の値 < 255 )
                     {
-                        this.txInfo[ 0 ].n透明度 = this.ct進行用.n現在の値;
-                        this.txInfo[ 1 ].n透明度 = 255 - this.ct進行用.n現在の値;
+                        this.txInfo[ 0 ].Opacity = this.ct進行用.n現在の値;
+                        this.txInfo[ 1 ].Opacity = 255 - this.ct進行用.n現在の値;
                     }
                     else if( this.ct進行用.n現在の値 >= 255 && this.ct進行用.n現在の値 < 1245 )
                     {
                         this.bFirst = false;
-                        this.txInfo[ 0 ].n透明度 = 255;
-                        this.txInfo[ 1 ].n透明度 = 0;
+                        this.txInfo[ 0 ].Opacity = 255;
+                        this.txInfo[ 1 ].Opacity = 0;
                     }
                     else if( this.ct進行用.n現在の値 >= 1245 && this.ct進行用.n現在の値 < 1500 )
                     {
-                        this.txInfo[ 0 ].n透明度 = 255 - ( this.ct進行用.n現在の値 - 1245 );
-                        this.txInfo[ 1 ].n透明度 = this.ct進行用.n現在の値 - 1245;
+                        this.txInfo[ 0 ].Opacity = 255 - ( this.ct進行用.n現在の値 - 1245 );
+                        this.txInfo[ 1 ].Opacity = this.ct進行用.n現在の値 - 1245;
                     }
                     else if( this.ct進行用.n現在の値 >= 1500 && this.ct進行用.n現在の値 <= 3000 )
                     {
-                        this.txInfo[ 0 ].n透明度 = 0;
-                        this.txInfo[ 1 ].n透明度 = 255;
+                        this.txInfo[ 0 ].Opacity = 0;
+                        this.txInfo[ 1 ].Opacity = 255;
                     }
 
-                    this.txInfo[ 0 ].t2D描画( TJAPlayer3.app.Device, 340, 600 );
-                    this.txInfo[ 1 ].t2D描画( TJAPlayer3.app.Device, 340, 600 );
+                    this.txInfo[ 0 ].t2D描画( TJAPlayer4.app.Device, 340, 600 );
+                    this.txInfo[ 1 ].t2D描画( TJAPlayer4.app.Device, 340, 600 );
                 }
 
                 #endregion

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TJAPlayer3.Animations
+namespace TJAPlayer4.Animations
 {
     /// <summary>
     /// リニア移動を行うクラス。

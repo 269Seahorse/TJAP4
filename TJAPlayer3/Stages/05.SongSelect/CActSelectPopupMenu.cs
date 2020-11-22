@@ -9,7 +9,7 @@ using System.IO;
 using FDK;
 
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActSelectPopupMenu : CActivity
 	{
@@ -39,7 +39,7 @@ namespace TJAPlayer3
 			get;
 			private set;
 		}
-		public virtual void tActivatePopupMenu( E楽器パート einst )
+		public virtual void tActivatePopupMenu(E楽器パート einst, int nPlayer)
 		{
 			nItemSelecting = -1;		// #24757 2011.4.1 yyagi: Clear sorting status in each stating menu.
 			this.eInst = einst;
@@ -67,7 +67,7 @@ namespace TJAPlayer3
 			stqMenuTitle.cItem.str項目名 = title;
 		    using (var bitmap = prvFont.DrawPrivateFont( title, Color.White, Color.Black ))
 		    {
-		        stqMenuTitle.txName = TJAPlayer3.tテクスチャの生成( bitmap, false );
+		        stqMenuTitle.txName = TJAPlayer4.tテクスチャの生成( bitmap, false );
 		        stqMenuTitle.rectName = prvFont.RectStrings;
 		    }
 			lciMenuItems = new stQuickMenuItem[ menulist.Count ];
@@ -77,7 +77,7 @@ namespace TJAPlayer3
 				stqm.cItem = menulist[ i ];
 			    using (var bitmap = prvFont.DrawPrivateFont( menulist[ i ].str項目名, Color.White, Color.Black ))
 			    {
-			        stqm.txName = TJAPlayer3.tテクスチャの生成( bitmap, false );
+			        stqm.txName = TJAPlayer4.tテクスチャの生成( bitmap, false );
 			        stqm.rectName = prvFont.RectStrings;
 			    }
 				lciMenuItems[ i ] = stqm;
@@ -99,7 +99,7 @@ namespace TJAPlayer3
 		{
 			if ( this.bキー入力待ち )
 			{
-				TJAPlayer3.Skin.sound決定音.t再生する();
+				TJAPlayer4.Skin.sound決定音.t再生する();
 
 				if ( this.n現在の選択行 != lciMenuItems.Length - 1 )
 				{
@@ -153,7 +153,7 @@ namespace TJAPlayer3
 		{
 			if ( this.bキー入力待ち )
 			{
-				TJAPlayer3.Skin.soundカーソル移動音.t再生する();
+				TJAPlayer4.Skin.soundカーソル移動音.t再生する();
 				if ( bIsSelectingIntItem )
 				{
 					 lciMenuItems[ n現在の選択行 ].cItem.t項目値を前へ移動();		// 項目移動と数値上下は方向が逆になるので注意
@@ -171,7 +171,7 @@ namespace TJAPlayer3
 		{
 			if ( this.bキー入力待ち )
 			{
-				TJAPlayer3.Skin.soundカーソル移動音.t再生する();
+				TJAPlayer4.Skin.soundカーソル移動音.t再生する();
 				if ( bIsSelectingIntItem )
 				{
 					lciMenuItems[ n現在の選択行 ].cItem.t項目値を次へ移動();		// 項目移動と数値上下は方向が逆になるので注意
@@ -194,7 +194,7 @@ namespace TJAPlayer3
 			this.bキー入力待ち = true;
 			for ( int i = 0; i < 4; i++ )
 			{
-				this.ctキー反復用[ i ] = new CCounter( 0, 0, 0, TJAPlayer3.Timer );
+				this.ctキー反復用[ i ] = new CCounter( 0, 0, 0, TJAPlayer4.Timer );
 			}
 			base.b活性化してない = true;
 
@@ -236,7 +236,7 @@ namespace TJAPlayer3
 			{
 				//CDTXMania.tテクスチャの解放( ref this.txPopupMenuBackground );
 				//CDTXMania.tテクスチャの解放( ref this.txCursor );
-                TJAPlayer3.t安全にDisposeする( ref this.prvFont );
+                TJAPlayer4.t安全にDisposeする( ref this.prvFont );
 			}
 			base.OnManagedリソースの解放();
 		}
@@ -253,21 +253,21 @@ namespace TJAPlayer3
 				if ( this.bキー入力待ち )
 				{
 					#region [ Shift-F1: CONFIG画面 ]
-					if ( ( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightShift ) || TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftShift ) ) &&
-						TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F1 ) )
+					if ( ( TJAPlayer4.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.RightShift ) || TJAPlayer4.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.LeftShift ) ) &&
+						TJAPlayer4.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F1 ) )
 					{	// [SHIFT] + [F1] CONFIG
-						TJAPlayer3.Skin.sound取消音.t再生する();
+						TJAPlayer4.Skin.sound取消音.t再生する();
 						tCancel();
 						this.bGotoDetailConfig = true;
 					}
 					#endregion
 					#region [ キー入力: キャンセル ]
-					else if ( ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Escape )
-						|| TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.FT )
-						|| TJAPlayer3.Pad.b押されたGB( Eパッド.Cancel ) )
+					else if ( ( TJAPlayer4.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Escape )
+						|| TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.FT )
+						|| TJAPlayer4.Pad.b押されたGB( Eパッド.Cancel ) )
                         && this.bEsc有効 )
 					{	// キャンセル
-						TJAPlayer3.Skin.sound取消音.t再生する();
+						TJAPlayer4.Skin.sound取消音.t再生する();
 						tCancel();
 						this.bIsActivePopupMenu = false;
 					}
@@ -276,21 +276,21 @@ namespace TJAPlayer3
 					#region [ キー入力: 決定 ]
 					// E楽器パート eInst = E楽器パート.UNKNOWN;
 					ESortAction eAction = ESortAction.END;
-					if ( TJAPlayer3.Pad.b押された( E楽器パート.GUITAR, Eパッド.Decide ) )
+					if ( TJAPlayer4.Pad.b押された( E楽器パート.GUITAR, Eパッド.Decide ) )
 					{
 						eInst = E楽器パート.GUITAR;
 						eAction = ESortAction.Decide;
 					}
-					else if ( TJAPlayer3.Pad.b押された( E楽器パート.BASS, Eパッド.Decide ) )
+					else if ( TJAPlayer4.Pad.b押された( E楽器パート.BASS, Eパッド.Decide ) )
 					{
 						eInst = E楽器パート.BASS;
 						eAction = ESortAction.Decide;
 					}
 					else if (
-						TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.Decide )	// #24756 2011.4.1 yyagi: Add condition "Drum-Decide" to enable CY in Sort Menu.
-						|| TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD )
-						|| TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC )
-						|| ( TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) )
+						TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.Decide )	// #24756 2011.4.1 yyagi: Add condition "Drum-Decide" to enable CY in Sort Menu.
+						|| TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD )
+						|| TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC )
+						|| ( TJAPlayer4.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer4.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) )
 					{
 						eInst = E楽器パート.DRUMS;
 						eAction = ESortAction.Decide;
@@ -301,47 +301,47 @@ namespace TJAPlayer3
 					}
 					#endregion
 					#region [ キー入力: 前に移動 ]
-					this.ctキー反復用.Up.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.t前に移動 ) );
-					this.ctキー反復用.R.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.R ), new CCounter.DGキー処理( this.t前に移動 ) );
-					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) )
+					this.ctキー反復用.Up.tキー反復( TJAPlayer4.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.t前に移動 ) );
+					this.ctキー反復用.R.tキー反復( TJAPlayer4.Pad.b押されているGB( Eパッド.R ), new CCounter.DGキー処理( this.t前に移動 ) );
+					if ( TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) )
 					{
 						this.t前に移動();
 					}
 					#endregion
 					#region [ キー入力: 次に移動 ]
-					this.ctキー反復用.Down.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.t次に移動 ) );
-					this.ctキー反復用.B.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.B ), new CCounter.DGキー処理( this.t次に移動 ) );
-					if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) )
+					this.ctキー反復用.Down.tキー反復( TJAPlayer4.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.t次に移動 ) );
+					this.ctキー反復用.B.tキー反復( TJAPlayer4.Pad.b押されているGB( Eパッド.B ), new CCounter.DGキー処理( this.t次に移動 ) );
+					if ( TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) )
 					{
 						this.t次に移動();
 					}
 					#endregion
 				}
 				#region [ ポップアップメニュー 背景描画 ]
-				if ( TJAPlayer3.Tx.Menu_Title != null )
+				if ( TJAPlayer4.Tx.Menu_Title != null )
 				{
-                    TJAPlayer3.Tx.Menu_Title.t2D描画( TJAPlayer3.app.Device, 160, 40 );
+                    TJAPlayer4.Tx.Menu_Title.t2D描画( TJAPlayer4.app.Device, 160, 40 );
 				}
 				#endregion
 				#region [ ソートメニュータイトル描画 ]
 				int x = 240, y = 44;
-				stqMenuTitle.txName.t2D描画( TJAPlayer3.app.Device, x, y );
+				stqMenuTitle.txName.t2D描画( TJAPlayer4.app.Device, x, y );
 				#endregion
 				#region [ カーソル描画 ]
-				if ( TJAPlayer3.Tx.Menu_Highlight != null )
+				if ( TJAPlayer4.Tx.Menu_Highlight != null )
 				{
 					int height = 32;
 					int curX = 180;
 					int curY = 46 + ( height * ( this.n現在の選択行 + 1 ) );
-                    TJAPlayer3.Tx.Menu_Highlight.t2D描画( TJAPlayer3.app.Device, curX, curY, new Rectangle( 0, 0, 16, 32 ) );
+                    TJAPlayer4.Tx.Menu_Highlight.t2D描画( TJAPlayer4.app.Device, curX, curY, new Rectangle( 0, 0, 16, 32 ) );
 					curX += 0x10;
 					Rectangle rectangle = new Rectangle( 8, 0, 0x10, 0x20 );
 					for ( int j = 0; j < 16; j++ )
 					{
-                        TJAPlayer3.Tx.Menu_Highlight.t2D描画( TJAPlayer3.app.Device, curX, curY, rectangle );
+                        TJAPlayer4.Tx.Menu_Highlight.t2D描画( TJAPlayer4.app.Device, curX, curY, rectangle );
 						curX += 16;
 					}
-                    TJAPlayer3.Tx.Menu_Highlight.t2D描画( TJAPlayer3.app.Device, curX, curY, new Rectangle( 0x10, 0, 16, 32 ) );
+                    TJAPlayer4.Tx.Menu_Highlight.t2D描画( TJAPlayer4.app.Device, curX, curY, new Rectangle( 0x10, 0, 16, 32 ) );
 				}
 				#endregion
 				#region [ ソート候補文字列描画 ]
@@ -352,7 +352,7 @@ namespace TJAPlayer3
 					if ( lciMenuItems[ i ].txName != null )
 					{
 						int height = lciMenuItems[ i ].rectName.Height;
-						lciMenuItems[ i ].txName.t2D描画( TJAPlayer3.app.Device, 180, 77 + i * 32 );
+						lciMenuItems[ i ].txName.t2D描画( TJAPlayer4.app.Device, 180, 77 + i * 32 );
 					}
 
                     bool bValueBold = (bItemBold || (i == nItemSelecting && bIsSelectingIntItem)) ? true : false;
@@ -383,9 +383,9 @@ namespace TJAPlayer3
                             prvFont.DrawPrivateFont(s, Color.White, Color.Black, Color.Yellow, Color.OrangeRed) :
                             prvFont.DrawPrivateFont(s, Color.White, Color.Black))
                         {
-                            using (var ctStr = TJAPlayer3.tテクスチャの生成(bmpStr, false))
+                            using (var ctStr = TJAPlayer4.tテクスチャの生成(bmpStr, false))
                             {
-                                ctStr.t2D描画(TJAPlayer3.app.Device, 330, 77 + i * 32);
+                                ctStr.t2D描画(TJAPlayer4.app.Device, 330, 77 + i * 32);
                             }
                         }
                     }

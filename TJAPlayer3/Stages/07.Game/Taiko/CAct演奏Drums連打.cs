@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     internal class CAct演奏Drums連打 : CActivity
     {
@@ -68,36 +68,38 @@ namespace TJAPlayer3
         {
             this.ct連打枠カウンター = new CCounter[ 4 ];
             this.ct連打アニメ = new CCounter[4];
+            FadeOut = new Animations.FadeOut[4];
             for ( int i = 0; i < 4; i++ )
             {
                 this.ct連打枠カウンター[ i ] = new CCounter();
                 this.ct連打アニメ[i] = new CCounter();
+                // 後から変えれるようにする。大体10フレーム分。
+                FadeOut[i] = new Animations.FadeOut(167);
             }
             this.b表示 = new bool[]{ false, false, false, false };
             this.n連打数 = new int[ 4 ];
-
 
             base.On活性化();
         }
 
         public override void On非活性化()
         {
+            for (int i = 0; i < 4; i++)
+            {
+                ct連打枠カウンター[i] = null;
+                ct連打アニメ[i] = null;
+                FadeOut[i] = null;
+            }
             base.On非活性化();
         }
 
         public override void OnManagedリソースの作成()
         {
-            //this.tx連打枠 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_Rollballoon.png" ) );
-            //this.tx連打数字 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_RollNumber.png" ) );
-
             base.OnManagedリソースの作成();
         }
 
         public override void OnManagedリソースの解放()
         {
-            //CDTXMania.tテクスチャの解放( ref this.tx連打枠 );
-            //CDTXMania.tテクスチャの解放( ref this.tx連打数字 );
-
             base.OnManagedリソースの解放();
         }
 
@@ -110,33 +112,27 @@ namespace TJAPlayer3
         {
             this.ct連打枠カウンター[ player ].t進行();
             this.ct連打アニメ[player].t進行();
+            FadeOut[player].Tick();
             //1PY:-3 2PY:514
             //仮置き
             int[] nRollBalloon = new int[] { -3, 514, 0, 0 };
             int[] nRollNumber = new int[] { 48, 559, 0, 0 };
-            for( int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++ )
+            for( int i = 0; i < TJAPlayer4.ConfigIni.nPlayerCount; i++ )
             {
                 //CDTXMania.act文字コンソール.tPrint(0, 0, C文字コンソール.Eフォント種別.白, this.ct連打枠カウンター[player].n現在の値.ToString());
                 if ( this.ct連打枠カウンター[ player ].b終了値に達してない)
                 {
-                    TJAPlayer3.Tx.Balloon_Roll.t2D描画(TJAPlayer3.app.Device, TJAPlayer3.Skin.Game_Balloon_Roll_Frame_X[player], TJAPlayer3.Skin.Game_Balloon_Roll_Frame_Y[player]);
-                    this.t文字表示(TJAPlayer3.Skin.Game_Balloon_Roll_Number_X[player], TJAPlayer3.Skin.Game_Balloon_Roll_Number_Y[player], n連打数.ToString(), n連打数, player);
-                    TJAPlayer3.Tx.Balloon_Roll.n透明度 = 256;
-                    TJAPlayer3.Tx.Balloon_Number_Roll.n透明度 = 256;
-                    if ((int)this.ct連打枠カウンター[player].n現在の値 > 96)
+                    if (ct連打枠カウンター[player].n現在の値 > 1333 && !FadeOut[player].Counter.b進行中)
                     {
-                        TJAPlayer3.Tx.Balloon_Roll.n透明度 = 50;
-                        TJAPlayer3.Tx.Balloon_Number_Roll.n透明度 = 50;
-                    } else if((int)this.ct連打枠カウンター[player].n現在の値 > 92)
-                    {
-                        TJAPlayer3.Tx.Balloon_Roll.n透明度 = 125;
-                        TJAPlayer3.Tx.Balloon_Number_Roll.n透明度 = 125;
-                    } else if ((int)this.ct連打枠カウンター[player].n現在の値 > 88)
-                    {
-                        TJAPlayer3.Tx.Balloon_Roll.n透明度 = 200;
-                        TJAPlayer3.Tx.Balloon_Number_Roll.n透明度 = 200;
+                        FadeOut[player].Start();
                     }
+                    var opacity = (int)FadeOut[player].GetAnimation();
+                    TJAPlayer4.Tx.Balloon_Roll.Opacity = opacity;
+                    TJAPlayer4.Tx.Balloon_Number_Roll.Opacity = opacity;
 
+
+                    TJAPlayer4.Tx.Balloon_Roll.t2D描画(TJAPlayer4.app.Device, TJAPlayer4.Skin.Game_Balloon_Roll_Frame_X[player], TJAPlayer4.Skin.Game_Balloon_Roll_Frame_Y[player]);
+                    this.t文字表示(TJAPlayer4.Skin.Game_Balloon_Roll_Number_X[player], TJAPlayer4.Skin.Game_Balloon_Roll_Number_Y[player], n連打数.ToString(), n連打数, player);
                 }
             }
 
@@ -145,7 +141,9 @@ namespace TJAPlayer3
 
         public void t枠表示時間延長( int player )
         {
-            this.ct連打枠カウンター[ player ] = new CCounter( 0, 100, 10, TJAPlayer3.Timer );
+            this.ct連打枠カウンター[ player ] = new CCounter( 0, 1500, 1, TJAPlayer4.Timer );
+            FadeOut[player].Counter.n現在の値 = 0;
+            FadeOut[player].Counter.t停止();
         }
 
 
@@ -169,6 +167,7 @@ namespace TJAPlayer3
             0.055f,
             0.000f
         };
+        private Animations.FadeOut[] FadeOut;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct ST文字位置
@@ -188,18 +187,18 @@ namespace TJAPlayer3
 				{
 					if( this.st文字位置[ i ].ch == ch )
 					{
-						Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_Balloon_Number_Size[0] * i, 0, TJAPlayer3.Skin.Game_Balloon_Number_Size[0], TJAPlayer3.Skin.Game_Balloon_Number_Size[1]);
+						Rectangle rectangle = new Rectangle(TJAPlayer4.Skin.Game_Balloon_Number_Size[0] * i, 0, TJAPlayer4.Skin.Game_Balloon_Number_Size[0], TJAPlayer4.Skin.Game_Balloon_Number_Size[1]);
 
-						if(TJAPlayer3.Tx.Balloon_Number_Roll != null )
+						if(TJAPlayer4.Tx.Balloon_Number_Roll != null )
 						{
-                            TJAPlayer3.Tx.Balloon_Number_Roll.vc拡大縮小倍率.X = TJAPlayer3.Skin.Game_Balloon_Roll_Number_Scale;
-                            TJAPlayer3.Tx.Balloon_Number_Roll.vc拡大縮小倍率.Y = TJAPlayer3.Skin.Game_Balloon_Roll_Number_Scale + RollScale[this.ct連打アニメ[nPlayer].n現在の値];
-                            TJAPlayer3.Tx.Balloon_Number_Roll.t2D拡大率考慮下基準描画( TJAPlayer3.app.Device, x - ( ( (TJAPlayer3.Skin.Game_Balloon_Number_Padding + 2) * n桁数 ) / 2 ), y, rectangle );
+                            TJAPlayer4.Tx.Balloon_Number_Roll.vc拡大縮小倍率.X = TJAPlayer4.Skin.Game_Balloon_Roll_Number_Scale;
+                            TJAPlayer4.Tx.Balloon_Number_Roll.vc拡大縮小倍率.Y = TJAPlayer4.Skin.Game_Balloon_Roll_Number_Scale + RollScale[this.ct連打アニメ[nPlayer].n現在の値];
+                            TJAPlayer4.Tx.Balloon_Number_Roll.t2D拡大率考慮下基準描画( TJAPlayer4.app.Device, x - ( ( (TJAPlayer4.Skin.Game_Balloon_Number_Padding + 2) * n桁数 ) / 2 ), y, rectangle );
 						}
 						break;
 					}
 				}
-				x += ( TJAPlayer3.Skin.Game_Balloon_Number_Padding - ( n桁数 > 2 ? n桁数 * 2 : 0 ) );
+				x += ( TJAPlayer4.Skin.Game_Balloon_Number_Padding - ( n桁数 > 2 ? n桁数 * 2 : 0 ) );
 			}
 		}
     }

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏DrumsチップファイアD : CActivity
 	{
@@ -27,7 +27,7 @@ namespace TJAPlayer3
         public virtual void Start( int nLane, int nPlayer )
         {
             nY座標P2 = new int[] { 548, 612, 670, 712, 730, 780, 725, 690, 640 };
-            if( TJAPlayer3.Tx.Effects_Hit_FireWorks != null && TJAPlayer3.Tx.Effects_Hit_FireWorks != null )
+            if( TJAPlayer4.Tx.Effects_Hit_FireWorks != null && TJAPlayer4.Tx.Effects_Hit_FireWorks != null )
             {
                 for (int i = 0; i < 9; i++)
                 {
@@ -36,7 +36,7 @@ namespace TJAPlayer3
                         if (!this.st大音符花火[j].b使用中)
                         {
                             this.st大音符花火[j].b使用中 = true;
-                            this.st大音符花火[j].ct進行 = new CCounter(0, 40, 18, TJAPlayer3.Timer); // カウンタ
+                            this.st大音符花火[j].ct進行 = new CCounter(0, 40, 18, TJAPlayer4.Timer); // カウンタ
                             this.st大音符花火[j].fX = this.nX座標[ i ]; //X座標
                             this.st大音符花火[j].fY = nPlayer == 0 ? this.nY座標[ i ] : this.nY座標P2[ i ];
 
@@ -108,7 +108,7 @@ namespace TJAPlayer3
 			    {
                     this.st状態[ j ].b使用中 = true;
 		    		//this.st状態[ n ].ct進行 = new CCounter( 0, 9, 20, CDTXMania.Timer );
-	    			this.st状態[ j ].ct進行 = new CCounter( 0, 6, 25, TJAPlayer3.Timer );
+	    			this.st状態[ j ].ct進行 = new CCounter( 0, 6, 25, TJAPlayer4.Timer );
     				this.st状態[ j ].judge = judge;
                     this.st状態[ j ].nPlayer = player;
                     this.st状態_大[ j ].nPlayer = player;
@@ -123,7 +123,7 @@ namespace TJAPlayer3
                         case 0x14:
                         case 0x1A:
                         case 0x1B:
-                            this.st状態_大[ j ].ct進行 = new CCounter( 0, 9, 20, TJAPlayer3.Timer );
+                            this.st状態_大[ j ].ct進行 = new CCounter( 0, 9, 20, TJAPlayer4.Timer );
                             this.st状態_大[ j ].judge = judge;
                             this.st状態_大[ j ].nIsBig = 1;
                             break;
@@ -256,27 +256,27 @@ namespace TJAPlayer3
 
 					        // (When performing calibration, reduce visual distraction
 					        // and current judgment feedback near the judgment position.)
-					        if( TJAPlayer3.Tx.Effects_Hit_Explosion != null && !TJAPlayer3.IsPerformingCalibration )
+					        if( TJAPlayer4.Tx.Effects_Hit_Explosion != null && !TJAPlayer4.IsPerformingCalibration )
 					        {
                                 int n = this.st状態[ i ].nIsBig == 1 ? 520 : 0;
-                                int nX = ( TJAPlayer3.Skin.nScrollFieldX[ this.st状態[ i ].nPlayer ] ) - ( (TJAPlayer3.Tx.Effects_Hit_Explosion.sz画像サイズ.Width / 7 ) / 2 );
-                                int nY = ( TJAPlayer3.Skin.nJudgePointY[ this.st状態[ i ].nPlayer ] ) - ( (TJAPlayer3.Tx.Effects_Hit_Explosion.sz画像サイズ.Height / 4 ) / 2 );
+                                int nX = ( TJAPlayer4.Skin.nScrollFieldX[ this.st状態[ i ].nPlayer ] ) - ( (TJAPlayer4.Tx.Effects_Hit_Explosion.sz画像サイズ.Width / 7 ) / 2 );
+                                int nY = ( TJAPlayer4.Skin.nJudgePointY[ this.st状態[ i ].nPlayer ] ) - ( (TJAPlayer4.Tx.Effects_Hit_Explosion.sz画像サイズ.Height / 4 ) / 2 );
 
                                 switch( st状態[ i ].judge )
                                 {
                                     case E判定.Perfect:
                                     case E判定.Great:
                                     case E判定.Auto:
-                                        if (!this.st状態_大[i].ct進行.b停止中 && TJAPlayer3.Tx.Effects_Hit_Explosion_Big != null && this.st状態_大[i].nIsBig == 1)  
-                                                TJAPlayer3.Tx.Effects_Hit_Explosion.t2D描画(TJAPlayer3.app.Device, nX, nY, new Rectangle(this.st状態[i].ct進行.n現在の値 * 260, n + 520, 260, 260));
+                                        if (!this.st状態_大[i].ct進行.b停止中 && TJAPlayer4.Tx.Effects_Hit_Explosion_Big != null && this.st状態_大[i].nIsBig == 1)  
+                                                TJAPlayer4.Tx.Effects_Hit_Explosion.t2D描画(TJAPlayer4.app.Device, nX, nY, new Rectangle(this.st状態[i].ct進行.n現在の値 * 260, n + 520, 260, 260));
                                         else
-                                            TJAPlayer3.Tx.Effects_Hit_Explosion.t2D描画(TJAPlayer3.app.Device, nX, nY, new Rectangle(this.st状態[i].ct進行.n現在の値 * 260, n, 260, 260));
+                                            TJAPlayer4.Tx.Effects_Hit_Explosion.t2D描画(TJAPlayer4.app.Device, nX, nY, new Rectangle(this.st状態[i].ct進行.n現在の値 * 260, n, 260, 260));
                                         break;                                    
                                     case E判定.Good:
-                                        if (!this.st状態_大[i].ct進行.b停止中 && TJAPlayer3.Tx.Effects_Hit_Explosion_Big != null && this.st状態_大[i].nIsBig == 1)
-                                            TJAPlayer3.Tx.Effects_Hit_Explosion.t2D描画( TJAPlayer3.app.Device, nX, nY, new Rectangle( this.st状態[ i ].ct進行.n現在の値 * 260, n + 780, 260, 260 ) );
+                                        if (!this.st状態_大[i].ct進行.b停止中 && TJAPlayer4.Tx.Effects_Hit_Explosion_Big != null && this.st状態_大[i].nIsBig == 1)
+                                            TJAPlayer4.Tx.Effects_Hit_Explosion.t2D描画( TJAPlayer4.app.Device, nX, nY, new Rectangle( this.st状態[ i ].ct進行.n現在の値 * 260, n + 780, 260, 260 ) );
                                         else
-                                            TJAPlayer3.Tx.Effects_Hit_Explosion.t2D描画(TJAPlayer3.app.Device, nX, nY, new Rectangle(this.st状態[i].ct進行.n現在の値 * 260, n + 260, 260, 260));
+                                            TJAPlayer4.Tx.Effects_Hit_Explosion.t2D描画(TJAPlayer4.app.Device, nX, nY, new Rectangle(this.st状態[i].ct進行.n現在の値 * 260, n + 260, 260, 260));
                                         break;
                                     case E判定.Miss:
                                     case E判定.Bad:
@@ -296,7 +296,7 @@ namespace TJAPlayer3
 					    {
 						    this.st状態_大[ i ].ct進行.t停止();
 					    }
-					    if(TJAPlayer3.Tx.Effects_Hit_Explosion_Big != null && this.st状態_大[ i ].nIsBig == 1 )
+					    if(TJAPlayer4.Tx.Effects_Hit_Explosion_Big != null && this.st状態_大[ i ].nIsBig == 1 )
 					    {
 
                             switch( st状態_大[ i ].judge )
@@ -306,8 +306,8 @@ namespace TJAPlayer3
                                 case E判定.Auto:
                                     if( this.st状態_大[ i ].nIsBig == 1 )
                                     {
-                                        float fX = 415 - ((TJAPlayer3.Tx.Effects_Hit_Explosion_Big.sz画像サイズ.Width * TJAPlayer3.Tx.Effects_Hit_Explosion_Big.vc拡大縮小倍率.X ) / 2.0f);
-                                        float fY = TJAPlayer3.Skin.nJudgePointY[ this.st状態_大[ i ].nPlayer ] - ((TJAPlayer3.Tx.Effects_Hit_Explosion_Big.sz画像サイズ.Height * TJAPlayer3.Tx.Effects_Hit_Explosion_Big.vc拡大縮小倍率.Y ) / 2.0f);
+                                        float fX = 415 - ((TJAPlayer4.Tx.Effects_Hit_Explosion_Big.sz画像サイズ.Width * TJAPlayer4.Tx.Effects_Hit_Explosion_Big.vc拡大縮小倍率.X ) / 2.0f);
+                                        float fY = TJAPlayer4.Skin.nJudgePointY[ this.st状態_大[ i ].nPlayer ] - ((TJAPlayer4.Tx.Effects_Hit_Explosion_Big.sz画像サイズ.Height * TJAPlayer4.Tx.Effects_Hit_Explosion_Big.vc拡大縮小倍率.Y ) / 2.0f);
                                         //float fY = 257 - ((this.txアタックエフェクトUpper_big.sz画像サイズ.Height * this.txアタックエフェクトUpper_big.vc拡大縮小倍率.Y ) / 2.0f);
 
                                         ////7
@@ -319,13 +319,13 @@ namespace TJAPlayer3
 
                                         Matrix mat = Matrix.Identity;
                                         mat *= Matrix.Scaling( f倍率, f倍率, f倍率 );
-                                        mat *= Matrix.Translation( TJAPlayer3.Skin.nScrollFieldX[0] - SampleFramework.GameWindowSize.Width / 2.0f, -(TJAPlayer3.Skin.nJudgePointY[ this.st状態[ i ].nPlayer ] - SampleFramework.GameWindowSize.Height / 2.0f), 0f );
+                                        mat *= Matrix.Translation( TJAPlayer4.Skin.nScrollFieldX[0] - SampleFramework.GameWindowSize.Width / 2.0f, -(TJAPlayer4.Skin.nJudgePointY[ this.st状態[ i ].nPlayer ] - SampleFramework.GameWindowSize.Height / 2.0f), 0f );
                                         //mat *= Matrix.Billboard( new Vector3( 15, 15, 15 ), new Vector3(0, 0, 0), new Vector3( 0, 0, 0 ), new Vector3( 0, 0, 0 ) );
                                         //mat *= Matrix.Translation( 0f, 0f, 0f );
 
 
-                                        TJAPlayer3.Tx.Effects_Hit_Explosion_Big.n透明度 = 255;
-                                        TJAPlayer3.Tx.Effects_Hit_Explosion_Big.t3D描画( TJAPlayer3.app.Device, mat );
+                                        TJAPlayer4.Tx.Effects_Hit_Explosion_Big.Opacity = 255;
+                                        TJAPlayer4.Tx.Effects_Hit_Explosion_Big.t3D描画( TJAPlayer4.app.Device, mat );
                                     }
                                     break;
                                     
@@ -342,7 +342,7 @@ namespace TJAPlayer3
 
                 for (int i = 0; i < 45; i++)
                 {
-                    if( TJAPlayer3.Skin.nScrollFieldX[0] != 414 )
+                    if( TJAPlayer4.Skin.nScrollFieldX[0] != 414 )
                         break;
 
                     if (this.st大音符花火[i].b使用中)

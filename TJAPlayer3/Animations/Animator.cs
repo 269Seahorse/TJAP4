@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TJAPlayer3;
+using TJAPlayer4;
 using FDK;
 
-namespace TJAPlayer3.Animations
+namespace TJAPlayer4.Animations
 {
     class Animator : IAnimatable
     {
@@ -33,7 +33,7 @@ namespace TJAPlayer3.Animations
             switch (Type)
             {
                 case CounterType.Normal:
-                    Counter.t開始((int)StartValue, (int)EndValue, (int)TickInterval, TJAPlayer3.Timer);
+                    Counter.t開始((int)StartValue, (int)EndValue, (int)TickInterval, TJAPlayer4.Timer);
                     break;
                 case CounterType.Double:
                     Counter.t開始((double)StartValue, (double)EndValue, (double)TickInterval, CSound管理.rc演奏用タイマ);

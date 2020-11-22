@@ -8,9 +8,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using FDK;
-using TJAPlayer3;
+using TJAPlayer4;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	public class CScoreIni
 	{
@@ -162,7 +162,6 @@ namespace TJAPlayer3
 		}
 		public class C演奏記録
 		{
-			public STAUTOPLAY bAutoPlay;
 			public bool bDrums有効;
 			public bool bGuitar有効;
 			public STDGBVALUE<bool> bHidden;
@@ -184,62 +183,40 @@ namespace TJAPlayer3
 			public Eダメージレベル eダメージレベル;
 			public STDGBVALUE<float> f譜面スクロール速度;
 			public string Hash;
-			public int nGoodになる範囲ms;
-			public int nGood数;
-			public int nGreatになる範囲ms;
-			public int nGreat数;
-			public int nMiss数;
-			public int nPerfectになる範囲ms;
-			public int nPerfect数;
-			public int nPoorになる範囲ms;
-			public int nPoor数;
-			public int nPerfect数_Auto含まない;
-			public int nGreat数_Auto含まない;
-			public int nGood数_Auto含まない;
-			public int nPoor数_Auto含まない;
-			public int nMiss数_Auto含まない;
-			public long nスコア;
-            public int n連打数;
+
+			public double dbPerfectになる範囲ms;
+			public double dbGreatになる範囲ms;
+			public double dbGoodになる範囲ms;
+			public double dbPoorになる範囲ms;
+
+			//リザルトで使うやつはひとまず増やしておこう。
+			public int[] nPerfect数 = new int[2];
+			public int[] nGreat数 = new int[2];
+			public int[] nGood数 = new int[2];
+			public int[] nPoor数 = new int[2];
+			public int[] nMiss数 = new int[2];
+			public int[] n連打数 = new int[2];
+			public int[] n最大コンボ数 = new int[2];
+			public float[] fゲージ = new float[2];
+			public long[] nスコア = new long[2];
+
 			public int n演奏速度分子;
 			public int n演奏速度分母;
-			public int n最大コンボ数;
 			public int n全チップ数;
 			public string strDTXManiaのバージョン;
 			public bool レーン9モード;
 			public int nRisky;		// #23559 2011.6.20 yyagi 0=OFF, 1-10=Risky
 			public string 最終更新日時;
-            public float fゲージ;
             public int[] n良 = new int[(int)Difficulty.Total];
             public int[] n可 = new int[(int)Difficulty.Total];
             public int[] n不可 = new int[(int)Difficulty.Total];
             public int[] n連打 = new int[(int)Difficulty.Total];
             public int[] nハイスコア = new int[(int)Difficulty.Total];
-            public Dan_C[] Dan_C;
+            public Dan_C[][] Dan_C;
+			public Dan_C Dan_Gauge;
 
 			public C演奏記録()
 			{
-				this.bAutoPlay = new STAUTOPLAY();
-				this.bAutoPlay.LC = false;
-				this.bAutoPlay.HH = false;
-				this.bAutoPlay.SD = false;
-				this.bAutoPlay.BD = false;
-				this.bAutoPlay.HT = false;
-				this.bAutoPlay.LT = false;
-				this.bAutoPlay.FT = false;
-				this.bAutoPlay.CY = false;
-				this.bAutoPlay.Guitar = false;
-				this.bAutoPlay.Bass = false;
-				this.bAutoPlay.GtR = false;
-				this.bAutoPlay.GtG = false;
-				this.bAutoPlay.GtB = false;
-				this.bAutoPlay.GtPick = false;
-				this.bAutoPlay.GtW = false;
-				this.bAutoPlay.BsR = false;
-				this.bAutoPlay.BsG = false;
-				this.bAutoPlay.BsB = false;
-				this.bAutoPlay.BsPick = false;
-				this.bAutoPlay.BsW = false;
-
 				this.bSudden = new STDGBVALUE<bool>();
 				this.bSudden.Drums = false;
 				this.bSudden.Guitar = false;
@@ -278,17 +255,17 @@ namespace TJAPlayer3
 				this.bDrums有効 = true;
 				this.bSTAGEFAILED有効 = true;
 				this.eダメージレベル = Eダメージレベル.普通;
-				this.nPerfectになる範囲ms = 34;
-				this.nGreatになる範囲ms = 67;
-				this.nGoodになる範囲ms = 84;
-				this.nPoorになる範囲ms = 117;
+				this.dbPerfectになる範囲ms = 34;
+				this.dbGreatになる範囲ms = 67;
+				this.dbGoodになる範囲ms = 84;
+				this.dbPoorになる範囲ms = 117;
 				this.strDTXManiaのバージョン = "Unknown";
 				this.最終更新日時 = "";
 				this.Hash = "00000000000000000000000000000000";
 				this.レーン9モード = true;
 				this.nRisky = 0;									// #23559 2011.6.20 yyagi
-                this.fゲージ = 0.0f;
-                Dan_C = new Dan_C[3];
+                Dan_C = new Dan_C[1][];
+				Dan_Gauge = null;
 			}
 
 			public bool bフルコンボじゃない
@@ -302,24 +279,10 @@ namespace TJAPlayer3
 			{
 				get
 				{
-					return ( ( this.n最大コンボ数 > 0 ) && ( this.n最大コンボ数 == ( this.nPerfect数 + this.nGreat数 + this.nGood数 + this.nPoor数 + this.nMiss数 ) ) );
+					return ((this.n最大コンボ数[0] > 0) && (this.n最大コンボ数[0] == (this.nPerfect数[0] + this.nGreat数[0] + this.nGood数[0] + this.nPoor数[0] + this.nMiss数[0])));
 				}
 			}
 
-			public bool b全AUTOじゃない
-			{
-				get
-				{
-					return !b全AUTOである;
-				}
-			}
-			public bool b全AUTOである
-			{
-				get
-				{
-					return (this.n全チップ数 - this.nPerfect数_Auto含まない - this.nGreat数_Auto含まない - this.nGood数_Auto含まない - this.nPoor数_Auto含まない - this.nMiss数_Auto含まない) == this.n全チップ数;
-				}
-			}
 #if false
 			[StructLayout( LayoutKind.Sequential )]
 			public struct STAUTOPLAY
@@ -681,8 +644,8 @@ namespace TJAPlayer3
 												{
 													goto Label_03B9;
 												}
-												c演奏記録.nスコア = long.Parse( para );
-                                                
+												c演奏記録.nスコア[0] = long.Parse(para);
+
 
 												continue;
 											}
@@ -815,46 +778,35 @@ namespace TJAPlayer3
 							}
 							else if( item.Equals( "Perfect" ) )
 							{
-								c演奏記録.nPerfect数 = int.Parse( para );
+								c演奏記録.nPerfect数[0] = int.Parse( para );
 							}
 							else if( item.Equals( "Great" ) )
 							{
-								c演奏記録.nGreat数 = int.Parse( para );
+								c演奏記録.nGreat数[0] = int.Parse( para );
 							}
 							else if( item.Equals( "Good" ) )
 							{
-								c演奏記録.nGood数 = int.Parse( para );
+								c演奏記録.nGood数[0] = int.Parse( para );
 							}
 							else if( item.Equals( "Poor" ) )
 							{
-								c演奏記録.nPoor数 = int.Parse( para );
+								c演奏記録.nPoor数[0] = int.Parse( para );
 							}
 							else if( item.Equals( "Miss" ) )
 							{
-								c演奏記録.nMiss数 = int.Parse( para );
+								c演奏記録.nMiss数[0] = int.Parse( para );
 							}
                             else if( item.Equals( "Roll" ) )
                             {
-								c演奏記録.n連打数 = int.Parse( para );
+								c演奏記録.n連打数[0] = int.Parse( para );
                             }
 							else if( item.Equals( "MaxCombo" ) )
 							{
-								c演奏記録.n最大コンボ数 = int.Parse( para );
+								c演奏記録.n最大コンボ数[0] = int.Parse( para );
 							}
 							else if( item.Equals( "TotalChips" ) )
 							{
 								c演奏記録.n全チップ数 = int.Parse( para );
-							}
-							else if( item.Equals( "AutoPlay" ) )
-							{
-								// LCなし               LCあり               CYとRDが別           Gt/Bs autolane/pick
-								if( para.Length == 9 || para.Length == 10 || para.Length == 11 || para.Length == 21 )
-								{
-									for( int i = 0; i < para.Length; i++ )
-									{
-										c演奏記録.bAutoPlay[ i ] = this.ONorOFF( para[ i ] );
-									}
-								}
 							}
 							else if ( item.Equals( "Risky" ) )
 							{
@@ -1116,19 +1068,19 @@ namespace TJAPlayer3
 											}
 											else if ( item.Equals( "PerfectRange" ) )
 											{
-												c演奏記録.nPerfectになる範囲ms = int.Parse( para );
+												c演奏記録.dbPerfectになる範囲ms = double.Parse( para );
 											}
 											else if ( item.Equals( "GreatRange" ) )
 											{
-												c演奏記録.nGreatになる範囲ms = int.Parse( para );
+												c演奏記録.dbGreatになる範囲ms = double.Parse( para );
 											}
 											else if ( item.Equals( "GoodRange" ) )
 											{
-												c演奏記録.nGoodになる範囲ms = int.Parse( para );
+												c演奏記録.dbGoodになる範囲ms = double.Parse( para );
 											}
 											else if ( item.Equals( "PoorRange" ) )
 											{
-												c演奏記録.nPoorになる範囲ms = int.Parse( para );
+												c演奏記録.dbPoorになる範囲ms = double.Parse( para );
 											}
 											else if ( item.Equals( "DTXManiaVersion" ) )
 											{
@@ -1225,21 +1177,16 @@ namespace TJAPlayer3
 			{
                 string[] strArray = { "HiScore.Drums", "HiSkill.Drums", "HiScore.Guitar", "HiSkill.Guitar", "HiScore.Bass", "HiSkill.Bass", "LastPlay.Drums", "LastPlay.Guitar", "LastPlay.Bass" };
 				writer.WriteLine( "[{0}]", strArray[ i ] );
-				writer.WriteLine( "Score={0}", this.stセクション[ i ].nスコア );
+				writer.WriteLine( "Score={0}", this.stセクション[ i ].nスコア[0] );
 				writer.WriteLine( "PlaySkill={0}", this.stセクション[ i ].db演奏型スキル値 );
 				writer.WriteLine( "Skill={0}", this.stセクション[ i ].dbゲーム型スキル値 );
-				writer.WriteLine( "Perfect={0}", this.stセクション[ i ].nPerfect数 );
-				writer.WriteLine( "Great={0}", this.stセクション[ i ].nGreat数 );
-				writer.WriteLine( "Good={0}", this.stセクション[ i ].nGood数 );
-				writer.WriteLine( "Poor={0}", this.stセクション[ i ].nPoor数 );
-				writer.WriteLine( "Miss={0}", this.stセクション[ i ].nMiss数 );
-				writer.WriteLine( "MaxCombo={0}", this.stセクション[ i ].n最大コンボ数 );
+				writer.WriteLine( "Perfect={0}", this.stセクション[ i ].nPerfect数[0] );
+				writer.WriteLine( "Great={0}", this.stセクション[ i ].nGreat数[0] );
+				writer.WriteLine( "Good={0}", this.stセクション[ i ].nGood数[0] );
+				writer.WriteLine( "Poor={0}", this.stセクション[ i ].nPoor数[0] );
+				writer.WriteLine( "Miss={0}", this.stセクション[ i ].nMiss数[0] );
+				writer.WriteLine( "MaxCombo={0}", this.stセクション[ i ].n最大コンボ数[0] );
 				writer.WriteLine( "TotalChips={0}", this.stセクション[ i ].n全チップ数 );
-				writer.Write( "AutoPlay=" );
-				for ( int j = 0; j < (int) Eレーン.MAX; j++ )
-				{
-					writer.Write( this.stセクション[ i ].bAutoPlay[ j ] ? 1 : 0 );
-				}
 				writer.WriteLine();
 				writer.WriteLine( "Risky={0}", this.stセクション[ i ].nRisky );
 				writer.WriteLine( "SuddenDrums={0}", this.stセクション[ i ].bSudden.Drums ? 1 : 0 );
@@ -1274,10 +1221,10 @@ namespace TJAPlayer3
 				writer.WriteLine( "UseMIDIIN={0}", this.stセクション[ i ].b演奏にMIDI入力を使用した ? 1 : 0 );
 				writer.WriteLine( "UseJoypad={0}", this.stセクション[ i ].b演奏にジョイパッドを使用した ? 1 : 0 );
 				writer.WriteLine( "UseMouse={0}", this.stセクション[ i ].b演奏にマウスを使用した ? 1 : 0 );
-				writer.WriteLine( "PerfectRange={0}", this.stセクション[ i ].nPerfectになる範囲ms );
-				writer.WriteLine( "GreatRange={0}", this.stセクション[ i ].nGreatになる範囲ms );
-				writer.WriteLine( "GoodRange={0}", this.stセクション[ i ].nGoodになる範囲ms );
-				writer.WriteLine( "PoorRange={0}", this.stセクション[ i ].nPoorになる範囲ms );
+				writer.WriteLine( "PerfectRange={0}", this.stセクション[ i ].dbPerfectになる範囲ms );
+				writer.WriteLine( "GreatRange={0}", this.stセクション[ i ].dbGreatになる範囲ms );
+				writer.WriteLine( "GoodRange={0}", this.stセクション[ i ].dbGoodになる範囲ms );
+				writer.WriteLine( "PoorRange={0}", this.stセクション[ i ].dbPoorになる範囲ms );
 				writer.WriteLine( "DTXManiaVersion={0}", this.stセクション[ i ].strDTXManiaのバージョン );
 				writer.WriteLine( "DateTime={0}", this.stセクション[ i ].最終更新日時 );
 				writer.WriteLine( "Hash={0}", this.stセクション[ i ].Hash );
@@ -1307,8 +1254,8 @@ namespace TJAPlayer3
 		{
 			if( part.b演奏にMIDI入力を使用した || part.b演奏にキーボードを使用した || part.b演奏にジョイパッドを使用した || part.b演奏にマウスを使用した )	// 2010.9.11
 			{
-				int nTotal = part.nPerfect数 + part.nGreat数 + part.nGood数 + part.nPoor数 + part.nMiss数;
-				return tランク値を計算して返す( nTotal, part.nPerfect数, part.nGreat数, part.nGood数, part.nPoor数, part.nMiss数 );
+				int nTotal = part.nPerfect数[0] + part.nGreat数[0] + part.nGood数[0] + part.nPoor数[0] + part.nMiss数[0];
+				return tランク値を計算して返す(nTotal, part.nPerfect数[0], part.nGreat数[0], part.nGood数[0], part.nPoor数[0], part.nMiss数[0]);
 			}
 			return (int)ERANK.UNKNOWN;
 		}
@@ -1350,30 +1297,30 @@ namespace TJAPlayer3
 			}
 			return (int)ERANK.E;
 		}
-		internal static double tゲーム型スキルを計算して返す( int nLevel, int nTotal, int nPerfect, int nCombo, E楽器パート inst, STAUTOPLAY bAutoPlay )
+		internal static double tゲーム型スキルを計算して返す(int nLevel, int nTotal, int nPerfect, int nCombo, E楽器パート inst)
 		{
 			double ret;
 			if( ( nTotal == 0 ) || ( ( nPerfect == 0 ) && ( nCombo == 0 ) ) )
 				ret = 0.0;
 
 			ret = ( ( nLevel * ( ( nPerfect * 0.8 + nCombo * 0.2 ) / ( (double) nTotal ) ) ) / 2.0 );
-			ret *= dbCalcReviseValForDrGtBsAutoLanes( inst, bAutoPlay );
+			ret *= dbCalcReviseValForDrGtBsAutoLanes(inst);
 
 			return ret;
 		}
-		internal static double t演奏型スキルを計算して返す( int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, E楽器パート inst, STAUTOPLAY bAutoPlay)
+		internal static double t演奏型スキルを計算して返す(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, E楽器パート inst)
 		{
-			if( nTotal == 0 )
+			if ( nTotal == 0 )
 				return 0.0;
 
 			int nAuto = nTotal - ( nPerfect + nGreat + nGood + nPoor  + nMiss );
 			double y = ( ( nPerfect * 1.0 + nGreat * 0.8 + nGood * 0.5 + nPoor * 0.2 + nMiss * 0.0 + nAuto * 0.0 ) * 100.0 ) / ( (double) nTotal );
 			double ret = ( 100.0 * ( ( Math.Pow( 1.03, y ) - 1.0 ) / ( Math.Pow( 1.03, 100.0 ) - 1.0 ) ) );
 
-			ret *= dbCalcReviseValForDrGtBsAutoLanes( inst, bAutoPlay );
+			ret *= dbCalcReviseValForDrGtBsAutoLanes(inst);
 			return ret;
 		}
-		internal static double dbCalcReviseValForDrGtBsAutoLanes( E楽器パート inst, STAUTOPLAY bAutoPlay )
+		internal static double dbCalcReviseValForDrGtBsAutoLanes(E楽器パート inst)
 		{
             //削除
 			return 1.0;
@@ -1417,18 +1364,16 @@ namespace TJAPlayer3
 		internal static string t演奏セクションのMD5を求めて返す( C演奏記録 cc )
 		{
 			StringBuilder builder = new StringBuilder();
-			builder.Append( cc.nスコア.ToString() );
+			builder.Append( cc.nスコア[0].ToString() );
 			builder.Append( cc.dbゲーム型スキル値.ToString( ".000000" ) );
 			builder.Append( cc.db演奏型スキル値.ToString( ".000000" ) );
-			builder.Append( cc.nPerfect数 );
-			builder.Append( cc.nGreat数 );
-			builder.Append( cc.nGood数 );
-			builder.Append( cc.nPoor数 );
-			builder.Append( cc.nMiss数 );
-			builder.Append( cc.n最大コンボ数 );
+			builder.Append(cc.nPerfect数[0]);
+			builder.Append(cc.nGreat数[0]);
+			builder.Append(cc.nGood数[0]);
+			builder.Append(cc.nPoor数[0]);
+			builder.Append(cc.nMiss数[0]);
+			builder.Append(cc.n最大コンボ数[0]);
 			builder.Append( cc.n全チップ数 );
-			for( int i = 0; i < 10; i++ )
-				builder.Append( boolToChar( cc.bAutoPlay[ i ] ) );
 			builder.Append( boolToChar( cc.bTight ) );
 			builder.Append( boolToChar( cc.bSudden.Drums ) );
 			builder.Append( boolToChar( cc.bSudden.Guitar ) );
@@ -1462,10 +1407,10 @@ namespace TJAPlayer3
 			builder.Append( boolToChar( cc.b演奏にMIDI入力を使用した ) );
 			builder.Append( boolToChar( cc.b演奏にジョイパッドを使用した ) );
 			builder.Append( boolToChar( cc.b演奏にマウスを使用した ) );
-			builder.Append( cc.nPerfectになる範囲ms );
-			builder.Append( cc.nGreatになる範囲ms );
-			builder.Append( cc.nGoodになる範囲ms );
-			builder.Append( cc.nPoorになる範囲ms );
+			builder.Append( cc.dbPerfectになる範囲ms );
+			builder.Append( cc.dbGreatになる範囲ms );
+			builder.Append( cc.dbGoodになる範囲ms );
+			builder.Append( cc.dbPoorになる範囲ms );
 			builder.Append( cc.strDTXManiaのバージョン );
 			builder.Append( cc.最終更新日時 );
 
@@ -1481,18 +1426,18 @@ namespace TJAPlayer3
 		}
 		internal static void t更新条件を取得する( out bool bDrumsを更新する, out bool bGuitarを更新する, out bool bBassを更新する )
 		{
-            bDrumsを更新する = !TJAPlayer3.ConfigIni.b太鼓パートAutoPlay;
+            bDrumsを更新する = !TJAPlayer4.ConfigIni.bAutoPlay[0];
 			bGuitarを更新する = false;
 			bBassを更新する =   false;
 		}
 		internal static int t総合ランク値を計算して返す( C演奏記録 Drums, C演奏記録 Guitar, C演奏記録 Bass )
 		{
 			int nTotal   = Drums.n全チップ数;
-			int nPerfect = Drums.nPerfect数_Auto含まない;	// #24569 2011.3.1 yyagi: to calculate result rank without AUTO chips
-			int nGreat =   Drums.nGreat数_Auto含まない;		//
-			int nGood =    Drums.nGood数_Auto含まない;		//
-			int nPoor =    Drums.nPoor数_Auto含まない;		//
-			int nMiss =    Drums.nMiss数_Auto含まない;		//
+			int nPerfect = Drums.nPerfect数[0];  // #24569 2011.3.1 yyagi: to calculate result rank without AUTO chips
+			int nGreat = Drums.nGreat数[0];      //
+			int nGood = Drums.nGood数[0];        //
+			int nPoor = Drums.nPoor数[0];        //
+			int nMiss = Drums.nMiss数[0];        //
 			return tランク値を計算して返す( nTotal, nPerfect, nGreat, nGood, nPoor, nMiss );
 		}
 

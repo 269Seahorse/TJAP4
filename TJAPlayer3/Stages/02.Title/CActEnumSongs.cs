@@ -13,7 +13,7 @@ using SlimDX.Direct3D9;
 using FDK;
 using SampleFramework;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActEnumSongs :  CActivity
 	{
@@ -49,7 +49,7 @@ namespace TJAPlayer3
 			try
 			{
 				this.ctNowEnumeratingSongs = new CCounter();	// 0, 1000, 17, CDTXMania.Timer );
-				this.ctNowEnumeratingSongs.t開始( 0, 100, 17, TJAPlayer3.Timer );
+				this.ctNowEnumeratingSongs.t開始( 0, 100, 17, TJAPlayer4.Timer );
 			}
 			finally
 			{
@@ -93,7 +93,7 @@ namespace TJAPlayer3
 					"     曲データの一覧を\n       取得しています。\n   しばらくお待ちください。",
 					" Now enumerating songs.\n         Please wait..."
 				};
-				int ci = ( CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja" ) ? 0 : 1;
+				int ci = ( CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ja" ) ? 0 : 1;
 				if ( ( strMessage != null ) && ( strMessage.Length > 0 ) )
 				{
 					Bitmap image = new Bitmap( 1, 1 );
@@ -107,10 +107,10 @@ namespace TJAPlayer3
 					graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					graphics.DrawString( strMessage[ ci ], ftMessage, Brushes.White, (float) 0f, (float) 0f );
 					graphics.Dispose();
-					this.txMessage = new CTexture( TJAPlayer3.app.Device, image, TJAPlayer3.TextureFormat );
+					this.txMessage = new CTexture( TJAPlayer4.app.Device, image, TJAPlayer4.TextureFormat );
 					this.txMessage.vc拡大縮小倍率 = new Vector3( 0.5f, 0.5f, 1f );
 					image.Dispose();
-					TJAPlayer3.t安全にDisposeする( ref ftMessage );
+					TJAPlayer4.t安全にDisposeする( ref ftMessage );
 				}
 				else
 				{
@@ -134,7 +134,7 @@ namespace TJAPlayer3
 
 			//CDTXMania.t安全にDisposeする( ref this.txDialogNowEnumeratingSongs );
 			//CDTXMania.t安全にDisposeする( ref this.txNowEnumeratingSongs );
-			TJAPlayer3.t安全にDisposeする( ref this.txMessage );
+			TJAPlayer4.t安全にDisposeする( ref this.txMessage );
 			base.OnManagedリソースの解放();
 		}
 
@@ -145,15 +145,15 @@ namespace TJAPlayer3
 				return 0;
 			}
 			this.ctNowEnumeratingSongs.t進行Loop();
-			if ( TJAPlayer3.Tx.Enum_Song != null )
+			if ( TJAPlayer4.Tx.Enum_Song != null )
 			{
-                TJAPlayer3.Tx.Enum_Song.n透明度 = (int) ( 176.0 + 80.0 * Math.Sin( (double) (2 * Math.PI * this.ctNowEnumeratingSongs.n現在の値 * 2 / 100.0 ) ) );
-                TJAPlayer3.Tx.Enum_Song.t2D描画( TJAPlayer3.app.Device, 18, 7 );
+                TJAPlayer4.Tx.Enum_Song.Opacity = (int) ( 176.0 + 80.0 * Math.Sin( (double) (2 * Math.PI * this.ctNowEnumeratingSongs.n現在の値 * 2 / 100.0 ) ) );
+                TJAPlayer4.Tx.Enum_Song.t2D描画( TJAPlayer4.app.Device, 18, 7 );
 			}
-			if ( bコマンドでの曲データ取得 && TJAPlayer3.Tx.Config_Enum_Song != null )
+			if ( bコマンドでの曲データ取得 && TJAPlayer4.Tx.Config_Enum_Song != null )
 			{
-                TJAPlayer3.Tx.Config_Enum_Song.t2D描画( TJAPlayer3.app.Device, 180, 177 );
-				this.txMessage.t2D描画( TJAPlayer3.app.Device, 190, 197 );
+                TJAPlayer4.Tx.Config_Enum_Song.t2D描画( TJAPlayer4.app.Device, 180, 177 );
+				this.txMessage.t2D描画( TJAPlayer4.app.Device, 190, 197 );
 			}
 
 			return 0;

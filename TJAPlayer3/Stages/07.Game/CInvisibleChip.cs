@@ -4,7 +4,7 @@ using System.Text;
 using System.Diagnostics;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	public class CInvisibleChip : IDisposable
 	{
@@ -82,7 +82,7 @@ namespace TJAPlayer3
 		/// <param name="eInst">楽器パート</param>
 		public void ShowChipTemporally( E楽器パート eInst )
 		{
-			ccounter[ (int) eInst ].t開始( 0, nDisplayTimeMs + nFadeoutTimeMs + 1, 1, TJAPlayer3.Timer );
+			ccounter[ (int) eInst ].t開始( 0, nDisplayTimeMs + nFadeoutTimeMs + 1, 1, TJAPlayer4.Timer );
 		}
 
 		/// <summary>

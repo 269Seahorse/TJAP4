@@ -5,7 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using SlimDX;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏Drums判定文字列 : CAct演奏判定文字列共通
 	{
@@ -103,12 +103,12 @@ namespace TJAPlayer3
 					{
 						int baseX = 370;
                         //int baseY = 135;
-                        int baseY = TJAPlayer3.Skin.nScrollFieldY[base.st状態[j].nPlayer] - 53;
-						int x = TJAPlayer3.Skin.nScrollFieldX[ 0 ] - TJAPlayer3.Tx.Judge.szテクスチャサイズ.Width / 2;
+                        int baseY = TJAPlayer4.Skin.nScrollFieldY[base.st状態[j].nPlayer] - 53;
+						int x = TJAPlayer4.Skin.nScrollFieldX[ 0 ] - TJAPlayer4.Tx.Judge.szテクスチャサイズ.Width / 2;
 						int y = ( baseY + base.st状態[ j ].n相対Y座標 );
-						if( TJAPlayer3.Tx.Judge != null )
+						if( TJAPlayer4.Tx.Judge != null )
 						{
-                            TJAPlayer3.Tx.Judge.t2D描画( TJAPlayer3.app.Device, x, y, base.st判定文字列[ (int) base.st状態[ j ].judge ].rc );
+                            TJAPlayer4.Tx.Judge.t2D描画( TJAPlayer4.app.Device, x, y, base.st判定文字列[ (int) base.st状態[ j ].judge ].rc );
 						}
 					}
 				}

@@ -8,7 +8,7 @@ using FDK;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	/// <summary>
 	/// box.defによるスキン変更時に一時的に遷移する、スキン画像の一切無いステージ。
@@ -79,7 +79,7 @@ namespace TJAPlayer3
 				}
 
                 //スキン変更処理
-                TJAPlayer3.app.RefleshSkin();
+                TJAPlayer4.app.RefleshSkin();
 
                 return 1;
 			}

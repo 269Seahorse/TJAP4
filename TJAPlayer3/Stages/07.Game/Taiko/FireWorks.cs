@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     internal class FireWorks : CActivity
     {
@@ -35,7 +35,7 @@ namespace TJAPlayer3
                     FireWork[i].Player = nPlayer;
                     FireWork[i].X = x;
                     FireWork[i].Y = y;
-                    FireWork[i].Counter = new CCounter(0, TJAPlayer3.Skin.Game_Effect_FireWorks[2] - 1, TJAPlayer3.Skin.Game_Effect_FireWorks_Timer, TJAPlayer3.Timer);
+                    FireWork[i].Counter = new CCounter(0, TJAPlayer4.Skin.Game_Effect_FireWorks[2] - 1, TJAPlayer4.Skin.Game_Effect_FireWorks_Timer, TJAPlayer4.Timer);
                     break;
                 }
             }
@@ -84,7 +84,7 @@ namespace TJAPlayer3
                     if(FireWork[i].IsUsing)
                     {
                         FireWork[i].Counter.t進行();
-                        TJAPlayer3.Tx.Effects_Hit_FireWorks.t2D中心基準描画(TJAPlayer3.app.Device, (float)FireWork[i].X, (float)FireWork[i].Y, 1, new Rectangle(FireWork[i].Counter.n現在の値 * TJAPlayer3.Skin.Game_Effect_FireWorks[0], 0, TJAPlayer3.Skin.Game_Effect_FireWorks[0], TJAPlayer3.Skin.Game_Effect_FireWorks[1]));
+                        TJAPlayer4.Tx.Effects_Hit_FireWorks.t2D中心基準描画(TJAPlayer4.app.Device, (float)FireWork[i].X, (float)FireWork[i].Y, 1, new Rectangle(FireWork[i].Counter.n現在の値 * TJAPlayer4.Skin.Game_Effect_FireWorks[0], 0, TJAPlayer4.Skin.Game_Effect_FireWorks[0], TJAPlayer4.Skin.Game_Effect_FireWorks[1]));
                         if (FireWork[i].Counter.b終了値に達した)
                         {
                             FireWork[i].Counter.t停止();

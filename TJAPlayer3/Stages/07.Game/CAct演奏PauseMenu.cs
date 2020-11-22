@@ -7,7 +7,7 @@ using System.IO;
 using SlimDX;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏PauseMenu : CActSelectPopupMenu
 	{
@@ -49,11 +49,11 @@ namespace TJAPlayer3
 		}
 
 		// メソッド
-		public override void tActivatePopupMenu( E楽器パート einst )
+		public override void tActivatePopupMenu(E楽器パート einst, int nPlayer)
 		{
             this.CAct演奏PauseMenuMain();
             this.bやり直しを選択した = false;
-			base.tActivatePopupMenu( einst );
+			base.tActivatePopupMenu(einst, 0);
 		}
 		//public void tDeativatePopupMenu()
 		//{
@@ -68,8 +68,8 @@ namespace TJAPlayer3
                     this.sw = Stopwatch.StartNew();
                 if( sw.ElapsedMilliseconds > 1500 )
                 {
-                    TJAPlayer3.stage演奏ドラム画面.bPAUSE = false;
-                    TJAPlayer3.stage演奏ドラム画面.t演奏やりなおし();
+                    TJAPlayer4.stage演奏ドラム画面.bPAUSE = false;
+                    TJAPlayer4.stage演奏ドラム画面.t演奏やりなおし();
 
 	    		    this.tDeativatePopupMenu();
                     this.sw.Reset();
@@ -82,12 +82,12 @@ namespace TJAPlayer3
             switch ( n現在の選択行 )
             {
 				case (int) EOrder.Continue:
-                    TJAPlayer3.stage演奏ドラム画面.bPAUSE = false;
+                    TJAPlayer4.stage演奏ドラム画面.bPAUSE = false;
 
                     CSound管理.rc演奏用タイマ.t再開();
-					TJAPlayer3.Timer.t再開();
-					TJAPlayer3.DTX.t全チップの再生再開();
-                    TJAPlayer3.stage演奏ドラム画面.actAVI.tPauseControl();
+					TJAPlayer4.Timer.t再開();
+					TJAPlayer4.DTX[0].t全チップの再生再開();
+					TJAPlayer4.stage演奏ドラム画面.actAVI.tPauseControl();
 
 					this.tDeativatePopupMenu();
 					break;
@@ -98,8 +98,8 @@ namespace TJAPlayer3
 
 				case (int) EOrder.Return:
                     CSound管理.rc演奏用タイマ.t再開();
-					TJAPlayer3.Timer.t再開();
-                    TJAPlayer3.stage演奏ドラム画面.t演奏中止();
+					TJAPlayer4.Timer.t再開();
+                    TJAPlayer4.stage演奏ドラム画面.t演奏中止();
 					this.tDeativatePopupMenu();
                     break;
                 default:
@@ -130,7 +130,7 @@ namespace TJAPlayer3
 				string pathパネル本体 = CSkin.Path( @"Graphics\ScreenSelect popup auto settings.png" );
 				if ( File.Exists( pathパネル本体 ) )
 				{
-					this.txパネル本体 = TJAPlayer3.tテクスチャの生成( pathパネル本体, true );
+					this.txパネル本体 = TJAPlayer4.tテクスチャの生成( pathパネル本体, true );
 				}
 
 				base.OnManagedリソースの作成();
@@ -140,8 +140,8 @@ namespace TJAPlayer3
 		{
 			if ( !base.b活性化してない )
 			{
-				TJAPlayer3.tテクスチャの解放( ref this.txパネル本体 );
-				TJAPlayer3.tテクスチャの解放( ref this.tx文字列パネル );
+				TJAPlayer4.tテクスチャの解放( ref this.txパネル本体 );
+				TJAPlayer4.tテクスチャの解放( ref this.tx文字列パネル );
 				base.OnManagedリソースの解放();
 			}
 		}

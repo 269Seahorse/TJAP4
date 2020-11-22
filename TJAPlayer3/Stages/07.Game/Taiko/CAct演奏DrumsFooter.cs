@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     internal class CAct演奏DrumsFooter : CActivity
     {
@@ -39,9 +39,9 @@ namespace TJAPlayer3
 
         public override int On進行描画()
         {
-            if (TJAPlayer3.Tx.Mob_Footer != null)
+            if (TJAPlayer4.Tx.Mob_Footer != null)
             {
-                TJAPlayer3.Tx.Mob_Footer.t2D描画(TJAPlayer3.app.Device, 0, 720 - TJAPlayer3.Tx.Mob_Footer.szテクスチャサイズ.Height);
+                TJAPlayer4.Tx.Mob_Footer.t2D描画(TJAPlayer4.app.Device, 0, 720 - TJAPlayer4.Tx.Mob_Footer.szテクスチャサイズ.Height);
             }
             return base.On進行描画();
         }

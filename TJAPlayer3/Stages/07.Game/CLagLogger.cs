@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using FDK.ExtensionMethods;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     internal static class CLagLogger
     {

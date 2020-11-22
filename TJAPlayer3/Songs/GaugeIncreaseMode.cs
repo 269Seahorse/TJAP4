@@ -1,4 +1,4 @@
-﻿namespace TJAPlayer3
+﻿namespace TJAPlayer4
 {
     /// <summary>
     /// ゲージ増加量の種類。

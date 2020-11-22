@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏Combo音声 : CActivity
 	{
@@ -59,7 +59,7 @@ namespace TJAPlayer3
 			{
                 // フォルダ内を走査してコンボボイスをListに入れていく
                 // 1P、2P コンボボイス
-                for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
+                for (int i = 0; i < TJAPlayer4.ConfigIni.nPlayerCount; i++)
                 {
                     var currentDir = CSkin.Path(string.Format(@"Sounds\Combo_{0}P\", i + 1));
                     if (Directory.Exists(currentDir))
@@ -70,7 +70,7 @@ namespace TJAPlayer3
                             comboVoice.bFileFound = true;
                             comboVoice.nPlayer = i;
                             comboVoice.strFilePath = item;
-                            comboVoice.soundComboVoice = TJAPlayer3.Sound管理.tサウンドを生成する(item, ESoundGroup.Voice);
+                            comboVoice.soundComboVoice = TJAPlayer4.Sound管理.tサウンドを生成する(item, ESoundGroup.Voice);
                             comboVoice.nCombo = int.Parse(Path.GetFileNameWithoutExtension(item));
                             ListCombo[i].Add(comboVoice);
                         }
@@ -91,7 +91,7 @@ namespace TJAPlayer3
                 {
                     foreach (var item in ListCombo[i])
                     {
-                        TJAPlayer3.Sound管理.tサウンドを破棄する(item.soundComboVoice);
+                        TJAPlayer4.Sound管理.tサウンドを破棄する(item.soundComboVoice);
                     }
                     ListCombo[i].Clear();
                 }

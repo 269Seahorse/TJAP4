@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     public class CCourse
     {

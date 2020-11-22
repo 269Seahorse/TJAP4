@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 
     /// <summary>
@@ -29,16 +29,16 @@ namespace TJAPlayer3
     }
     public enum Eジャンル
     {
-        None = 0,
-        JPOP = 1,
-        ゲーム = 2,
-        ナムコ = 3,
-        クラシック = 4,
-        バラエティ = 5,
-        どうよう = 6,
-        ボーカロイド = 7,
-        アニメ = 8
-    }
+		None = 0,
+		JPOP = 1,
+		ゲーム = 2,
+		ナムコ = 3,
+		クラシック = 4,
+		バラエティ = 5,
+		キッズ = 6,
+		ボーカロイド = 7,
+		アニメ = 8
+	}
     public enum EGame
     {
         OFF = 0,

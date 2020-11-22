@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class C文字コンソール : CActivity
 	{
@@ -53,7 +53,7 @@ namespace TJAPlayer3
 						{
 							if( this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ] != null )
 							{
-								this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ].t2D描画( TJAPlayer3.app.Device, x, y, this.rc文字の矩形領域[ (int) ( (int) font % (int) Eフォント種別.白細 ), index ] );
+								this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ].t2D描画( TJAPlayer4.app.Device, x, y, this.rc文字の矩形領域[ (int) ( (int) font % (int) Eフォント種別.白細 ), index ] );
 							}
 							x += nFontWidth;
 						}
@@ -92,8 +92,8 @@ namespace TJAPlayer3
 		{
 			if( !base.b活性化してない )
 			{
-				this.txフォント8x16[ 0 ] = TJAPlayer3.Tx.TxC(@"Console_Font.png");
-				this.txフォント8x16[ 1 ] = TJAPlayer3.Tx.TxC(@"Console_Font_Small.png");
+				this.txフォント8x16[ 0 ] = TJAPlayer4.Tx.TxC(@"Console_Font.png");
+				this.txフォント8x16[ 1 ] = TJAPlayer4.Tx.TxC(@"Console_Font_Small.png");
                 base.OnManagedリソースの作成();
 			}
 		}

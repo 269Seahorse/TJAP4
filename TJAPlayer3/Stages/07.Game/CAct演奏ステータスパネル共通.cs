@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Diagnostics;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏ステータスパネル共通 : CActivity
 	{

@@ -6,7 +6,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     internal class CAct演奏Drumsゲームモード : CActivity
     {
@@ -96,8 +96,8 @@ namespace TJAPlayer3
         public void t叩ききりまショー_初期化()
         {
             this.st叩ききりまショー = new ST叩ききりまショー();
-            this.n演奏時間 = ( TJAPlayer3.DTX.listChip.Count > 0 ) ? TJAPlayer3.DTX.listChip[ TJAPlayer3.DTX.listChip.Count - 1 ].n発声時刻ms : 0;
-            this.st叩ききりまショー.ct残り時間 = new CCounter( 0, 25000, 1, TJAPlayer3.Timer );
+            this.n演奏時間 = (TJAPlayer4.DTX[0].listChip.Count > 0) ? TJAPlayer4.DTX[0].listChip[TJAPlayer4.DTX[0].listChip.Count - 1].n発声時刻ms : 0;
+            this.st叩ききりまショー.ct残り時間 = new CCounter( 0, 25000, 1, TJAPlayer4.Timer );
             this.st叩ききりまショー.ct加算時間表示 = new CCounter();
             this.st叩ききりまショー.ct加算審査中 = new CCounter();
             this.st叩ききりまショー.b最初のチップが叩かれた = false;
@@ -122,7 +122,7 @@ namespace TJAPlayer3
             this.n加算時間 = 0;
             this.n前回の延長時間 = 0;
             
-            this.st叩ききりまショー.ct針アニメ = new CCounter( 0, 1000, 1, TJAPlayer3.Timer );
+            this.st叩ききりまショー.ct針アニメ = new CCounter( 0, 1000, 1, TJAPlayer4.Timer );
 
             this.t叩ききりまショー_判定項目と難易度を決める();
         }
@@ -130,7 +130,7 @@ namespace TJAPlayer3
         public void t叩ききりまショー_判定項目と難易度を決める()
         {
             //まず通常、激辛時でわける。
-            if( TJAPlayer3.ConfigIni.eGameMode == EGame.完走叩ききりまショー )
+            if( TJAPlayer4.ConfigIni.eGameMode == EGame.完走叩ききりまショー )
             {
                 #region[ 通常 ]
                 //通常の査定
@@ -195,7 +195,7 @@ namespace TJAPlayer3
                 };
                 #endregion
             }
-            else if( TJAPlayer3.ConfigIni.eGameMode == EGame.完走叩ききりまショー激辛 )
+            else if( TJAPlayer4.ConfigIni.eGameMode == EGame.完走叩ききりまショー激辛 )
             {
                 #region[ 激辛 ]
                 //激ムズの査定
@@ -261,7 +261,7 @@ namespace TJAPlayer3
                 };
 
                 //★10の場合超激辛モードになる。
-                if( TJAPlayer3.DTX.LEVELtaiko[ TJAPlayer3.stage選曲.n確定された曲の難易度 ] >= 10 )
+                if (TJAPlayer4.DTX[0].LEVELtaiko[TJAPlayer4.stage選曲.n確定された曲の難易度[0]] >= 10)
                 {
                     #region[ 超激辛 ]
                     this.st叩ききりまショー.b超激辛 = true;
@@ -308,7 +308,7 @@ namespace TJAPlayer3
                     #endregion
                 }
 
-                if( TJAPlayer3.ConfigIni.bSuperHard )
+                if( TJAPlayer4.ConfigIni.bSuperHard )
                 {
                     #region[ 超激辛 ]
                     this.st叩ききりまショー.b超激辛 = true;
@@ -392,7 +392,7 @@ namespace TJAPlayer3
 
         public override int On進行描画()
         {
-            if( TJAPlayer3.ConfigIni.eGameMode == EGame.完走叩ききりまショー || TJAPlayer3.ConfigIni.eGameMode == EGame.完走叩ききりまショー激辛 )
+            if( TJAPlayer4.ConfigIni.eGameMode == EGame.完走叩ききりまショー || TJAPlayer4.ConfigIni.eGameMode == EGame.完走叩ききりまショー激辛 )
             {
                 //if( this.st叩ききりまショー.b最初のチップが叩かれた == true )//&&
                   //CDTXMania.stage演奏ドラム画面.r検索範囲内にチップがあるか調べる( CSound管理.rc演奏用タイマ.n現在時刻ms, 0, 3000 ) )
@@ -409,7 +409,7 @@ namespace TJAPlayer3
 				    if( !this.st叩ききりまショー.ct残り時間.b停止中 || this.st叩ききりまショー.b加算アニメ中 == true )
 				    {
                         this.st叩ききりまショー.ct残り時間.t進行();
-					    if( !TJAPlayer3.stage演奏ドラム画面.r検索範囲内にチップがあるか調べる( CSound管理.rc演奏用タイマ.n現在時刻ms, 0, 5000, 0 ) || this.st叩ききりまショー.b加算アニメ中 == true )
+					    if( !TJAPlayer4.stage演奏ドラム画面.r検索範囲内にチップがあるか調べる((long)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer4.ConfigIni.n演奏速度) / 20.0)), 0, 5000, 0 ) || this.st叩ききりまショー.b加算アニメ中 == true )
 					    {
                             this.st叩ききりまショー.bタイマー使用中 = false;
 						    this.st叩ききりまショー.ct残り時間.t停止();
@@ -419,12 +419,12 @@ namespace TJAPlayer3
 
                 if( !this.st叩ききりまショー.bタイマー使用中 && this.st叩ききりまショー.b加算アニメ中 == false )
                 {
-                    if ((this.st叩ききりまショー.b最初のチップが叩かれた == true && ( TJAPlayer3.stage演奏ドラム画面.r検索範囲内にチップがあるか調べる(CSound管理.rc演奏用タイマ.n現在時刻ms, 0, 2000, 0 ) ) ) )
+                    if ((this.st叩ききりまショー.b最初のチップが叩かれた == true && ( TJAPlayer4.stage演奏ドラム画面.r検索範囲内にチップがあるか調べる(CSound管理.rc演奏用タイマ.n現在時刻ms, 0, 2000, 0 ) ) ) )
                     {
                         this.st叩ききりまショー.bタイマー使用中 = true;
                         int nCount = this.st叩ききりまショー.ct残り時間.n現在の値;
-                        this.st叩ききりまショー.ct残り時間 = new CCounter( 0, 25000, 1, TJAPlayer3.Timer );
-                        this.st叩ききりまショー.ct針アニメ = new CCounter( 0, 1000, 1, TJAPlayer3.Timer );
+                        this.st叩ききりまショー.ct残り時間 = new CCounter( 0, 25000, 1, TJAPlayer4.Timer );
+                        this.st叩ききりまショー.ct針アニメ = new CCounter( 0, 1000, 1, TJAPlayer4.Timer );
                         this.st叩ききりまショー.ct残り時間.n現在の値 = nCount;
                     }
 
@@ -434,22 +434,22 @@ namespace TJAPlayer3
                 if( ( this.st叩ききりまショー.ct残り時間.n現在の値 >= 20000 ) && this.st叩ききりまショー.ct残り時間.n現在の値 != 25000 )
                     this.t叩ききりまショー_評価をして残り時間を延長する();
 
-                if( TJAPlayer3.Tx.Tile_Black != null )
+                if( TJAPlayer4.Tx.Tile_Black != null )
                 {
                     if( this.st叩ききりまショー.ct残り時間.n現在の値 >= 22000 && this.st叩ききりまショー.ct残り時間.n現在の値 < 23000 )
-                        TJAPlayer3.Tx.Tile_Black.n透明度 = 64;
+                        TJAPlayer4.Tx.Tile_Black.Opacity = 64;
                     else if( this.st叩ききりまショー.ct残り時間.n現在の値 >= 23000 && this.st叩ききりまショー.ct残り時間.n現在の値 < 24000 )
-                        TJAPlayer3.Tx.Tile_Black.n透明度 = 128;
+                        TJAPlayer4.Tx.Tile_Black.Opacity = 128;
                     else if( this.st叩ききりまショー.ct残り時間.n現在の値 >= 24000 )
-                        TJAPlayer3.Tx.Tile_Black.n透明度 = 192;
+                        TJAPlayer4.Tx.Tile_Black.Opacity = 192;
                     else
-                        TJAPlayer3.Tx.Tile_Black.n透明度 = 0;
+                        TJAPlayer4.Tx.Tile_Black.Opacity = 0;
 
                     for (int i = 0; i <= (SampleFramework.GameWindowSize.Width / 64); i++)
                     {
                         for (int j = 0; j <= (SampleFramework.GameWindowSize.Height / 64); j++)
                         {
-                            TJAPlayer3.Tx.Tile_Black.t2D描画(TJAPlayer3.app.Device, i * 64, j * 64);
+                            TJAPlayer4.Tx.Tile_Black.t2D描画(TJAPlayer4.app.Device, i * 64, j * 64);
                         }
                     }
                 }
@@ -465,10 +465,10 @@ namespace TJAPlayer3
                 //CDTXMania.act文字コンソール.tPrint( 100, 16 * 7, C文字コンソール.Eフォント種別.白, this.st叩ききりまショー.ct加算審査中.n現在の値.ToString() );
 
                 #region[ 残り時間描画 ]
-                if(TJAPlayer3.Tx.Taiko_Combo != null )
+                if(TJAPlayer4.Tx.Taiko_Combo != null )
                 {
-                    if (TJAPlayer3.Tx.GameMode_Timer_Frame != null)
-                        TJAPlayer3.Tx.GameMode_Timer_Frame.t2D描画( TJAPlayer3.app.Device, 230, 84 );
+                    if (TJAPlayer4.Tx.GameMode_Timer_Frame != null)
+                        TJAPlayer4.Tx.GameMode_Timer_Frame.t2D描画( TJAPlayer4.app.Device, 230, 84 );
                     this.st叩ききりまショー.ct針アニメ.t進行Loop();
 
                     int nCenterX = 230;
@@ -488,10 +488,10 @@ namespace TJAPlayer3
                         mat *= SlimDX.Matrix.Translation( 280 - 640, -( 134 - 360 ), 0 );
                     }
 
-                    TJAPlayer3.Tx.GameMode_Timer_Tick.t3D描画( TJAPlayer3.app.Device, mat );
+                    TJAPlayer4.Tx.GameMode_Timer_Tick.t3D描画( TJAPlayer4.app.Device, mat );
 
                     string str表示する残り時間 = ( this.st叩ききりまショー.ct残り時間.n現在の値 < 1000 ) ? "25" : ( ( 26000 - this.st叩ききりまショー.ct残り時間.n現在の値 ) / 1000 ).ToString();
-                    this.t小文字表示( 230 + (str表示する残り時間.Length * TJAPlayer3.Skin.Game_Taiko_Combo_Size[0] / 4 ), 84 + TJAPlayer3.Tx.GameMode_Timer_Frame.szテクスチャサイズ.Height / 2 , string.Format("{0,2:#0}", str表示する残り時間 ));
+                    this.t小文字表示( 230 + (str表示する残り時間.Length * TJAPlayer4.Skin.Game_Taiko_Combo_Size[0] / 4 ), 84 + TJAPlayer4.Tx.GameMode_Timer_Frame.szテクスチャサイズ.Height / 2 , string.Format("{0,2:#0}", str表示する残り時間 ));
                 }
 
                 if( !this.st叩ききりまショー.ct加算審査中.b停止中 )
@@ -529,7 +529,7 @@ namespace TJAPlayer3
             double n延長する時間 = 0;
 
             //最後に延長した時刻から11秒経過していなければ延長を行わない。
-            if( this.n最後に時間延長した時刻 + 11000 <= CSound管理.rc演奏用タイマ.n現在時刻ms )
+            if( this.n最後に時間延長した時刻 + 11000 <= (CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer4.ConfigIni.n演奏速度) / 20.0)))
             {
                 //1項目につき5秒
                 //-精度
@@ -595,10 +595,10 @@ namespace TJAPlayer3
                     }
                 }
                 #region[ 全体 ]
-                if( TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Perfect != 0 || TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Great != 0 )
+                if (TJAPlayer4.stage演奏ドラム画面.nヒット数_Auto含まない[0].Drums.Perfect != 0 || TJAPlayer4.stage演奏ドラム画面.nヒット数_Auto含まない[0].Drums.Great != 0)
                 {
-                    double db全体精度 = ( (double) ( TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Perfect + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Great ) / this.st叩ききりまショー.n区間ノート数 ) * 100.0;
-                    for( int i = 0; i < this.n全体精度ボーナス.Length; i++ )
+                    double db全体精度 = ((double)(TJAPlayer4.stage演奏ドラム画面.nヒット数_Auto含まない[0].Drums.Perfect + TJAPlayer4.stage演奏ドラム画面.nヒット数_Auto含まない[0].Drums.Great) / this.st叩ききりまショー.n区間ノート数) * 100.0;
+                    for ( int i = 0; i < this.n全体精度ボーナス.Length; i++ )
                     {
                         if( db全体精度 >= this.n全体精度ボーナス[ i ].ret )
                         {
@@ -622,10 +622,10 @@ namespace TJAPlayer3
                     }
                 }
                 #endregion
-                if( TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.P1最高値 != 0 )
+                if (TJAPlayer4.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[0] != 0)
                 {
-                    double db全体コンボ率 = ( (double)TJAPlayer3.stage演奏ドラム画面.actCombo.n現在のコンボ数.P1最高値 / this.st叩ききりまショー.n現在通過したノート数 ) * 100.0;
-                    for( int i = 0; i < this.n全体コンボ率ボーナス.Length; i++ )
+                    double db全体コンボ率 = ((double)TJAPlayer4.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[0] / this.st叩ききりまショー.n現在通過したノート数) * 100.0;
+                    for ( int i = 0; i < this.n全体コンボ率ボーナス.Length; i++ )
                     {
                         if( db全体コンボ率 >= this.n全体コンボ率ボーナス[ i ].ret )
                         {
@@ -635,8 +635,8 @@ namespace TJAPlayer3
                     }
                 }
 
-                double db全体ミス率 = ( ( (double)TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Poor + TJAPlayer3.stage演奏ドラム画面.nヒット数_Auto含まない.Drums.Miss ) / this.st叩ききりまショー.n現在通過したノート数 ) * 100.0;
-                for( int i = 0; i < this.n全体ミス率ボーナス.Length; i++ )
+                double db全体ミス率 = (((double)TJAPlayer4.stage演奏ドラム画面.nヒット数_Auto含まない[0].Drums.Poor + TJAPlayer4.stage演奏ドラム画面.nヒット数_Auto含まない[0].Drums.Miss) / this.st叩ききりまショー.n現在通過したノート数) * 100.0;
+                for ( int i = 0; i < this.n全体ミス率ボーナス.Length; i++ )
                 {
                     if( db全体ミス率 >= this.n全体ミス率ボーナス[ i ].ret )
                     {
@@ -647,7 +647,7 @@ namespace TJAPlayer3
                 #endregion
 
 
-                this.n最後に時間延長した時刻 = (int)CSound管理.rc演奏用タイマ.n現在時刻ms;
+                this.n最後に時間延長した時刻 = (int)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer4.ConfigIni.n演奏速度) / 20.0));
                 if( n延長する時間 < 0 )
                     n延長する時間 = 0;
                 if( this.st叩ききりまショー.n区間ノート数 == 0 )
@@ -680,7 +680,7 @@ namespace TJAPlayer3
                     return;
                 if (this.st叩ききりまショー.b超激辛 && (((double)this.st叩ききりまショー.nヒット数_POOR + this.st叩ききりまショー.nヒット数_MISS) > 0))
                     return; //ミスが出るようでは上達しませんよ。お兄様。
-                if( TJAPlayer3.ConfigIni.bSuperHard )
+                if( TJAPlayer4.ConfigIni.bSuperHard )
                     return; //スーパーハード時はボーナス加点無し。
 
 
@@ -718,7 +718,7 @@ namespace TJAPlayer3
                 }
 
 
-                this.n最後に時間延長した時刻 = (int)CSound管理.rc演奏用タイマ.n現在時刻ms;
+                this.n最後に時間延長した時刻 = (int)(CSound管理.rc演奏用タイマ.n現在時刻 * (((double)TJAPlayer4.ConfigIni.n演奏速度) / 20.0));
                 if( n延長する時間 < 0 )
                     n延長する時間 = 0;
 
@@ -807,12 +807,12 @@ namespace TJAPlayer3
 
         private void t加算審査アニメ_Start()
         {
-            this.st叩ききりまショー.ct加算審査中 = new CCounter( 0, 2000, 1, TJAPlayer3.Timer );
+            this.st叩ききりまショー.ct加算審査中 = new CCounter( 0, 2000, 1, TJAPlayer4.Timer );
             this.st叩ききりまショー.b加算アニメ中 = true;
         }
         private void t加算時間描画_Start()
         {
-            this.st叩ききりまショー.ct加算時間表示 = new CCounter( 0, 1, 1000, TJAPlayer3.Timer );
+            this.st叩ききりまショー.ct加算時間表示 = new CCounter( 0, 1, 1000, TJAPlayer4.Timer );
         }
 
         private void t加算時間描画( int addtime )
@@ -853,23 +853,23 @@ namespace TJAPlayer3
 				{
                     if (this.st小文字位置[i].ch == ch)
                     {
-                        Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_Taiko_Combo_Size[0] * i, 0, TJAPlayer3.Skin.Game_Taiko_Combo_Size[0], TJAPlayer3.Skin.Game_Taiko_Combo_Size[1]);
-						if(TJAPlayer3.Tx.Taiko_Combo[0]  != null )
+                        Rectangle rectangle = new Rectangle(TJAPlayer4.Skin.Game_Taiko_Combo_Size[0] * i, 0, TJAPlayer4.Skin.Game_Taiko_Combo_Size[0], TJAPlayer4.Skin.Game_Taiko_Combo_Size[1]);
+						if(TJAPlayer4.Tx.Taiko_Combo[0]  != null )
 						{
                             if( this.st叩ききりまショー.bタイマー使用中 )
-                                TJAPlayer3.Tx.Taiko_Combo[0].n透明度 = 255;
+                                TJAPlayer4.Tx.Taiko_Combo[0].Opacity = 255;
                             else if( this.st叩ききりまショー.b最初のチップが叩かれた && !this.st叩ききりまショー.bタイマー使用中 )
-                                TJAPlayer3.Tx.Taiko_Combo[0].n透明度 = 128;
+                                TJAPlayer4.Tx.Taiko_Combo[0].Opacity = 128;
                             if (this.st叩ききりまショー.b加算アニメ中)
-                                TJAPlayer3.Tx.Taiko_Combo[0].n透明度 = 0;
-                            TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.Y = 1f;
-                            TJAPlayer3.Tx.Taiko_Combo[0].vc拡大縮小倍率.X = 1f;
-                            TJAPlayer3.Tx.Taiko_Combo[0].t2D中心基準描画( TJAPlayer3.app.Device, x, y, rectangle );
+                                TJAPlayer4.Tx.Taiko_Combo[0].Opacity = 0;
+                            TJAPlayer4.Tx.Taiko_Combo[0].vc拡大縮小倍率.Y = 1f;
+                            TJAPlayer4.Tx.Taiko_Combo[0].vc拡大縮小倍率.X = 1f;
+                            TJAPlayer4.Tx.Taiko_Combo[0].t2D中心基準描画( TJAPlayer4.app.Device, x, y, rectangle );
 						}
 						break;
 					}
 				}
-				x += TJAPlayer3.Skin.Game_Taiko_Combo_Padding[0] * 2;
+				x += TJAPlayer4.Skin.Game_Taiko_Combo_Padding[0] * 2;
 			}
 		}
         protected void t加算文字表示( int x, int y, string str )
@@ -881,11 +881,11 @@ namespace TJAPlayer3
                 {
                     if( cFont[ i ] == ch )
                     {
-                        Rectangle rectangle = new Rectangle(TJAPlayer3.Skin.Game_Score_Size[0] * i, 0, TJAPlayer3.Skin.Game_Score_Size[0], TJAPlayer3.Skin.Game_Score_Size[1]);
-                        if (TJAPlayer3.Tx.Taiko_Score[0] != null )
+                        Rectangle rectangle = new Rectangle(TJAPlayer4.Skin.Game_Score_Size[0] * i, 0, TJAPlayer4.Skin.Game_Score_Size[0], TJAPlayer4.Skin.Game_Score_Size[1]);
+                        if (TJAPlayer4.Tx.Taiko_Score[0] != null )
                         {
-                            TJAPlayer3.Tx.Taiko_Score[0].vc拡大縮小倍率.Y = 1f;
-                            TJAPlayer3.Tx.Taiko_Score[0].t2D描画( TJAPlayer3.app.Device, x, y, rectangle );
+                            TJAPlayer4.Tx.Taiko_Score[0].vc拡大縮小倍率.Y = 1f;
+                            TJAPlayer4.Tx.Taiko_Score[0].t2D描画( TJAPlayer4.app.Device, x, y, rectangle );
                         }
                     }
                 }

@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CActFIFOStart : CActivity
 	{
@@ -14,12 +14,12 @@ namespace TJAPlayer3
 		{
 			this.mode = EFIFOモード.フェードアウト;
 
-            this.counter = new CCounter( 0, 1500, 1, TJAPlayer3.Timer );
+            this.counter = new CCounter( 0, 1500, 1, TJAPlayer4.Timer );
 		}
 		public void tフェードイン開始()
 		{
 			this.mode = EFIFOモード.フェードイン;
-			this.counter = new CCounter( 0, 1500, 1, TJAPlayer3.Timer );
+			this.counter = new CCounter( 0, 1500, 1, TJAPlayer4.Timer );
 		}
 		public void tフェードイン完了()		// #25406 2011.6.9 yyagi
 		{
@@ -57,19 +57,19 @@ namespace TJAPlayer3
 
             if( this.mode == EFIFOモード.フェードアウト )
             {
-                if( TJAPlayer3.Tx.SongLoading_FadeOut != null )
+                if( TJAPlayer4.Tx.SongLoading_FadeOut != null )
 			    {
                     int y = this.counter.n現在の値 >= 840 ? 840 : this.counter.n現在の値;
-                    TJAPlayer3.Tx.SongLoading_FadeOut.t2D描画( TJAPlayer3.app.Device, 0, 720 - y );
+                    TJAPlayer4.Tx.SongLoading_FadeOut.t2D描画( TJAPlayer4.app.Device, 0, 720 - y );
                 }
 
 			}
             else
             {
-                if(TJAPlayer3.Tx.SongLoading_FadeIn != null )
+                if(TJAPlayer4.Tx.SongLoading_FadeIn != null )
                 {
                     int y = this.counter.n現在の値 >= 840 ? 840 : this.counter.n現在の値;
-                    TJAPlayer3.Tx.SongLoading_FadeIn.t2D描画( TJAPlayer3.app.Device, 0, 0 - y );
+                    TJAPlayer4.Tx.SongLoading_FadeIn.t2D描画( TJAPlayer4.app.Device, 0, 0 - y );
                 }
             }
 

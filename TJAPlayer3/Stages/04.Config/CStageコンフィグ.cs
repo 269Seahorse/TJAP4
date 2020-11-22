@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Diagnostics;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CStageコンフィグ : CStage
 	{
@@ -59,9 +59,9 @@ namespace TJAPlayer3
 			try
 			{
 				this.n現在のメニュー番号 = 0;                                                    //
-                if (!string.IsNullOrEmpty(TJAPlayer3.ConfigIni.FontName))
+                if (!string.IsNullOrEmpty(TJAPlayer4.ConfigIni.FontName))
                 {
-                    this.ftフォント = new Font(TJAPlayer3.ConfigIni.FontName, 18.0f, FontStyle.Bold, GraphicsUnit.Pixel);
+                    this.ftフォント = new Font(TJAPlayer4.ConfigIni.FontName, 18.0f, FontStyle.Bold, GraphicsUnit.Pixel);
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace TJAPlayer3
                 }
 				for( int i = 0; i < 4; i++ )													//
 				{																				//
-					this.ctキー反復用[ i ] = new CCounter( 0, 0, 0, TJAPlayer3.Timer );			//
+					this.ctキー反復用[ i ] = new CCounter( 0, 0, 0, TJAPlayer4.Timer );			//
 				}																				//
 				this.bメニューにフォーカス中 = true;											// ここまでOPTIONと共通
 				this.eItemPanelモード = EItemPanelモード.パッド一覧;
@@ -87,7 +87,7 @@ namespace TJAPlayer3
 			Trace.Indent();
 			try
 			{
-				TJAPlayer3.ConfigIni.t書き出し( TJAPlayer3.strEXEのあるフォルダ + "Config.ini" );	// CONFIGだけ
+				TJAPlayer4.ConfigIni.t書き出し( TJAPlayer4.strEXEのあるフォルダ + "Config.ini" );	// CONFIGだけ
 				if( this.ftフォント != null )													// 以下OPTIONと共通
 				{
 					this.ftフォント.Dispose();
@@ -132,11 +132,11 @@ namespace TJAPlayer3
 			        {
 			            using (var bmpStr = prvFont.DrawPrivateFont(strMenuItem[i], Color.White, Color.Black))
 			            {
-			                txMenuItemLeft[i, 0] = TJAPlayer3.tテクスチャの生成(bmpStr, false);
+			                txMenuItemLeft[i, 0] = TJAPlayer4.tテクスチャの生成(bmpStr, false);
 			            }
 			            using (var bmpStr = prvFont.DrawPrivateFont(strMenuItem[i], Color.White, Color.Black, Color.Yellow, Color.OrangeRed))
 			            {
-			                txMenuItemLeft[i, 1] = TJAPlayer3.tテクスチャの生成(bmpStr, false);
+			                txMenuItemLeft[i, 1] = TJAPlayer4.tテクスチャの生成(bmpStr, false);
 			            }
 			        }
 			    }
@@ -160,7 +160,7 @@ namespace TJAPlayer3
 				//CDTXMania.tテクスチャの解放( ref this.tx上部パネル );
 				//CDTXMania.tテクスチャの解放( ref this.tx下部パネル );
 				//CDTXMania.tテクスチャの解放( ref this.txMenuカーソル );
-				TJAPlayer3.tテクスチャの解放( ref this.tx説明文パネル );
+				TJAPlayer4.tテクスチャの解放( ref this.tx説明文パネル );
 				for ( int i = 0; i < txMenuItemLeft.GetLength( 0 ); i++ )
 				{
 					txMenuItemLeft[ i, 0 ].Dispose();
@@ -188,21 +188,21 @@ namespace TJAPlayer3
 
 			#region [ 背景 ]
 			//---------------------
-			if(TJAPlayer3.Tx.Config_Background != null )
-                TJAPlayer3.Tx.Config_Background.t2D描画( TJAPlayer3.app.Device, 0, 0 );
+			if(TJAPlayer4.Tx.Config_Background != null )
+                TJAPlayer4.Tx.Config_Background.t2D描画( TJAPlayer4.app.Device, 0, 0 );
 			//---------------------
 			#endregion
 			#region [ メニューカーソル ]
 			//---------------------
-			if( TJAPlayer3.Tx.Config_Cursor != null )
+			if( TJAPlayer4.Tx.Config_Cursor != null )
 			{
 				Rectangle rectangle;
-                TJAPlayer3.Tx.Config_Cursor.n透明度 = this.bメニューにフォーカス中 ? 255 : 128;
+                TJAPlayer4.Tx.Config_Cursor.Opacity = this.bメニューにフォーカス中 ? 255 : 128;
 				int x = 110;
 				int y = (int)( 145.5 + ( this.n現在のメニュー番号 * 37.5 ) );
 				int num3 = 340;
-                TJAPlayer3.Tx.Config_Cursor.t2D描画( TJAPlayer3.app.Device, x, y, new Rectangle( 0, 0, 32, 48 ) );
-                TJAPlayer3.Tx.Config_Cursor.t2D描画( TJAPlayer3.app.Device, ( x + num3 ) - 32, y, new Rectangle( 20, 0, 32, 48 ) );
+                TJAPlayer4.Tx.Config_Cursor.t2D描画( TJAPlayer4.app.Device, x, y, new Rectangle( 0, 0, 32, 48 ) );
+                TJAPlayer4.Tx.Config_Cursor.t2D描画( TJAPlayer4.app.Device, ( x + num3 ) - 32, y, new Rectangle( 20, 0, 32, 48 ) );
 				x += 32;
 				for( num3 -= 64; num3 > 0; num3 -= rectangle.Width )
 				{
@@ -211,7 +211,7 @@ namespace TJAPlayer3
 					{
 						rectangle.Width -= 32 - num3;
 					}
-                    TJAPlayer3.Tx.Config_Cursor.t2D描画( TJAPlayer3.app.Device, x, y, rectangle );
+                    TJAPlayer4.Tx.Config_Cursor.t2D描画( TJAPlayer4.app.Device, x, y, rectangle );
 					x += rectangle.Width;
 				}
 			}
@@ -229,7 +229,7 @@ namespace TJAPlayer3
 				//txMenuItemLeft = CDTXMania.tテクスチャの生成( bmpStr, false );
 				int flag = ( this.n現在のメニュー番号 == i ) ? 1 : 0;
 				int num4 = txMenuItemLeft[ i, flag ].sz画像サイズ.Width;
-                txMenuItemLeft[i, flag].t2D描画(TJAPlayer3.app.Device, 282 - (num4 / 2) + TJAPlayer3.Skin.Config_ItemText_Correction_X, menuY + TJAPlayer3.Skin.Config_ItemText_Correction_Y ); //55
+                txMenuItemLeft[i, flag].t2D描画(TJAPlayer4.app.Device, 282 - (num4 / 2) + TJAPlayer4.Skin.Config_ItemText_Correction_X, menuY + TJAPlayer4.Skin.Config_ItemText_Correction_Y ); //55
 				//txMenuItem.Dispose();
 				menuY += stepY;
 			}
@@ -238,7 +238,7 @@ namespace TJAPlayer3
 			#region [ 説明文パネル ]
 			//---------------------
 			if( this.tx説明文パネル != null )
-				this.tx説明文パネル.t2D描画( TJAPlayer3.app.Device, 67, 382 );
+				this.tx説明文パネル.t2D描画( TJAPlayer4.app.Device, 67, 382 );
 			//---------------------
 			#endregion
 			#region [ アイテム ]
@@ -279,7 +279,7 @@ namespace TJAPlayer3
 				case CStage.Eフェーズ.共通_フェードイン:
 					if( this.actFIFO.On進行描画() != 0 )
 					{
-						TJAPlayer3.Skin.bgmコンフィグ画面.t再生する();
+						TJAPlayer4.Skin.bgmコンフィグ画面.t再生する();
 						base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
 					}
 					break;
@@ -302,20 +302,20 @@ namespace TJAPlayer3
 
 			if( ( base.eフェーズID != CStage.Eフェーズ.共通_通常状態 )
 				|| this.actKeyAssign.bキー入力待ちの最中である
-				|| TJAPlayer3.act現在入力を占有中のプラグイン != null )
+				|| TJAPlayer4.act現在入力を占有中のプラグイン != null )
 				return 0;
 
 			// 曲データの一覧取得中は、キー入力を無効化する
-			if ( !TJAPlayer3.EnumSongs.IsEnumerating || TJAPlayer3.actEnumSongs.bコマンドでの曲データ取得 != true )
+			if ( !TJAPlayer4.EnumSongs.IsEnumerating || TJAPlayer4.actEnumSongs.bコマンドでの曲データ取得 != true )
 			{
-				if ( ( TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Escape ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.FT ) ) || TJAPlayer3.Pad.b押されたGB( Eパッド.FT ) )
+				if ( ( TJAPlayer4.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Escape ) || TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.FT ) ) || TJAPlayer4.Pad.b押されたGB( Eパッド.FT ) )
 				{
-					TJAPlayer3.Skin.sound取消音.t再生する();
+					TJAPlayer4.Skin.sound取消音.t再生する();
 					if ( !this.bメニューにフォーカス中 )
 					{
 						if ( this.eItemPanelモード == EItemPanelモード.キーコード一覧 )
 						{
-							TJAPlayer3.stageコンフィグ.tアサイン完了通知();
+							TJAPlayer4.stageコンフィグ.tアサイン完了通知();
 							return 0;
 						}
 						if ( !this.actList.bIsKeyAssignSelected && !this.actList.bIsFocusingParameter )	// #24525 2011.3.15 yyagi, #32059 2013.9.17 yyagi
@@ -331,17 +331,17 @@ namespace TJAPlayer3
 						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
 					}
 				}
-				else if ( ( TJAPlayer3.Pad.b押されたDGB( Eパッド.CY ) || TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || ( TJAPlayer3.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer3.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) )
+				else if ( ( TJAPlayer4.Pad.b押されたDGB( Eパッド.CY ) || TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || ( TJAPlayer4.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && TJAPlayer4.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) )
 				{
 					if ( this.n現在のメニュー番号 == 2 )
 					{
-						TJAPlayer3.Skin.sound決定音.t再生する();
+						TJAPlayer4.Skin.sound決定音.t再生する();
 						this.actFIFO.tフェードアウト開始();
 						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
 					}
 					else if ( this.bメニューにフォーカス中 )
 					{
-						TJAPlayer3.Skin.sound決定音.t再生する();
+						TJAPlayer4.Skin.sound決定音.t再生する();
 						this.bメニューにフォーカス中 = false;
 						this.t説明文パネルに現在選択されている項目の説明を描画する();
 					}
@@ -368,15 +368,15 @@ namespace TJAPlayer3
 						}
 					}
 				}
-				this.ctキー反復用.Up.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
-				this.ctキー反復用.R.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
-				if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) )
+				this.ctキー反復用.Up.tキー反復( TJAPlayer4.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+				this.ctキー反復用.R.tキー反復( TJAPlayer4.Pad.b押されているGB( Eパッド.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+				if ( TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.SD ) )
 				{
 					this.tカーソルを上へ移動する();
 				}
-				this.ctキー反復用.Down.tキー反復( TJAPlayer3.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
-				this.ctキー反復用.B.tキー反復( TJAPlayer3.Pad.b押されているGB( Eパッド.BD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
-				if ( TJAPlayer3.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) )
+				this.ctキー反復用.Down.tキー反復( TJAPlayer4.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+				this.ctキー反復用.B.tキー反復( TJAPlayer4.Pad.b押されているGB( Eパッド.BD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+				if ( TJAPlayer4.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) )
 				{
 					this.tカーソルを下へ移動する();
 				}
@@ -482,7 +482,7 @@ namespace TJAPlayer3
 			}
 			else
 			{
-				TJAPlayer3.Skin.soundカーソル移動音.t再生する();
+				TJAPlayer4.Skin.soundカーソル移動音.t再生する();
 				this.n現在のメニュー番号 = ( this.n現在のメニュー番号 + 1 ) % 3;
 				switch( this.n現在のメニュー番号 )
 				{
@@ -538,7 +538,7 @@ namespace TJAPlayer3
 			}
 			else
 			{
-				TJAPlayer3.Skin.soundカーソル移動音.t再生する();
+				TJAPlayer4.Skin.soundカーソル移動音.t再生する();
 				this.n現在のメニュー番号 = ( ( this.n現在のメニュー番号 - 1 ) + 3 ) % 3;
 				switch( this.n現在のメニュー番号 )
 				{
@@ -643,7 +643,7 @@ namespace TJAPlayer3
 						break;
 				}
 				
-				int c = (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ? 0 : 1;
+				int c = (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ja") ? 0 : 1;
 				for (int i = 0; i < 2; i++)
 				{
 					graphics.DrawString( str[ c, i ], this.ftフォント, Brushes.White, new PointF( 8f, ( i * 30 ) * 1.5f ) );
@@ -653,7 +653,7 @@ namespace TJAPlayer3
 				{
 					this.tx説明文パネル.Dispose();
 				}
-				this.tx説明文パネル = new CTexture( TJAPlayer3.app.Device, image, TJAPlayer3.TextureFormat );
+				this.tx説明文パネル = new CTexture( TJAPlayer4.app.Device, image, TJAPlayer4.TextureFormat );
 				image.Dispose();
 			}
 			catch( CTextureCreateFailedException e)
@@ -682,7 +682,7 @@ namespace TJAPlayer3
 				{
 					this.tx説明文パネル.Dispose();
 				}
-				this.tx説明文パネル = new CTexture( TJAPlayer3.app.Device, image, TJAPlayer3.TextureFormat );
+				this.tx説明文パネル = new CTexture( TJAPlayer4.app.Device, image, TJAPlayer4.TextureFormat );
 				image.Dispose();
 			}
 			catch( CTextureCreateFailedException e )

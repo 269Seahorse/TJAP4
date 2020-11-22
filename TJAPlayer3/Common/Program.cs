@@ -10,7 +10,7 @@ using System.IO;
 using FDK;
 using System.Reflection;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class Program
 	{
@@ -20,7 +20,7 @@ namespace TJAPlayer3
 
 		private static bool tDLLの存在チェック( string strDll名, string str存在しないときに表示するエラー文字列jp, string str存在しないときに表示するエラー文字列en, bool bLoadDllCheck )
 		{
-			string str存在しないときに表示するエラー文字列 = ( CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja" ) ?
+			string str存在しないときに表示するエラー文字列 = ( CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ja" ) ?
 				str存在しないときに表示するエラー文字列jp : str存在しないときに表示するエラー文字列en;
 			if ( bLoadDllCheck )
 			{
@@ -74,10 +74,11 @@ namespace TJAPlayer3
 
                 Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
+
                 #region [DLLの存在チェック]
-                if ( !tDLLの存在チェック( "dll\\SlimDX" + TJAPlayer3.SLIMDXDLL + ".dll",
-					"SlimDX" + TJAPlayer3.SLIMDXDLL + ".dll またはその依存するdllが存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
-					"SlimDX" + TJAPlayer3.SLIMDXDLL + ".dll, or its depended DLL, is not found." + newLine + "Please download DTXMania again."
+                if ( !tDLLの存在チェック( "dll\\SlimDX" + TJAPlayer4.SLIMDXDLL + ".dll",
+					"SlimDX" + TJAPlayer4.SLIMDXDLL + ".dll またはその依存するdllが存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
+					"SlimDX" + TJAPlayer4.SLIMDXDLL + ".dll, or its depended DLL, is not found." + newLine + "Please download DTXMania again."
 					) ) bDLLnotfound = true;
 				if ( !tDLLの存在チェック( "dll\\FDK.dll",
 					"FDK.dll またはその依存するdllが存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
@@ -91,9 +92,9 @@ namespace TJAPlayer3
 					"SoundDecoder.dll またはその依存するdllが存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"SoundDecoder.dll, or its depended DLL, is not found." + newLine + "Please download DTXMania again."
 					) ) bDLLnotfound = true;
-				if ( !tDLLの存在チェック( TJAPlayer3.D3DXDLL,
-					TJAPlayer3.D3DXDLL + " が存在しません。" + newLine + "DirectX Redist フォルダの DXSETUP.exe を実行し、" + newLine + "必要な DirectX ランタイムをインストールしてください。",
-					TJAPlayer3.D3DXDLL + " is not found." + newLine + "Please execute DXSETUP.exe in \"DirectX Redist\" folder, to install DirectX runtimes required for DTXMania.",
+				if ( !tDLLの存在チェック( TJAPlayer4.D3DXDLL,
+					TJAPlayer4.D3DXDLL + " が存在しません。" + newLine + "DirectX Redist フォルダの DXSETUP.exe を実行し、" + newLine + "必要な DirectX ランタイムをインストールしてください。",
+					TJAPlayer4.D3DXDLL + " is not found." + newLine + "Please execute DXSETUP.exe in \"DirectX Redist\" folder, to install DirectX runtimes required for DTXMania.",
 					true
 					) ) bDLLnotfound = true;
 				if ( !tDLLの存在チェック( "dll\\bass.dll",
@@ -139,7 +140,7 @@ namespace TJAPlayer3
 					try
 #endif
 					{
-						using ( var mania = new TJAPlayer3() )
+						using ( var mania = new TJAPlayer4() )
 							mania.Run();
 
 						Trace.WriteLine( "" );
@@ -154,17 +155,7 @@ namespace TJAPlayer3
 						Trace.WriteLine( "エラーだゴメン！（涙" );
                         AssemblyName asmApp = Assembly.GetExecutingAssembly().GetName();
                         MessageBox.Show( "エラーが発生しました。\n" +
-                            "原因がわからない場合は、以下のエラー文を添えて、エラー送信フォームに送信してください。\n" + 
                             e.ToString(), asmApp.Name + " Ver." + asmApp.Version.ToString().Substring(0, asmApp.Version.ToString().Length - 2) + " Error", MessageBoxButtons.OK, MessageBoxIcon.Error );	// #23670 2011.2.28 yyagi to show error dialog
-                        DialogResult result = MessageBox.Show("エラー送信フォームを開きますか?(ブラウザが起動します)",
-                            asmApp.Name + " Ver." + asmApp.Version.ToString().Substring(0, asmApp.Version.ToString().Length - 2),
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Asterisk);
-                        if(result == DialogResult.Yes)
-                        {
-                            Process.Start("https://docs.google.com/forms/d/e/1FAIpQLScr_Oqs9WKnonQyxpEVt7gZYPcjjIfN3SjgqWPvxfw95nAQ6g/viewform?usp=pp_url&entry.60593436=" + System.Web.HttpUtility.UrlEncode(e.ToString()));
-                        }
-
 					}
 #endif
 					// END #24606 2011.03.08 from

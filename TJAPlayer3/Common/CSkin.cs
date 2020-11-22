@@ -7,7 +7,7 @@ using FDK;
 using System.Drawing;
 using System.Linq;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	// グローバル定数
 
@@ -205,7 +205,7 @@ namespace TJAPlayer3
                 {
                     try
                     {
-                        this.rSound[i] = TJAPlayer3.Sound管理.tサウンドを生成する(CSkin.Path(this.strファイル名), _soundGroup);
+                        this.rSound[i] = TJAPlayer4.Sound管理.tサウンドを生成する(CSkin.Path(this.strファイル名), _soundGroup);
                     }
                     catch
                     {
@@ -257,13 +257,13 @@ namespace TJAPlayer3
 
             public void tRemoveMixer()
             {
-                if (TJAPlayer3.Sound管理.GetCurrentSoundDeviceType() != "DirectShow")
+                if (TJAPlayer4.Sound管理.GetCurrentSoundDeviceType() != "DirectShow")
                 {
                     for (int i = 0; i < 2; i++)
                     {
                         if (this.rSound[i] != null)
                         {
-                            TJAPlayer3.Sound管理.RemoveMixer(this.rSound[i]);
+                            TJAPlayer4.Sound管理.RemoveMixer(this.rSound[i]);
                         }
                     }
                 }
@@ -279,7 +279,7 @@ namespace TJAPlayer3
                     {
                         if (this.rSound[i] != null)
                         {
-                            TJAPlayer3.Sound管理.tサウンドを破棄する(this.rSound[i]);
+                            TJAPlayer4.Sound管理.tサウンドを破棄する(this.rSound[i]);
                             this.rSound[i] = null;
                         }
                     }
@@ -575,7 +575,7 @@ namespace TJAPlayer3
         }
         private string InitializeSkinPathRoot()
         {
-            strSystemSkinRoot = System.IO.Path.Combine(TJAPlayer3.strEXEのあるフォルダ, "System" + System.IO.Path.DirectorySeparatorChar);
+            strSystemSkinRoot = System.IO.Path.Combine(TJAPlayer4.strEXEのあるフォルダ, "System" + System.IO.Path.DirectorySeparatorChar);
             return strSystemSkinRoot;
         }
 
@@ -635,7 +635,7 @@ namespace TJAPlayer3
                 if (!this[i].b排他)   // BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
                 {
                     Cシステムサウンド cシステムサウンド = this[i];
-                    if (!TJAPlayer3.bコンパクトモード || cシステムサウンド.bCompact対象)
+                    if (!TJAPlayer4.bコンパクトモード || cシステムサウンド.bCompact対象)
                     {
                         try
                         {
@@ -952,35 +952,6 @@ namespace TJAPlayer3
                             else if (strCommand == "NowStageDisp")
                             {
                                 this.b現在のステージ数を表示しない = C変換.bONorOFF(strParam[0]);
-                            }
-
-                            //-----------------------------
-                            #endregion
-                            #region[ 成績発表 ]
-                            //-----------------------------
-                            else if (strCommand == "ResultPanelP1X")
-                            {
-                                this.nResultPanelP1X = C変換.n値を文字列から取得して返す(strParam, 515);
-                            }
-                            else if (strCommand == "ResultPanelP1Y")
-                            {
-                                this.nResultPanelP1Y = C変換.n値を文字列から取得して返す(strParam, 75);
-                            }
-                            else if (strCommand == "ResultPanelP2X")
-                            {
-                                this.nResultPanelP2X = C変換.n値を文字列から取得して返す(strParam, 515);
-                            }
-                            else if (strCommand == "ResultPanelP2Y")
-                            {
-                                this.nResultPanelP2Y = C変換.n値を文字列から取得して返す(strParam, 75);
-                            }
-                            else if (strCommand == "ResultScoreP1X")
-                            {
-                                this.nResultScoreP1X = C変換.n値を文字列から取得して返す(strParam, 582);
-                            }
-                            else if (strCommand == "ResultScoreP1Y")
-                            {
-                                this.nResultScoreP1Y = C変換.n値を文字列から取得して返す(strParam, 252);
                             }
                             //-----------------------------
                             #endregion
@@ -1336,43 +1307,76 @@ namespace TJAPlayer3
                             }
                             else if (strCommand == nameof(Game_Chara_Balloon_Timer))
                             {
-                                if (int.Parse(strParam) > 0)
-                                    Game_Chara_Balloon_Timer = int.Parse(strParam);
+                                string[] strSplit = strParam.Split(',');
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    Game_Chara_Balloon_Timer[i] = int.Parse(strSplit[i]);
+                                }
                             }
-                            else if (strCommand == nameof(Game_Chara_Balloon_Delay))
+                            else if (strCommand == "(Game_Chara_Balloon_Delay")
                             {
-                                if (int.Parse(strParam) > 0)
-                                    Game_Chara_Balloon_Delay = int.Parse(strParam);
+                                string[] strSplit = strParam.Split(',');
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    Game_Chara_Balloon_Delay[i] = int.Parse(strSplit[i]);
+                                }
                             }
-                            else if (strCommand == nameof(Game_Chara_Balloon_FadeOut))
+                            else if (strCommand == "Game_Chara_Balloon_FadeOut")
                             {
-                                if (int.Parse(strParam) > 0)
-                                    Game_Chara_Balloon_FadeOut = int.Parse(strParam);
+                                string[] strSplit = strParam.Split(',');
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    Game_Chara_Balloon_FadeOut[i] = int.Parse(strSplit[i]);
+                                }
                             }
                             // パターン数の設定はTextureLoader.csで反映されます。
                             else if (strCommand == "Game_Chara_Motion_Normal")
                             {
-                                Game_Chara_Motion_Normal = strParam;
+                                Game_Chara_Motion_Normal[0] = strParam;
                             }
                             else if (strCommand == "Game_Chara_Motion_Clear")
                             {
-                                Game_Chara_Motion_Clear = strParam;
+                                Game_Chara_Motion_Clear[0] = strParam;
                             }
                             else if (strCommand == "Game_Chara_Motion_GoGo")
                             {
-                                Game_Chara_Motion_GoGo = strParam;
+                                Game_Chara_Motion_GoGo[0] = strParam;
+                            }
+                            else if (strCommand == "Game_Chara_Motion_Normal_2P")
+                            {
+                                Game_Chara_Motion_Normal[1] = strParam;
+                            }
+                            else if (strCommand == "Game_Chara_Motion_Clear_2P")
+                            {
+                                Game_Chara_Motion_Clear[1] = strParam;
+                            }
+                            else if (strCommand == "Game_Chara_Motion_GoGo_2P")
+                            {
+                                Game_Chara_Motion_GoGo[1] = strParam;
                             }
                             else if (strCommand == "Game_Chara_Beat_Normal")
                             {
-                                ParseInt32(value => Game_Chara_Beat_Normal = value);
+                                string[] strSplit = strParam.Split(',');
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    Game_Chara_Beat_Normal[i] = int.Parse(strSplit[i]);
+                                }
                             }
                             else if (strCommand == "Game_Chara_Beat_Clear")
                             {
-                                ParseInt32(value => Game_Chara_Beat_Clear = value);
+                                string[] strSplit = strParam.Split(',');
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    Game_Chara_Beat_Clear[i] = int.Parse(strSplit[i]);
+                                }
                             }
                             else if (strCommand == "Game_Chara_Beat_GoGo")
                             {
-                                ParseInt32(value => Game_Chara_Beat_GoGo = value);
+                                string[] strSplit = strParam.Split(',');
+                                for (int i = 0; i < 2; i++)
+                                {
+                                    Game_Chara_Beat_GoGo[i] = int.Parse(strSplit[i]);
+                                }
                             }
                             #endregion
                             #region Dancer
@@ -2023,6 +2027,22 @@ namespace TJAPlayer3
                             }
                             #endregion
                             #region Dan_C
+                            else if (strCommand == nameof(Game_DanC_Title_ForeColor))
+                            {
+                                Game_DanC_Title_ForeColor = ColorTranslator.FromHtml(strParam);
+                            }
+                            else if (strCommand == nameof(Game_DanC_Title_BackColor))
+                            {
+                                Game_DanC_Title_BackColor = ColorTranslator.FromHtml(strParam);
+                            }
+                            else if (strCommand == nameof(Game_DanC_SubTitle_ForeColor))
+                            {
+                                Game_DanC_SubTitle_ForeColor = ColorTranslator.FromHtml(strParam);
+                            }
+                            else if (strCommand == nameof(Game_DanC_SubTitle_BackColor))
+                            {
+                                Game_DanC_SubTitle_BackColor = ColorTranslator.FromHtml(strParam);
+                            }
                             else if (strCommand == nameof(Game_DanC_X))
                             {
                                 Game_DanC_X = strParam.Split(',').Select(int.Parse).ToArray();
@@ -2354,44 +2374,6 @@ namespace TJAPlayer3
         public E難易度表示タイプ eDiffDispMode;
         public bool b現在のステージ数を表示しない;
 
-        //リザルト画面
-        //現在のデフォルト値はダミーです。
-        public int nResultPanelP1X = 515;
-        public int nResultPanelP1Y = 75;
-        public int nResultPanelP2X = 515;
-        public int nResultPanelP2Y = 75;
-        public int nResultScoreP1X = 582;
-        public int nResultScoreP1Y = 252;
-        public int nResultJudge1_P1X = 815;
-        public int nResultJudge1_P1Y = 182;
-        public int nResultJudge2_P1X = 968;
-        public int nResultJudge2_P1Y = 174;
-        public int nResultGreatP1X = 875;
-        public int nResultGreatP1Y = 188;
-        public int nResultGreatP2X = 875;
-        public int nResultGreatP2Y = 188;
-        public int nResultGoodP1X = 875;
-        public int nResultGoodP1Y = 226;
-        public int nResultGoodP2X = 875;
-        public int nResultGoodP2Y = 226;
-        public int nResultBadP1X = 875;
-        public int nResultBadP1Y = 266;
-        public int nResultBadP2X = 875;
-        public int nResultBadP2Y = 266;
-        public int nResultComboP1X = 1144;
-        public int nResultComboP1Y = 188;
-        public int nResultComboP2X = 1144;
-        public int nResultComboP2Y = 188;
-        public int nResultRollP1X = 1144;
-        public int nResultRollP1Y = 226;
-        public int nResultRollP2X = 1144;
-        public int nResultRollP2Y = 226;
-        public int nResultGaugeBaseP1X = 555;
-        public int nResultGaugeBaseP1Y = 122;
-        public int nResultGaugeBaseP2X = 555;
-        public int nResultGaugeBaseP2Y = 122;
-        public int nResultGaugeBodyP1X = 559;
-        public int nResultGaugeBodyP1Y = 125;
         #endregion
 
         public enum RollColorMode
@@ -2474,27 +2456,27 @@ namespace TJAPlayer3
         public int[] Game_Chara_Y = new int[] { 0, 537 };
         public int[] Game_Chara_Balloon_X = new int[] { 240, 240, 0, 0 };
         public int[] Game_Chara_Balloon_Y = new int[] { 0, 297, 0, 0 };
-        public int Game_Chara_Ptn_Normal,
-            Game_Chara_Ptn_GoGo,
-            Game_Chara_Ptn_Clear,
-            Game_Chara_Ptn_10combo,
-            Game_Chara_Ptn_10combo_Max,
-            Game_Chara_Ptn_GoGoStart,
-            Game_Chara_Ptn_GoGoStart_Max,
-            Game_Chara_Ptn_ClearIn,
-            Game_Chara_Ptn_SoulIn,
-            Game_Chara_Ptn_Balloon_Breaking,
-            Game_Chara_Ptn_Balloon_Broke,
-            Game_Chara_Ptn_Balloon_Miss;
-        public string Game_Chara_Motion_Normal,
-            Game_Chara_Motion_Clear,
-            Game_Chara_Motion_GoGo = "0";
-        public int Game_Chara_Beat_Normal = 1;
-        public int Game_Chara_Beat_Clear = 2;
-        public int Game_Chara_Beat_GoGo = 2;
-        public int Game_Chara_Balloon_Timer = 28;
-        public int Game_Chara_Balloon_Delay = 500;
-        public int Game_Chara_Balloon_FadeOut = 84;
+        public int[] Game_Chara_Ptn_Normal = new int[2],
+            Game_Chara_Ptn_GoGo = new int[2],
+            Game_Chara_Ptn_Clear = new int[2],
+            Game_Chara_Ptn_10combo = new int[2],
+            Game_Chara_Ptn_10combo_Max = new int[2],
+            Game_Chara_Ptn_GoGoStart = new int[2],
+            Game_Chara_Ptn_GoGoStart_Max = new int[2],
+            Game_Chara_Ptn_ClearIn = new int[2],
+            Game_Chara_Ptn_SoulIn = new int[2],
+            Game_Chara_Ptn_Balloon_Breaking = new int[2],
+            Game_Chara_Ptn_Balloon_Broke = new int[2],
+            Game_Chara_Ptn_Balloon_Miss = new int[2];
+        public string[] Game_Chara_Motion_Normal = new string[] { "0", "0" },
+            Game_Chara_Motion_Clear = new string[] { "0", "0" },
+            Game_Chara_Motion_GoGo = new string[] { "0", "0" };
+        public int[] Game_Chara_Beat_Normal = new int[] { 1, 1 };
+        public int[] Game_Chara_Beat_Clear = new int[] { 2, 2 };
+        public int[] Game_Chara_Beat_GoGo = new int[] { 2, 2 };
+        public int[] Game_Chara_Balloon_Timer = new int[] { 28, 28 };
+        public int[] Game_Chara_Balloon_Delay = new int[] { 500, 500 };
+        public int[] Game_Chara_Balloon_FadeOut = new int[] { 84, 84 };
         #endregion
         #region Dancer
         public int[] Game_Dancer_X = new int[] { 640, 430, 856, 215, 1070 };
@@ -2658,6 +2640,10 @@ namespace TJAPlayer3
         public double Game_PuchiChara_SineTimer = 2;
         #endregion
         #region Dan-C
+        public Color Game_DanC_Title_ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+        public Color Game_DanC_Title_BackColor = ColorTranslator.FromHtml("#000000");
+        public Color Game_DanC_SubTitle_ForeColor = ColorTranslator.FromHtml("#FFFFFF");
+        public Color Game_DanC_SubTitle_BackColor = ColorTranslator.FromHtml("#000000");
         public int[] Game_DanC_X = new int[] { 302, 302, 302 };
         public int[] Game_DanC_Y = new int[] { 473, 419, 365 };
         public int[] Game_DanC_Size = new int[] { 956, 92 };
@@ -2701,6 +2687,33 @@ namespace TJAPlayer3
         public int[] Result_Dan = new int[] { 500, 500 };
         public int[] Result_Dan_XY = new int[] { 100, 0 };
         public int[] Result_Dan_Plate_XY = new int[] { 149, 416 };
+
+        public int[] Result_Panel_X = new int[] { 0, 640 };
+        public int[] Result_Panel_Y = new int[] { 0, 0 };
+        public int[] Result_Score_X = new int[] { 296, 444 };
+        public int[] Result_Score_Y = new int[] { 212, 212 };
+        public int[] Result_ScoreText_X = new int[] { 753, 753 };
+        public int[] Result_ScoreText_Y = new int[] { 249, 549 };
+        public int[] Result_Judge_X = new int[] { 815, 815 };
+        public int[] Result_Judge_Y = new int[] { 182, 482 };
+        public int[] Result_Great_X = new int[] { 490, 875 };
+        public int[] Result_Great_Y = new int[] { 188, 188 };
+        public int[] Result_Good_X = new int[] { 490, 875 };
+        public int[] Result_Good_Y = new int[] { 230, 230 };
+        public int[] Result_Bad_X = new int[] { 490, 875 };
+        public int[] Result_Bad_Y = new int[] { 272, 272 };
+        public int[] Result_Combo_X = new int[] { 490, 875 };
+        public int[] Result_Combo_Y = new int[] { 356, 356 };
+        public int[] Result_Roll_X = new int[] { 490, 875 };
+        public int[] Result_Roll_Y = new int[] { 314, 314 };
+        public int[] Result_GaugeBase_X = new int[] { 555, 555 };
+        public int[] Result_GaugeBase_Y = new int[] { 122, 422 };
+        public int[] Result_GaugeBody_X = new int[] { 559, 559 };
+        public int[] Result_GaugeBody_Y = new int[] { 125, 425 };
+        public int[] Result_GaugeSoul_X = new int[] { 1174, 1174 };
+        public int[] Result_GaugeSoul_Y = new int[] { 107, 407 };
+        public int[] Result_GaugeSoulFire_X = new int[] { 1100, 1100 };
+        public int[] Result_GaugeSoulFire_Y = new int[] { 34, 334 };
         #endregion
         #region Font
         public int Font_Edge_Ratio = 30;

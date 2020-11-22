@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
 	internal class CAct演奏DrumsレーンフラッシュGB : CAct演奏レーンフラッシュGB共通
 	{

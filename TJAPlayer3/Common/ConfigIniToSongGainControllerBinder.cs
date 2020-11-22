@@ -1,6 +1,6 @@
 ﻿using FDK;
 
-namespace TJAPlayer3
+namespace TJAPlayer4
 {
     /// <summary>
     /// The ConfigIniToSongGainControllerBinder allows for SONGVOL and/or other
